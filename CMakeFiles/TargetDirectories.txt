@@ -1,2 +1,0 @@
-/mnt/d/VSCode_projects/NamePending/CMakeFiles/edit_cache.dir
-/mnt/d/VSCode_projects/NamePending/CMakeFiles/rebuild_cache.dir
