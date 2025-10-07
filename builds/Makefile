@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named mathlib
+
+# Build rule for target.
+mathlib: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mathlib
+.PHONY : mathlib
+
+# fast build rule for target.
+mathlib/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/build
+.PHONY : mathlib/fast
+
+#=============================================================================
 # Target rules for targets named demo
 
 # Build rule for target.
@@ -126,8 +139,80 @@ demo: cmake_check_build_system
 
 # fast build rule for target.
 demo/fast:
-	$(MAKE) $(MAKESILENT) -f demos/CMakeFiles/demo.dir/build.make demos/CMakeFiles/demo.dir/build
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/build
 .PHONY : demo/fast
+
+demos/demo.o: demos/demo.cpp.o
+.PHONY : demos/demo.o
+
+# target to build an object file
+demos/demo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/demos/demo.cpp.o
+.PHONY : demos/demo.cpp.o
+
+demos/demo.i: demos/demo.cpp.i
+.PHONY : demos/demo.i
+
+# target to preprocess a source file
+demos/demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/demos/demo.cpp.i
+.PHONY : demos/demo.cpp.i
+
+demos/demo.s: demos/demo.cpp.s
+.PHONY : demos/demo.s
+
+# target to generate assembly for a file
+demos/demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/demos/demo.cpp.s
+.PHONY : demos/demo.cpp.s
+
+src/complex.o: src/complex.cpp.o
+.PHONY : src/complex.o
+
+# target to build an object file
+src/complex.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/complex.cpp.o
+.PHONY : src/complex.cpp.o
+
+src/complex.i: src/complex.cpp.i
+.PHONY : src/complex.i
+
+# target to preprocess a source file
+src/complex.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/complex.cpp.i
+.PHONY : src/complex.cpp.i
+
+src/complex.s: src/complex.cpp.s
+.PHONY : src/complex.s
+
+# target to generate assembly for a file
+src/complex.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/complex.cpp.s
+.PHONY : src/complex.cpp.s
+
+src/polynomial.o: src/polynomial.cpp.o
+.PHONY : src/polynomial.o
+
+# target to build an object file
+src/polynomial.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/polynomial.cpp.o
+.PHONY : src/polynomial.cpp.o
+
+src/polynomial.i: src/polynomial.cpp.i
+.PHONY : src/polynomial.i
+
+# target to preprocess a source file
+src/polynomial.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/polynomial.cpp.i
+.PHONY : src/polynomial.cpp.i
+
+src/polynomial.s: src/polynomial.cpp.s
+.PHONY : src/polynomial.s
+
+# target to generate assembly for a file
+src/polynomial.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/polynomial.cpp.s
+.PHONY : src/polynomial.cpp.s
 
 # Help Target
 help:
@@ -138,6 +223,16 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... demo"
+	@echo "... mathlib"
+	@echo "... demos/demo.o"
+	@echo "... demos/demo.i"
+	@echo "... demos/demo.s"
+	@echo "... src/complex.o"
+	@echo "... src/complex.i"
+	@echo "... src/complex.s"
+	@echo "... src/polynomial.o"
+	@echo "... src/polynomial.i"
+	@echo "... src/polynomial.s"
 .PHONY : help
 
 

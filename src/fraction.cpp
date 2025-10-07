@@ -1,4 +1,4 @@
-#include "mathlib.hpp"
+#include "../includes/mathlib.hpp"
 
 namespace Mathlib {
     void Fraction::reduce() {
@@ -91,7 +91,7 @@ namespace Mathlib {
 
     Fraction Fraction::operator+(const Fraction& f) const {
         Fraction result;
-        int _lcm = lcm(q, f.q);
+        int _lcm = std::lcm(q, f.q);
 
         result.q = _lcm;
         result.p = this->expanded(_lcm).p + f.expanded(_lcm).p;
@@ -117,21 +117,21 @@ namespace Mathlib {
     }
 
     Fraction Fraction::operator||(const Fraction& f) const {
-        int _lcm = lcm(q, f.q);
+        int _lcm = std::lcm(q, f.q);
         int _max = max(this->expanded(_lcm).p, f.expanded(_lcm).p);
         
         return Fraction(_max, _lcm);
     }
 
     Fraction Fraction::operator&&(const Fraction& f) const {
-        int _lcm = lcm(q, f.q);
+        int _lcm = std::lcm(q, f.q);
         int _min = min(this->expanded(_lcm).p, f.expanded(_lcm).p);
         
         return Fraction(_min, _lcm);
     }
 
     bool Fraction::operator==(const Fraction& f) const {
-        int _lcm = lcm(q, f.q);
+        int _lcm = std::lcm(q, f.q);
 
         return this->expanded(_lcm).p == f.expanded(_lcm).p;
     }
@@ -141,13 +141,13 @@ namespace Mathlib {
     }
 
     bool Fraction::operator<(const Fraction& f) const {
-        int _lcm = lcm(q, f.q);
+        int _lcm = std::lcm(q, f.q);
 
         return this->expanded(_lcm).p < f.expanded(_lcm).p;
     }
 
     bool Fraction::operator<=(const Fraction& f) const {
-        int _lcm = lcm(q, f.q);
+        int _lcm = std::lcm(q, f.q);
 
         return this->expanded(_lcm).p <= f.expanded(_lcm).p;
     }

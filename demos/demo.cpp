@@ -1,4 +1,4 @@
-#include "../src/mathlib.hpp"
+#include "../includes/mathlib.hpp"
 
 namespace bla = Mathlib;
 

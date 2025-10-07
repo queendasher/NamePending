@@ -1,4 +1,4 @@
-#include "mathlib.hpp"
+#include "../includes/mathlib.hpp"
 
 namespace Mathlib {
     void Polynomial::trim() {

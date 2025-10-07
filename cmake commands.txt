@@ -1,0 +1,3 @@
+cmake -S . -B builds
+cmake --build builds --clean-first -v
+./builds/bin/demo

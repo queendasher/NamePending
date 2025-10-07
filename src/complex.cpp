@@ -1,4 +1,4 @@
-#include "mathlib.hpp"
+#include "../includes/mathlib.hpp"
 
 namespace Mathlib{
     Complex::Complex(double real, double imag) : a(real), b(imag) {}
