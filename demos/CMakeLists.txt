@@ -1,2 +1,2 @@
-add_executable (demo_vector demo_vector.cpp)
-target_sources (demo_vector PUBLIC ../src/vector.hpp)
+add_executable (demo demo.cpp)
+target_sources (demo PUBLIC ../src/mathlib.hpp)

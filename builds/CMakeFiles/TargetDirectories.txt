@@ -1,0 +1,5 @@
+/mnt/d/VSCode_projects/NamePending/builds/CMakeFiles/edit_cache.dir
+/mnt/d/VSCode_projects/NamePending/builds/CMakeFiles/rebuild_cache.dir
+/mnt/d/VSCode_projects/NamePending/builds/demos/CMakeFiles/demo.dir
+/mnt/d/VSCode_projects/NamePending/builds/demos/CMakeFiles/edit_cache.dir
+/mnt/d/VSCode_projects/NamePending/builds/demos/CMakeFiles/rebuild_cache.dir
