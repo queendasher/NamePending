@@ -5,16 +5,14 @@ namespace Mathlib{
 
     // GETTERS / SETTERS
 
-    int Complex::getReal() { return a; }
-    void Complex::setReal(double val) { a = val; }
-    int Complex::getImag() { return b; }
-    void Complex::setImag(double val) { b = val; }
+    int Complex::Re() { return a; }
+    int Complex::Im() { return b; }
 
     // MATH FUNCTIONS
 
     bool Complex::isReal() { return doubleIsEqual(a, 0); }
     bool Complex::isImaginary()  { return doubleIsEqual(b, 0); }
-    double Complex::absoluteValue() { return sqrt(a*a + b*b); }
+    double Complex::AbsVal() { return sqrt(a*a + b*b); }
 
     // OPERATIONS
 
@@ -46,7 +44,7 @@ namespace Mathlib{
     // STRING OUTPUT
 
     void Complex::print() { 
-        cout << a << ((b < 0) ? " - " : " + ") << fabs(b) << "i" << endl; 
+        cout << *this; 
     }
 
     ostream& operator<<(ostream& os, Complex z) {

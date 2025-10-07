@@ -10,7 +10,6 @@
 using namespace std;
 
 namespace Mathlib {
-    enum MatrixType { RANDOM, RANDOM_NO_ZERO, UPPER_TRIANGULAR, UPPER_TRIANGULAR_NO_ZERO, ID };
     bool doubleIsEqual(const double a, const double b, const double epsilon = __FLT_EPSILON__) { 
         return fabs(a - b) < epsilon; 
     }
@@ -23,15 +22,14 @@ namespace Mathlib {
     public:
         Complex(double real, double imag); // Constructor
 
-        int getReal();
-        void setReal(double val);
-        int getImag();
-        void setImag(double val);
+        int Re();
+        int Im();
 
         bool isReal(); // Returns true if the number is purely real, false otherwise
         bool isImaginary(); // Returns true if the number is purely imaginary, false otherwise
-        double absoluteValue(); // Returns the absolute value sqrt(a^2 + b^2)
+        double AbsVal(); // Returns the absolute value sqrt(a^2 + b^2)
 
+        Complex operator-(); // Unary negation
         Complex operator+(Complex z); // Called when addition is performed with another complex number
         Complex operator-(Complex z); // Called when subtraction is performed with another complex number
         Complex operator*(Complex z); // Called when multiplication is performed with another complex number
@@ -94,14 +92,18 @@ namespace Mathlib {
         Matrix(size_t r, size_t c);
         Matrix(const Matrix& other); // Copy
         Matrix(Matrix&& other); // Move
+        Matrix& operator=(const Matrix& other); // Copy
+        Matrix& operator=(Matrix&& other); // Move
         ~Matrix();
 
         size_t Rows() const ;
         size_t Cols() const ;
 
-        Matrix& operator=(const Matrix& other); // Copy
-        Matrix& operator=(Matrix&& other); // Move
-        T& operator()(size_t r, size_t c); // Write element (1-indexed)
+        Matrix& operator-() const ;
+        Matrix& operator+(const Matrix& other) const ;
+        Matrix& operator-(const Matrix& other) const ;
+        Matrix& operator*(const Matrix& other) const ; // Move
+        T& operator()(size_t r, size_t c) ; // Write element (1-indexed)
         const T& operator()(size_t r, size_t c) const; // Read element (1-indexed)
 
         //ostream& operator<<(ostream& os, const Matrix<T>& m);
