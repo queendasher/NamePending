@@ -92,7 +92,6 @@ demo_EXTERNAL_OBJECTS =
 
 bin/demo: CMakeFiles/demo.dir/demos/demo.cpp.o
 bin/demo: CMakeFiles/demo.dir/build.make
-bin/demo: lib/libmathlib.a
 bin/demo: CMakeFiles/demo.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/queendasher/projects/NamePending/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable bin/demo"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/demo.dir/link.txt --verbose=$(VERBOSE)

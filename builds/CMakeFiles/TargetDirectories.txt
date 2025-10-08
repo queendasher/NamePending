@@ -1,4 +1,3 @@
-/home/queendasher/projects/NamePending/builds/CMakeFiles/mathlib.dir
 /home/queendasher/projects/NamePending/builds/CMakeFiles/demo.dir
 /home/queendasher/projects/NamePending/builds/CMakeFiles/edit_cache.dir
 /home/queendasher/projects/NamePending/builds/CMakeFiles/rebuild_cache.dir

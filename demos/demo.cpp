@@ -1,4 +1,5 @@
-#include "../includes/mathlib.hpp"
+#include "../src/fraction.hpp"
+#include "../src/matrix.hpp"
 
 using namespace Mathlib;
 

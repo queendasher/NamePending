@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/queendasher/projects/NamePending/includes
+CXX_INCLUDES = -I/home/queendasher/projects/NamePending/src
 
 CXX_FLAGS = -g -std=c++17
 

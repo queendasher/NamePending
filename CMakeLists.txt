@@ -1,26 +1,21 @@
 cmake_minimum_required(VERSION 3.20)
 project(NamePending LANGUAGES CXX)
 
-# C++ settings
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Put build artifacts under the build tree in nice folders
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)   # .a / .lib
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)   # .so / .dll
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)   # executables
+# Set output directories for build targets
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-# .cpp implementations
-add_library(mathlib STATIC
-  src/complex.cpp
-  src/fraction.cpp
-  src/polynomial.cpp
+# Header-only library from files in ./src
+add_library(mathlib INTERFACE)
+target_include_directories(mathlib INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-# Public include path for mathlib
-target_include_directories(mathlib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/includes)
-
-# Build executable that links with the library
+# Demo executable
 add_executable(demo demos/demo.cpp)
 target_link_libraries(demo PRIVATE mathlib)

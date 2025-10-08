@@ -117,19 +117,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named mathlib
-
-# Build rule for target.
-mathlib: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 mathlib
-.PHONY : mathlib
-
-# fast build rule for target.
-mathlib/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/build
-.PHONY : mathlib/fast
-
-#=============================================================================
 # Target rules for targets named demo
 
 # Build rule for target.
@@ -166,78 +153,6 @@ demos/demo.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/demo.dir/build.make CMakeFiles/demo.dir/demos/demo.cpp.s
 .PHONY : demos/demo.cpp.s
 
-src/complex.o: src/complex.cpp.o
-.PHONY : src/complex.o
-
-# target to build an object file
-src/complex.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/complex.cpp.o
-.PHONY : src/complex.cpp.o
-
-src/complex.i: src/complex.cpp.i
-.PHONY : src/complex.i
-
-# target to preprocess a source file
-src/complex.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/complex.cpp.i
-.PHONY : src/complex.cpp.i
-
-src/complex.s: src/complex.cpp.s
-.PHONY : src/complex.s
-
-# target to generate assembly for a file
-src/complex.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/complex.cpp.s
-.PHONY : src/complex.cpp.s
-
-src/fraction.o: src/fraction.cpp.o
-.PHONY : src/fraction.o
-
-# target to build an object file
-src/fraction.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/fraction.cpp.o
-.PHONY : src/fraction.cpp.o
-
-src/fraction.i: src/fraction.cpp.i
-.PHONY : src/fraction.i
-
-# target to preprocess a source file
-src/fraction.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/fraction.cpp.i
-.PHONY : src/fraction.cpp.i
-
-src/fraction.s: src/fraction.cpp.s
-.PHONY : src/fraction.s
-
-# target to generate assembly for a file
-src/fraction.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/fraction.cpp.s
-.PHONY : src/fraction.cpp.s
-
-src/polynomial.o: src/polynomial.cpp.o
-.PHONY : src/polynomial.o
-
-# target to build an object file
-src/polynomial.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/polynomial.cpp.o
-.PHONY : src/polynomial.cpp.o
-
-src/polynomial.i: src/polynomial.cpp.i
-.PHONY : src/polynomial.i
-
-# target to preprocess a source file
-src/polynomial.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/polynomial.cpp.i
-.PHONY : src/polynomial.cpp.i
-
-src/polynomial.s: src/polynomial.cpp.s
-.PHONY : src/polynomial.s
-
-# target to generate assembly for a file
-src/polynomial.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/polynomial.cpp.s
-.PHONY : src/polynomial.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -247,19 +162,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... demo"
-	@echo "... mathlib"
 	@echo "... demos/demo.o"
 	@echo "... demos/demo.i"
 	@echo "... demos/demo.s"
-	@echo "... src/complex.o"
-	@echo "... src/complex.i"
-	@echo "... src/complex.s"
-	@echo "... src/fraction.o"
-	@echo "... src/fraction.i"
-	@echo "... src/fraction.s"
-	@echo "... src/polynomial.o"
-	@echo "... src/polynomial.i"
-	@echo "... src/polynomial.s"
 .PHONY : help
 
 
