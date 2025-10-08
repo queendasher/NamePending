@@ -1,10 +1,11 @@
 #include "mathlib.hpp"
 
 namespace Mathlib{
-    template <typename T>
+    enum ORDERING { ColMajor, RowMajor };
+    template <typename T, ORDERING ORD = ColMajor>
     class Matrix {
     private:
-        size_t rows, cols; // Currently using column-store first
+        size_t rows, cols;
         T* data;
 
     public:
@@ -154,13 +155,19 @@ namespace Mathlib{
         T& operator()(size_t r, size_t c) {
             if (r > rows || c > cols || r <= 0 || c <= 0)
                 throw out_of_range("Matrix index out of range");
-            return data[(c-1) * rows + (r-1)];
+            if (ORD == ColMajor)
+                return data[(c-1) * rows + (r-1)];
+            else // RowMajor
+                return data[(r-1) * cols + (c-1)];
         }
 
         T& operator()(size_t r, size_t c) const {
             if (r > rows || c > cols || r <= 0 || c <= 0)
                 throw out_of_range("Matrix index out of range");
-            return data[(c-1) * rows + (r-1)];
+            if (ORD == ColMajor)
+                return data[(c-1) * rows + (r-1)];
+            else // RowMajor
+                return data[(r-1) * cols + (c-1)];
         }
 
         void print() const {
