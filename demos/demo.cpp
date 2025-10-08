@@ -9,7 +9,7 @@ int main() {
     Matrix<Fraction> A(n, n);
     for(size_t i = 1; i <= n; ++i)
         for(size_t j = 1; j <= n; ++j)
-            A(i, j) = Fraction((i == j) ? 2 : 1, 1);
+            A(i, j) = Fraction((i == j) ? 2 : 1);
 
     cout << "Matrix A:\n" << A;
     try {
