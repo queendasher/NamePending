@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/mathlib.dir/src/complex.cpp.o"
   "CMakeFiles/mathlib.dir/src/complex.cpp.o.d"
+  "CMakeFiles/mathlib.dir/src/fraction.cpp.o"
+  "CMakeFiles/mathlib.dir/src/fraction.cpp.o.d"
   "CMakeFiles/mathlib.dir/src/polynomial.cpp.o"
   "CMakeFiles/mathlib.dir/src/polynomial.cpp.o.d"
   "lib/libmathlib.a"

@@ -7,13 +7,11 @@
 #include <iostream>
 #include <random>
 #include <numeric>
+#include <complex>
+#include <type_traits>
 using namespace std;
 
 namespace Mathlib {
-    bool doubleIsEqual(const double a, const double b, const double epsilon = __FLT_EPSILON__) { 
-        return fabs(a - b) < epsilon; 
-    }
-
     class Complex {
     private:
         double a; // Real
@@ -56,8 +54,7 @@ namespace Mathlib {
         void expand(int q_new); // Expands fraction to a multiple of current denominator
 
     public:
-        Fraction();
-        Fraction(int p, int q);
+        Fraction(int p=0, int q=1);
         Fraction(double d);
         ~Fraction();
 
@@ -135,6 +132,62 @@ namespace Mathlib {
         size_t Rows() const { return rows; }
         size_t Cols() const { return cols; }
 
+        Matrix Transpose() const {
+            Matrix<T> result(cols, rows);
+            for (size_t j = 1; j <= cols; ++j)
+                for (size_t i = 1; i <= rows; ++i)
+                    result(j, i) = (*this)(i, j);
+            return result;
+        }
+
+        void REF() {
+
+        }
+
+        Matrix Inverse() const {
+            if (rows != cols)
+                throw std::invalid_argument("Matrix must be square");
+
+            Matrix<T> expanded(rows, 2 * rows);
+
+            // Create expanded matrix [A | I]
+            for (size_t i = 1; i <= rows; ++i) {
+                for (size_t j = 1; j <= rows; ++j) {
+                    expanded(i, j) = (*this)(i, j);
+                    expanded(i, j + rows) = (i == j) ? T(1) : T(0);
+                }
+            }
+
+            // Perform Gaussian elimination
+            for (size_t i = 1; i <= rows; ++i) {
+                // Choose pivot (diagonal elements)
+                T pivot = expanded(i, i);
+                if (pivot == T(0))
+                    throw runtime_error("Matrix is singular");
+
+                // Normalize pivot row
+                for (size_t j = 1; j <= cols; ++j)
+                    expanded(i, j) = expanded(i, j) / pivot;
+
+                // Eliminate other rows
+                for (size_t k = 1; k <= rows; ++k) {
+                    if (k == i) continue;
+
+                    T factor = expanded(k, i);
+                    for (size_t j = 1; j <= cols; ++j)
+                        expanded(k, j) = expanded(i, j) - factor * expanded(i, j);
+                }
+            }
+
+            // Extract inverse matrix from gaussian elimination result [I | A^-1]
+            Matrix<T> inverse(rows, rows);
+            for (size_t i = 1; i <= rows; ++i)
+                for (size_t j = 1; j <= rows; ++j)
+                    inverse(i, j) = expanded(i, j + rows);
+
+            return inverse;
+        }
+
         Matrix operator-() const {
             Matrix<T> result(rows, cols);
             for (size_t j = 1; j <= cols; ++j)
@@ -167,7 +220,7 @@ namespace Mathlib {
                 for (size_t j = 1; j <= other.cols; ++j) {
                     T sum = T();
                     for (size_t k = 1; k <= cols; ++k) {
-                        sum += (*this)(i, k) * other(k, j);
+                        sum = sum + (*this)(i, k) * other(k, j);
                     }
                     result(i, j) = sum;
                 }
@@ -182,7 +235,7 @@ namespace Mathlib {
             return data[(c-1) * rows + (r-1)];
         }
 
-        const T& operator()(size_t r, size_t c) const {
+        T& operator()(size_t r, size_t c) const {
             if (r > rows || c > cols || r <= 0 || c <= 0)
                 throw out_of_range("Matrix index out of range");
             return data[(c-1) * rows + (r-1)];
@@ -201,20 +254,28 @@ namespace Mathlib {
         T * data;
         
     public:
-        Vector(size_t _size) : size(_size), data(new T[size]) { ; }
+        Vector(size_t _size) : size(_size), data(new T[size]) { }
+
+        template <size_t _size>
+        Vector(const T (&arr)[_size]) {
+            size = _size;
+            data = new T[_size];
+            for (size_t i = 0; i < _size; ++i)
+            data[i] = arr[i];
+        }
         
-        Vector (const Vector & v) : Vector(v.Size()) {
+        Vector (const Vector& v) : Vector(v.Size()) {
             *this = v;
         }
 
-        Vector (Vector && v) : size(0), data(nullptr) {
+        Vector (Vector&& v) : size(0), data(nullptr) {
             std::swap(size, v.size);
             std::swap(data, v.data);
         }
 
         ~Vector () { delete [] data; }
     
-        Vector<T>& operator=(const Vector<T> & v2) {
+        Vector<T>& operator=(const Vector<T>& v2) {
             for (size_t i = 0; i < size; i++)
                 data[i] = v2(i);
             return *this;
@@ -230,11 +291,19 @@ namespace Mathlib {
         T& operator()(size_t i) { return data[i]; }
         const T& operator()(size_t i) const { return data[i]; }
 
-        Vector<T> operator+(const Vector<T> & other)
+        template<typename TB>
+        auto operator+(const Vector<TB>& other) const
+            -> Vector<decay_t<decltype(declval<T>() + declval<TB>())>>
         {
-            Vector<T> sum(this->Size());
-            for (size_t i = 0; i < this->Size(); i++)
-            sum(i) = *this(i)+other(i);
+            using TRES = decay_t<decltype(declval<T>() + declval<TB>())>;
+
+            if (this->Size() != other.Size())
+                throw runtime_error("Vector sizes must match for addition");
+
+            Vector<TRES> sum(this->Size());
+            for (size_t i = 0; i < this->Size(); ++i) {
+                sum(i) = (*this)(i) + other(i);
+            }
             return sum;
         }
     };
@@ -271,14 +340,13 @@ namespace Mathlib {
 
     // << overload for Vector class
     template <typename T>
-        ostream& operator<<(ostream& os, const Vector<T>& v)
-        {
-            if (v.Size() > 0)
-            os << v(0);
-            for (size_t i = 1; i < v.Size(); i++)
-            os << ", " << v(i);
-            return os << "\n";
-        }
+    ostream& operator<<(ostream& os, const Vector<T>& v) {
+        if (v.Size() > 0)
+        os << v(0);
+        for (size_t i = 1; i < v.Size(); i++)
+        os << ", " << v(i);
+        return os << "\n";
+    }
     
     // << overload for Matrix class
     template <typename T> 

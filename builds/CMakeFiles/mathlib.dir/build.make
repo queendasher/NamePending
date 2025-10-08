@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/d/VSCode_projects/NamePending
+CMAKE_SOURCE_DIR = /home/queendasher/projects/NamePending
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/d/VSCode_projects/NamePending/builds
+CMAKE_BINARY_DIR = /home/queendasher/projects/NamePending/builds
 
 # Include any dependencies generated for this target.
 include CMakeFiles/mathlib.dir/depend.make
@@ -70,46 +70,62 @@ include CMakeFiles/mathlib.dir/progress.make
 include CMakeFiles/mathlib.dir/flags.make
 
 CMakeFiles/mathlib.dir/src/complex.cpp.o: CMakeFiles/mathlib.dir/flags.make
-CMakeFiles/mathlib.dir/src/complex.cpp.o: /mnt/d/VSCode_projects/NamePending/src/complex.cpp
+CMakeFiles/mathlib.dir/src/complex.cpp.o: /home/queendasher/projects/NamePending/src/complex.cpp
 CMakeFiles/mathlib.dir/src/complex.cpp.o: CMakeFiles/mathlib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/d/VSCode_projects/NamePending/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mathlib.dir/src/complex.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mathlib.dir/src/complex.cpp.o -MF CMakeFiles/mathlib.dir/src/complex.cpp.o.d -o CMakeFiles/mathlib.dir/src/complex.cpp.o -c /mnt/d/VSCode_projects/NamePending/src/complex.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/queendasher/projects/NamePending/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/mathlib.dir/src/complex.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mathlib.dir/src/complex.cpp.o -MF CMakeFiles/mathlib.dir/src/complex.cpp.o.d -o CMakeFiles/mathlib.dir/src/complex.cpp.o -c /home/queendasher/projects/NamePending/src/complex.cpp
 
 CMakeFiles/mathlib.dir/src/complex.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/mathlib.dir/src/complex.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/VSCode_projects/NamePending/src/complex.cpp > CMakeFiles/mathlib.dir/src/complex.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/queendasher/projects/NamePending/src/complex.cpp > CMakeFiles/mathlib.dir/src/complex.cpp.i
 
 CMakeFiles/mathlib.dir/src/complex.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/mathlib.dir/src/complex.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/VSCode_projects/NamePending/src/complex.cpp -o CMakeFiles/mathlib.dir/src/complex.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/queendasher/projects/NamePending/src/complex.cpp -o CMakeFiles/mathlib.dir/src/complex.cpp.s
+
+CMakeFiles/mathlib.dir/src/fraction.cpp.o: CMakeFiles/mathlib.dir/flags.make
+CMakeFiles/mathlib.dir/src/fraction.cpp.o: /home/queendasher/projects/NamePending/src/fraction.cpp
+CMakeFiles/mathlib.dir/src/fraction.cpp.o: CMakeFiles/mathlib.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/queendasher/projects/NamePending/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mathlib.dir/src/fraction.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mathlib.dir/src/fraction.cpp.o -MF CMakeFiles/mathlib.dir/src/fraction.cpp.o.d -o CMakeFiles/mathlib.dir/src/fraction.cpp.o -c /home/queendasher/projects/NamePending/src/fraction.cpp
+
+CMakeFiles/mathlib.dir/src/fraction.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/mathlib.dir/src/fraction.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/queendasher/projects/NamePending/src/fraction.cpp > CMakeFiles/mathlib.dir/src/fraction.cpp.i
+
+CMakeFiles/mathlib.dir/src/fraction.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/mathlib.dir/src/fraction.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/queendasher/projects/NamePending/src/fraction.cpp -o CMakeFiles/mathlib.dir/src/fraction.cpp.s
 
 CMakeFiles/mathlib.dir/src/polynomial.cpp.o: CMakeFiles/mathlib.dir/flags.make
-CMakeFiles/mathlib.dir/src/polynomial.cpp.o: /mnt/d/VSCode_projects/NamePending/src/polynomial.cpp
+CMakeFiles/mathlib.dir/src/polynomial.cpp.o: /home/queendasher/projects/NamePending/src/polynomial.cpp
 CMakeFiles/mathlib.dir/src/polynomial.cpp.o: CMakeFiles/mathlib.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/mnt/d/VSCode_projects/NamePending/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/mathlib.dir/src/polynomial.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mathlib.dir/src/polynomial.cpp.o -MF CMakeFiles/mathlib.dir/src/polynomial.cpp.o.d -o CMakeFiles/mathlib.dir/src/polynomial.cpp.o -c /mnt/d/VSCode_projects/NamePending/src/polynomial.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/queendasher/projects/NamePending/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/mathlib.dir/src/polynomial.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/mathlib.dir/src/polynomial.cpp.o -MF CMakeFiles/mathlib.dir/src/polynomial.cpp.o.d -o CMakeFiles/mathlib.dir/src/polynomial.cpp.o -c /home/queendasher/projects/NamePending/src/polynomial.cpp
 
 CMakeFiles/mathlib.dir/src/polynomial.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/mathlib.dir/src/polynomial.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/d/VSCode_projects/NamePending/src/polynomial.cpp > CMakeFiles/mathlib.dir/src/polynomial.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/queendasher/projects/NamePending/src/polynomial.cpp > CMakeFiles/mathlib.dir/src/polynomial.cpp.i
 
 CMakeFiles/mathlib.dir/src/polynomial.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/mathlib.dir/src/polynomial.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/d/VSCode_projects/NamePending/src/polynomial.cpp -o CMakeFiles/mathlib.dir/src/polynomial.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/queendasher/projects/NamePending/src/polynomial.cpp -o CMakeFiles/mathlib.dir/src/polynomial.cpp.s
 
 # Object files for target mathlib
 mathlib_OBJECTS = \
 "CMakeFiles/mathlib.dir/src/complex.cpp.o" \
+"CMakeFiles/mathlib.dir/src/fraction.cpp.o" \
 "CMakeFiles/mathlib.dir/src/polynomial.cpp.o"
 
 # External object files for target mathlib
 mathlib_EXTERNAL_OBJECTS =
 
 lib/libmathlib.a: CMakeFiles/mathlib.dir/src/complex.cpp.o
+lib/libmathlib.a: CMakeFiles/mathlib.dir/src/fraction.cpp.o
 lib/libmathlib.a: CMakeFiles/mathlib.dir/src/polynomial.cpp.o
 lib/libmathlib.a: CMakeFiles/mathlib.dir/build.make
 lib/libmathlib.a: CMakeFiles/mathlib.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/mnt/d/VSCode_projects/NamePending/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library lib/libmathlib.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/queendasher/projects/NamePending/builds/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library lib/libmathlib.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/mathlib.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mathlib.dir/link.txt --verbose=$(VERBOSE)
 
@@ -122,6 +138,6 @@ CMakeFiles/mathlib.dir/clean:
 .PHONY : CMakeFiles/mathlib.dir/clean
 
 CMakeFiles/mathlib.dir/depend:
-	cd /mnt/d/VSCode_projects/NamePending/builds && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /mnt/d/VSCode_projects/NamePending /mnt/d/VSCode_projects/NamePending /mnt/d/VSCode_projects/NamePending/builds /mnt/d/VSCode_projects/NamePending/builds /mnt/d/VSCode_projects/NamePending/builds/CMakeFiles/mathlib.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/queendasher/projects/NamePending/builds && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/queendasher/projects/NamePending /home/queendasher/projects/NamePending /home/queendasher/projects/NamePending/builds /home/queendasher/projects/NamePending/builds /home/queendasher/projects/NamePending/builds/CMakeFiles/mathlib.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/mathlib.dir/depend
 

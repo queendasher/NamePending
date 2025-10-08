@@ -12,7 +12,7 @@
         "cwd": "${workspaceFolder}",
         "MIMode": "gdb",
         "externalConsole": false,
-        "preLaunchTask": "CMake: Build"
+        //"preLaunchTask": "CMake: Build"
     }
   ]
 }

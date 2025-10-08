@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/d/VSCode_projects/NamePending/demos/demo.cpp" "CMakeFiles/demo.dir/demos/demo.cpp.o" "gcc" "CMakeFiles/demo.dir/demos/demo.cpp.o.d"
+  "/home/queendasher/projects/NamePending/demos/demo.cpp" "CMakeFiles/demo.dir/demos/demo.cpp.o" "gcc" "CMakeFiles/demo.dir/demos/demo.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

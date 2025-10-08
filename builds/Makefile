@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/d/VSCode_projects/NamePending
+CMAKE_SOURCE_DIR = /home/queendasher/projects/NamePending
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/d/VSCode_projects/NamePending/builds
+CMAKE_BINARY_DIR = /home/queendasher/projects/NamePending/builds
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/VSCode_projects/NamePending/builds/CMakeFiles /mnt/d/VSCode_projects/NamePending/builds//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/queendasher/projects/NamePending/builds/CMakeFiles /home/queendasher/projects/NamePending/builds//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/d/VSCode_projects/NamePending/builds/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/queendasher/projects/NamePending/builds/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -190,6 +190,30 @@ src/complex.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/complex.cpp.s
 .PHONY : src/complex.cpp.s
 
+src/fraction.o: src/fraction.cpp.o
+.PHONY : src/fraction.o
+
+# target to build an object file
+src/fraction.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/fraction.cpp.o
+.PHONY : src/fraction.cpp.o
+
+src/fraction.i: src/fraction.cpp.i
+.PHONY : src/fraction.i
+
+# target to preprocess a source file
+src/fraction.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/fraction.cpp.i
+.PHONY : src/fraction.cpp.i
+
+src/fraction.s: src/fraction.cpp.s
+.PHONY : src/fraction.s
+
+# target to generate assembly for a file
+src/fraction.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/mathlib.dir/build.make CMakeFiles/mathlib.dir/src/fraction.cpp.s
+.PHONY : src/fraction.cpp.s
+
 src/polynomial.o: src/polynomial.cpp.o
 .PHONY : src/polynomial.o
 
@@ -230,6 +254,9 @@ help:
 	@echo "... src/complex.o"
 	@echo "... src/complex.i"
 	@echo "... src/complex.s"
+	@echo "... src/fraction.o"
+	@echo "... src/fraction.i"
+	@echo "... src/fraction.s"
 	@echo "... src/polynomial.o"
 	@echo "... src/polynomial.i"
 	@echo "... src/polynomial.s"

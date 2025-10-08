@@ -10,8 +10,8 @@ namespace Mathlib{
 
     // MATH FUNCTIONS
 
-    bool Complex::isReal() { return doubleIsEqual(a, 0); }
-    bool Complex::isImaginary()  { return doubleIsEqual(b, 0); }
+    bool Complex::isReal() { return fabs(a) < __FLT_EPSILON__; }
+    bool Complex::isImaginary()  { return fabs(b) < __FLT_EPSILON__; }
     double Complex::AbsVal() { return sqrt(a*a + b*b); }
 
     // OPERATIONS

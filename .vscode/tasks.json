@@ -28,18 +28,37 @@
 			"label": "CMake: Configure",
 			"type": "shell",
 			"command": "cmake",
-			"args": ["-S", ".", "-B", "builds", "-DCMAKE_BUILD_TYPE=Debug"],
-			"options": { "cwd": "${workspaceFolder}" }
+			"args": [
+				"-S",
+				".",
+				"-B",
+				"builds",
+				"-DCMAKE_BUILD_TYPE=Debug"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			}
 		},
 		{
 			"label": "CMake: Build",
 			"type": "shell",
 			"command": "cmake",
-			"args": ["--build", "builds", "--config", "Debug", "-v"],
-			"options": { "cwd": "${workspaceFolder}" },
-			"group": { "kind": "build", "isDefault": true },
+			"args": [
+				"--build",
+				"builds",
+				"--config",
+				"Debug",
+				"-v"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
 			"problemMatcher": "$gcc",
 			"dependsOn": "CMake: Configure"
-		}
+		},
 	]
 }

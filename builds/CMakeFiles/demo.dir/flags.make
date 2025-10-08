@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/mnt/d/VSCode_projects/NamePending/includes
+CXX_INCLUDES = -I/home/queendasher/projects/NamePending/includes
 
-CXX_FLAGS = -g -std=c++11
+CXX_FLAGS = -g -std=c++17
 

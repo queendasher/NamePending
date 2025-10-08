@@ -2,7 +2,7 @@
 
 namespace Mathlib {
     void Polynomial::trim() {
-        while (n > 0 && doubleIsEqual(coefficients[n], 0.0)) {
+        while (n > 0 && fabs(coefficients[n]) < __FLT_EPSILON__) {
             --n;
         }
 
@@ -140,7 +140,7 @@ namespace Mathlib {
 
     ostream& operator<<(ostream& os, const Polynomial& p) {
         for (int i = p.n; i >= 0; --i) {
-            if (doubleIsEqual(p.coefficients[i], 0) && i > 0) continue;
+            if (fabs(p.coefficients[i]) < __FLT_EPSILON__ && i > 0) continue;
 
             if (i == p.n) {
                 os << p.coefficients[i];

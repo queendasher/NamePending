@@ -24,14 +24,12 @@ namespace Mathlib {
         }
     }
 
-    Fraction::Fraction() : p(0), q(1) { }
-
     Fraction::Fraction(int p, int q) : p(p), q(q) {
         reduce();
     }
 
     Fraction::Fraction(double d) {
-        if (doubleIsEqual(d, 0)) {
+        if (fabs(d) < __FLT_EPSILON__) {
             p = 0;
             q = 1;
             return;

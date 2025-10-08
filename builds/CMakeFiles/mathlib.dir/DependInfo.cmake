@@ -8,8 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/d/VSCode_projects/NamePending/src/complex.cpp" "CMakeFiles/mathlib.dir/src/complex.cpp.o" "gcc" "CMakeFiles/mathlib.dir/src/complex.cpp.o.d"
-  "/mnt/d/VSCode_projects/NamePending/src/polynomial.cpp" "CMakeFiles/mathlib.dir/src/polynomial.cpp.o" "gcc" "CMakeFiles/mathlib.dir/src/polynomial.cpp.o.d"
+  "/home/queendasher/projects/NamePending/src/complex.cpp" "CMakeFiles/mathlib.dir/src/complex.cpp.o" "gcc" "CMakeFiles/mathlib.dir/src/complex.cpp.o.d"
+  "/home/queendasher/projects/NamePending/src/fraction.cpp" "CMakeFiles/mathlib.dir/src/fraction.cpp.o" "gcc" "CMakeFiles/mathlib.dir/src/fraction.cpp.o.d"
+  "/home/queendasher/projects/NamePending/src/polynomial.cpp" "CMakeFiles/mathlib.dir/src/polynomial.cpp.o" "gcc" "CMakeFiles/mathlib.dir/src/polynomial.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -1,2 +1,2 @@
-/usr/bin/ar qc lib/libmathlib.a CMakeFiles/mathlib.dir/src/complex.cpp.o CMakeFiles/mathlib.dir/src/polynomial.cpp.o
+/usr/bin/ar qc lib/libmathlib.a CMakeFiles/mathlib.dir/src/complex.cpp.o CMakeFiles/mathlib.dir/src/fraction.cpp.o CMakeFiles/mathlib.dir/src/polynomial.cpp.o
 /usr/bin/ranlib lib/libmathlib.a
