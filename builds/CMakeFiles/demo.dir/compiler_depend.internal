@@ -3,9 +3,9 @@
 
 CMakeFiles/demo.dir/demos/demo.cpp.o
  /home/queendasher/projects/NamePending/demos/demo.cpp
- /home/queendasher/projects/NamePending/src/fraction.hpp
+ /home/queendasher/projects/NamePending/src/expression.hpp
  /home/queendasher/projects/NamePending/src/mathlib.hpp
- /home/queendasher/projects/NamePending/src/matrix.hpp
+ /home/queendasher/projects/NamePending/src/vector.hpp
  /usr/include/alloca.h
  /usr/include/asm-generic/errno-base.h
  /usr/include/asm-generic/errno.h
