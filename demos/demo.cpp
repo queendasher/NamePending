@@ -1,5 +1,6 @@
 #include "../src/mathlib.hpp"
 #include "../src/matrix.hpp"
+#include "../src/fraction.hpp"
 
 using namespace Mathlib;
 
@@ -33,6 +34,18 @@ void TestColRowViews(){
 	std::cout << "B.Col(1): " << B.Col(1) << "\n";
 	std::cout << "C.Col(1): " << C.Col(1) << "\n";
 	std::cout << "D.Col(1): " << D.Col(1) << "\n\n";
+
+	std::cout << "Row range (1,2) of each matrix:\n";
+	std::cout << "A.RowRange(1,2):\n" << A.RowRange(1,2) << "\n";
+	std::cout << "B.RowRange(1,2):\n" << B.RowRange(1,2) << "\n";
+	std::cout << "C.RowRange(1,2):\n" << C.RowRange(1,2) << "\n";
+	std::cout << "D.RowRange(1,2):\n" << D.RowRange(1,2) << "\n\n";
+
+	std::cout << "Column range (1,2) of each matrix:\n";
+	std::cout << "A.ColsRange(1,2):\n" << A.ColRange(1,2) << "\n";
+	std::cout << "B.ColsRange(1,2):\n" << B.ColRange(1,2) << "\n";
+	std::cout << "C.ColsRange(1,2):\n" << C.ColRange(1,2) << "\n";
+	std::cout << "D.ColsRange(1,2):\n" << D.ColRange(1,2) << "\n\n";
 }
 
 void TestTranspose(){
@@ -50,6 +63,16 @@ void TestTranspose(){
 	std::cout << "Transpose of A:\n" << A.Transpose() << "\n";
 }
 
+void TestInverse(){
+	Matrix<Fraction> A(3,3);
+	for(size_t i=0; i<3; ++i)
+		for(size_t j=0; j<3; ++j) 
+			A(i,j) = (i == j) ? Fraction(2) : Fraction(1);
+
+	std::cout << "Matrix A:\n" << A << "\n";
+	std::cout << "Inverse of A:\n" << A.Inverse() << "\n";
+}	
+
 int main()
 {
 	Vector<double> v(5);
@@ -59,5 +82,6 @@ int main()
 
 	TestTranspose();
 	TestColRowViews();
+	TestInverse();
 	return 0;	
 }

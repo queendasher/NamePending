@@ -40,7 +40,7 @@ namespace Mathlib
 		const T& operator()(size_t i) const { return data[dist*i]; }
 
 		auto Range(size_t first, size_t next) const {
-			return VectorView(next-first, dist, data+first*dist);
+			return VectorView<T, size_t>(next-first, dist, data+first*dist);
 		}
 
 		auto Slice(size_t first, size_t slice) const {
