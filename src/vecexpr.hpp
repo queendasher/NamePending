@@ -1,6 +1,8 @@
 #ifndef FILE_EXPRESSION
 #define FILE_EXPRESSION
 
+#include <cassert>
+
 namespace ASC_bla
 {
 
@@ -28,6 +30,7 @@ namespace ASC_bla
   template <typename TA, typename TB>
   auto operator+ (const VecExpr<TA> & a, const VecExpr<TB> & b)
   {
+    assert (a.size() == b.size());
     return SumVecExpr(a.upcast(), b.upcast());
   }
 

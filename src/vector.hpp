@@ -33,6 +33,7 @@ namespace ASC_bla
     template <typename TB>
     VectorView & operator= (const VecExpr<TB> & v2)
     {
+      assert (m_size == v2.size());
       for (size_t i = 0; i < m_size; i++)
         m_data[m_dist*i] = v2(i);
       return *this;
@@ -53,6 +54,7 @@ namespace ASC_bla
     const T & operator()(size_t i) const { return m_data[m_dist*i]; }
     
     auto range(size_t first, size_t next) const {
+      assert(first <= next && next <= m_size);
       return VectorView(next-first, m_dist, m_data+first*m_dist);
     }
 
@@ -100,6 +102,7 @@ namespace ASC_bla
     using BASE::operator=;
     Vector & operator=(const Vector & v2)
     {
+      assert (m_size == v2.m_size);    
       for (size_t i = 0; i < m_size; i++)
         m_data[i] = v2(i);
       return *this;
