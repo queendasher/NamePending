@@ -75,11 +75,32 @@ namespace Mathlib{
         }
 
         auto Transpose() const {
-            if constexpr (ORD == ColMajor) // need constexpr so auto knows return type at compile time
+            if constexpr (ORD == ColMajor)
                 return MatrixView<T, RowMajor>(cols, rows, data);
             else // RowMajor
                 return MatrixView<T, ColMajor>(cols, rows, data);
         }
+
+        // Returns a view of the next 'next' rows starting from 'first'
+        auto RowRange(size_t first, size_t next) const {
+            if (first + next > rows || first < 0 || next < 0)
+                throw out_of_range("Matrix row range out of range");
+            if constexpr (ORD == ColMajor)
+                return MatrixView<T, ColMajor, size_t>(next, cols, rows, data + first * rows);
+            else // RowMajor
+                return MatrixView<T, RowMajor, size_t>(next, cols, 1, data + first * cols);
+        }
+
+        // Returns a view of the next 'next' columns starting from 'first'
+        auto ColRange(size_t first, size_t next) const {
+            if (first + next > cols || first < 0 || next < 0)
+                throw out_of_range("Matrix column range out of range");
+            if constexpr (ORD == ColMajor)
+                return MatrixView<T, ColMajor, size_t>(rows, next, rows, data + first * rows);
+            else // RowMajor
+                return MatrixView<T, RowMajor, size_t>(rows, next, 1, data + first);
+        }
+        
     };
 
 
@@ -143,9 +164,9 @@ namespace Mathlib{
         size_t Rows() const { return rows; }
         size_t Cols() const { return cols; }
 
-        Matrix Inverse() const {
+        auto Inverse() const {
             if (rows != cols)
-                throw std::runtime_error("Matrix must be square to compute its inverse");
+                throw runtime_error("Matrix must be square to compute its inverse");
 
             // Create an augmented matrix [A | I]
             Matrix<T> augmented(rows, 2 * cols);
@@ -161,7 +182,7 @@ namespace Mathlib{
                 // Find pivot (diagonal element)
                 T pivot = augmented(i, i);
                 if (pivot == T(0))
-                    throw std::runtime_error("Matrix is singular and cannot be inverted");
+                    throw runtime_error("Matrix is singular and cannot be inverted");
 
                 // Normalize pivot row
                 for (size_t j = 0; j < 2 * cols; ++j)
@@ -178,12 +199,7 @@ namespace Mathlib{
             }
 
             // Extract the inverse matrix from the augmented matrix
-            Matrix<T> inverse(rows, cols);
-            for (size_t i = 0; i < rows; ++i)
-                for (size_t j = 0; j < cols; ++j)
-                    inverse(i, j) = augmented(i, j + cols);
-
-            return inverse;
+            return augmented.ColRange(cols, cols);
         }
 
         Matrix operator-() const {

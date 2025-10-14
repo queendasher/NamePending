@@ -165,6 +165,9 @@ namespace Mathlib {
     };
 
     ostream& operator<<(ostream& os, const Fraction& f) {
-        return os << f.getP() << "/" << f.getQ();
+        os << f.getP();
+        if(f.getQ() != 1)
+            os << "/" << f.getQ();
+        return os;
     }
 }
