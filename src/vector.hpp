@@ -22,13 +22,13 @@ namespace Mathlib
 		template<typename T2>
 		VectorView& operator=(const VecExpr<T2>& other) {
 			for (size_t i = 0; i < size; ++i)
-			data[dist*i] = other(i);
+				data[dist*i] = other(i);
 			return *this;
 		}
 
 		VectorView& operator=(T scal) {
 			for (size_t i = 0; i < size; ++i)
-			data[dist*i] = scal;
+				data[dist*i] = scal;
 			return *this;
 		}
 
@@ -44,7 +44,7 @@ namespace Mathlib
 		}
 
 		auto Slice(size_t first, size_t slice) const {
-			return VectorView<T,size_t>(size/slice, dist*slice, data+first*dist);
+			return VectorView<T, size_t>(size/slice, dist*slice, data+first*dist);
 		}
 	};
 
@@ -60,18 +60,18 @@ namespace Mathlib
 	public:
 		Vector(size_t size) : VectorView<T>(size, new T[size]) { }
 
-		Vector(const Vector& v) : Vector(v.Size()) { 
-			*this = v;
+		Vector(const Vector& other) : Vector(other.Size()) { 
+			*this = other;
 		}
 
-		Vector(Vector&& v) : VectorView<T> (0, nullptr) {
-			swap(size, v.size);
-			swap(data, v.data);
+		Vector(Vector&& other) : VectorView<T>(0, nullptr) {
+			swap(size, other.size);
+			swap(data, other.data);
 		}
 
-		template <typename TB>
-		Vector(const VecExpr<TB>& v) : Vector(v.Size()) {
-			*this = v;
+		template <typename T2>
+		Vector(const VecExpr<T2>& other) : Vector(other.Size()) {
+			*this = other;
 		}
 
 		~Vector() { delete[] data; }
@@ -91,8 +91,8 @@ namespace Mathlib
 	};
 
 
-	template<typename ...Args>
-	ostream& operator<<(ostream& os, const VectorView<Args...>& v) {
+	template <typename T, typename TDIST>
+	ostream& operator<<(ostream& os, const VectorView<T, TDIST>& v) {
 		if (v.Size() > 0)
 			os << v(0);
 		for (size_t i = 1; i < v.Size(); ++i)

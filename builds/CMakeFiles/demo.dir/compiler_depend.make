@@ -4,6 +4,7 @@
 CMakeFiles/demo.dir/demos/demo.cpp.o: /home/queendasher/projects/NamePending/demos/demo.cpp \
   /home/queendasher/projects/NamePending/src/expression.hpp \
   /home/queendasher/projects/NamePending/src/mathlib.hpp \
+  /home/queendasher/projects/NamePending/src/matrix.hpp \
   /home/queendasher/projects/NamePending/src/vector.hpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/errno-base.h \
@@ -419,10 +420,6 @@ CMakeFiles/demo.dir/demos/demo.cpp.o: /home/queendasher/projects/NamePending/dem
 
 /usr/include/c++/13/tr1/special_function_util.h:
 
-/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
-
-/usr/include/c++/13/bits/locale_classes.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/clock_t.h:
 
 /usr/include/c++/13/bits/char_traits.h:
@@ -433,13 +430,13 @@ CMakeFiles/demo.dir/demos/demo.cpp.o: /home/queendasher/projects/NamePending/dem
 
 /usr/include/c++/13/bits/ios_base.h:
 
-/usr/include/c++/13/bits/move.h:
-
 /usr/include/x86_64-linux-gnu/sys/single_threaded.h:
+
+/usr/include/c++/13/type_traits:
 
 /usr/include/c++/13/tr1/hypergeometric.tcc:
 
-/usr/include/c++/13/type_traits:
+/usr/include/c++/13/bits/move.h:
 
 /usr/include/errno.h:
 
@@ -465,15 +462,23 @@ CMakeFiles/demo.dir/demos/demo.cpp.o: /home/queendasher/projects/NamePending/dem
 
 /usr/include/c++/13/cwchar:
 
-/usr/include/x86_64-linux-gnu/bits/time64.h:
-
-/usr/include/c++/13/bits/basic_ios.h:
-
 /usr/include/alloca.h:
 
 /usr/include/c++/13/bit:
 
 /usr/include/c++/13/bits/basic_string.tcc:
+
+/usr/include/x86_64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/c++/13/bits/locale_classes.h:
+
+/home/queendasher/projects/NamePending/src/matrix.hpp:
+
+/usr/include/assert.h:
+
+/usr/include/c++/13/bits/locale_classes.tcc:
+
+/home/queendasher/projects/NamePending/src/vector.hpp:
 
 /usr/include/c++/13/bits/locale_facets.tcc:
 
@@ -487,16 +492,6 @@ CMakeFiles/demo.dir/demos/demo.cpp.o: /home/queendasher/projects/NamePending/dem
 
 /usr/include/c++/13/backward/binders.h:
 
-/usr/include/assert.h:
-
-/usr/include/c++/13/bits/locale_classes.tcc:
-
-/home/queendasher/projects/NamePending/src/vector.hpp:
-
-/usr/include/c++/13/bits/nested_exception.h:
-
-/home/queendasher/projects/NamePending/src/expression.hpp:
-
 /usr/include/c++/13/bits/specfun.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
@@ -504,6 +499,14 @@ CMakeFiles/demo.dir/demos/demo.cpp.o: /home/queendasher/projects/NamePending/dem
 /usr/include/c++/13/tr1/poly_laguerre.tcc:
 
 /usr/include/c++/13/bits/basic_string.h:
+
+/usr/include/x86_64-linux-gnu/bits/time64.h:
+
+/usr/include/c++/13/bits/basic_ios.h:
+
+/home/queendasher/projects/NamePending/src/expression.hpp:
+
+/usr/include/c++/13/bits/nested_exception.h:
 
 /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h:
 
@@ -551,12 +554,6 @@ CMakeFiles/demo.dir/demos/demo.cpp.o: /home/queendasher/projects/NamePending/dem
 
 /usr/include/c++/13/bits/exception.h:
 
-/usr/include/c++/13/pstl/glue_numeric_defs.h:
-
-/usr/include/c++/13/random:
-
-/usr/include/c++/13/string:
-
 /usr/include/c++/13/bits/istream.tcc:
 
 /usr/include/c++/13/bits/exception_ptr.h:
@@ -565,13 +562,19 @@ CMakeFiles/demo.dir/demos/demo.cpp.o: /home/queendasher/projects/NamePending/dem
 
 /usr/include/c++/13/bits/alloc_traits.h:
 
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+/usr/include/c++/13/ios:
 
-/usr/include/c++/13/bits/stl_iterator.h:
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
 /usr/include/c++/13/bits/functexcept.h:
 
-/usr/include/c++/13/ios:
+/usr/include/c++/13/bits/stl_iterator.h:
+
+/usr/include/c++/13/pstl/glue_numeric_defs.h:
+
+/usr/include/c++/13/random:
+
+/usr/include/c++/13/string:
 
 /usr/include/asm-generic/errno.h:
 

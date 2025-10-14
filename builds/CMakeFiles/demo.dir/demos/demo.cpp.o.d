@@ -190,6 +190,7 @@ CMakeFiles/demo.dir/demos/demo.cpp.o: \
  /usr/include/c++/13/pstl/glue_numeric_defs.h \
  /usr/include/c++/13/pstl/execution_defs.h /usr/include/c++/13/complex \
  /usr/include/c++/13/sstream /usr/include/c++/13/bits/sstream.tcc \
- /home/queendasher/projects/NamePending/demos/../src/vector.hpp \
+ /home/queendasher/projects/NamePending/demos/../src/matrix.hpp \
  /home/queendasher/projects/NamePending/demos/../src/mathlib.hpp \
+ /home/queendasher/projects/NamePending/demos/../src/vector.hpp \
  /home/queendasher/projects/NamePending/demos/../src/expression.hpp

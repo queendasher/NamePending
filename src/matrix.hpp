@@ -1,29 +1,112 @@
 #include "mathlib.hpp"
+#include "vector.hpp"
+#include "expression.hpp"
 
 namespace Mathlib{
     enum ORDERING { ColMajor, RowMajor };
-    template <typename T, ORDERING ORD = ColMajor>
-    class Matrix {
-    private:
+
+    template <typename T, ORDERING ORD = ColMajor, typename TDIST = integral_constant<size_t, 1>>
+    class MatrixView {
+    protected:
         size_t rows, cols;
         T* data;
+        TDIST dist;
 
     public:
-        Matrix(size_t r, size_t c) : rows(r), cols(c) {
-            data = new T[rows * cols]();
+        MatrixView() = default; // initializes members to zero / nullptr
+        MatrixView(const MatrixView&) = default; // shallow copy
+
+        template<typename TDIST2>
+        MatrixView(const MatrixView<T, ORD, TDIST2>& other) :  // allow implicit conversion between different dist types
+            rows(other.Rows()), 
+            cols(other.Cols()), 
+            data(other.Data()), 
+            dist(other.Dist()) { }
+        MatrixView(size_t r, size_t c, T* d) : rows(r), cols(c), data(d) { }
+        MatrixView(size_t r, size_t c, TDIST _dist, T* d) : rows(r), cols(c), data(d), dist(_dist) { }
+
+        template<typename T2>
+        MatrixView& operator=(const MatrixView<T, ORD, TDIST>& other) {
+            for (size_t j = 0; j < cols; ++j)
+                for (size_t i = 0; i < rows; ++i)
+                    (*this)(i, j) = other(i, j);
+            return *this;
         }
 
-        Matrix(const Matrix& other) : rows(other.rows), cols(other.cols) {
-            data = new T[rows * cols];
-            for (size_t i = 0; i < rows * cols; ++i)
-                data[i] = other.data[i];
+        T* Data() const { return data; }
+        size_t Rows() const { return rows; }
+        size_t Cols() const { return cols; }
+        auto Dist() const { return dist; }
+
+        const T& operator()(size_t r, size_t c) const {
+            if (r >= rows || c >= cols || r < 0 || c < 0)
+                throw out_of_range("Matrix index out of range");
+            if (ORD == ColMajor)
+                return data[c * rows + r];
+            else // RowMajor
+                return data[r * cols + c];
         }
 
-        Matrix(Matrix&& other) : rows(other.rows), cols(other.cols), data(other.data) {
-            other.data = nullptr;
-            other.rows = other.cols = 0;
+        T& operator()(size_t r, size_t c) {
+            if (r >= rows || c >= cols || r < 0 || c < 0)
+                throw out_of_range("Matrix index out of range");
+            if (ORD == ColMajor)
+                return data[c * rows + r];
+            else // RowMajor
+                return data[r * cols + c];
         }
 
+        auto Row(size_t r) const {
+            if (r >= rows || r < 0)
+                throw out_of_range("Matrix row index out of range");
+            if (ORD == ColMajor)
+                return VectorView<T, size_t>(cols, rows, data + r);
+            else // RowMajor
+                return VectorView<T, size_t>(cols, 1, data + r * cols);
+        }
+
+        auto Col(size_t c) const {
+            if (c >= cols || c < 0)
+                throw out_of_range("Matrix column index out of range");
+            if (ORD == ColMajor)
+                return VectorView<T, size_t>(rows, 1, data + c * rows);
+            else // RowMajor
+                return VectorView<T, size_t>(rows, cols, data + c);
+        }
+
+        auto Transpose() const {
+            if constexpr (ORD == ColMajor) // need constexpr so auto knows return type at compile time
+                return MatrixView<T, RowMajor>(cols, rows, data);
+            else // RowMajor
+                return MatrixView<T, ColMajor>(cols, rows, data);
+        }
+    };
+
+
+
+
+    template <typename T, ORDERING ORD = ColMajor>
+    class Matrix : public MatrixView<T, ORD> {
+        typedef MatrixView<T, ORD> BASE;
+        using BASE::rows;
+        using BASE::cols;
+        using BASE::data;
+
+    public:
+        Matrix(size_t r, size_t c) : 
+            MatrixView<T, ORD>(r, c, new T[r * c]) { }
+
+        Matrix(const Matrix& other) : Matrix(other.Rows(), other.Cols()) {
+            *this = other;
+        }
+
+        Matrix(Matrix&& other) : MatrixView<T, ORD>(0, 0, nullptr) {
+            swap(rows, other.rows);
+            swap(cols, other.cols);
+            swap(data, other.data);
+        }
+
+        using BASE::operator=;
         Matrix& operator=(const Matrix& other) { // Copy
             if (this != &other) {
                 delete[] data;
@@ -54,18 +137,6 @@ namespace Mathlib{
 
         size_t Rows() const { return rows; }
         size_t Cols() const { return cols; }
-
-        Matrix Transpose() const {
-            Matrix<T> result(cols, rows);
-            for (size_t j = 0; j < cols; ++j)
-                for (size_t i = 0; i < rows; ++i)
-                    result(j, i) = (*this)(i, j);
-            return result;
-        }
-
-        void REF() {
-
-        }
 
         Matrix Inverse() const {
             if (rows != cols)
@@ -152,7 +223,7 @@ namespace Mathlib{
         }
 
         T& operator()(size_t r, size_t c) {
-            if (r => rows || c => cols || r < 0 || c < 0)
+            if (r >= rows || c >= cols || r < 0 || c < 0)
                 throw out_of_range("Matrix index out of range");
             if (ORD == ColMajor)
                 return data[c * rows + r];
@@ -161,7 +232,7 @@ namespace Mathlib{
         }
 
         T& operator()(size_t r, size_t c) const {
-            if (r => rows || c => cols || r < 0 || c < 0)
+            if (r >= rows || c >= cols || r < 0 || c < 0)
                 throw out_of_range("Matrix index out of range");
             if (ORD == ColMajor)
                 return data[c * rows + r];
@@ -174,8 +245,19 @@ namespace Mathlib{
         }
     };
 
-    template <typename T> 
-    ostream& operator<<(ostream& os, const Matrix<T>& m) {
+    template <typename T, ORDERING ORD> 
+    ostream& operator<<(ostream& os, const Matrix<T, ORD>& m) {
+        for (size_t i = 0; i < m.Rows(); ++i) {
+            for (size_t j = 0; j < m.Cols(); ++j)
+                os << m(i, j) << " ";
+            os << "\n";
+        }
+
+        return os;
+    }
+    
+    template <typename T, ORDERING ORD, typename TDIST>
+    ostream& operator<<(ostream& os, const MatrixView<T, ORD, TDIST>& m) {
         for (size_t i = 0; i < m.Rows(); ++i) {
             for (size_t j = 0; j < m.Cols(); ++j)
                 os << m(i, j) << " ";
