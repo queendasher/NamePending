@@ -78,7 +78,7 @@ namespace ASC_bla
       : VectorView<T> (size, new T[size]) { ; }
     
     Vector (const Vector & v)
-      : Vector(v.Size())
+      : Vector(v.size())
     {
       *this = v;
     }

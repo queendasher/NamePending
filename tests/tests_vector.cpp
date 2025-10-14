@@ -6,14 +6,16 @@
 #include <vector.hpp>
 using namespace ASC_bla;
 
-/*
-uint32_t factorial(uint32_t number)
-{
-  return number <= 1 ? number : factorial(number - 1) * number;
-}
-*/
 
 TEST_CASE( "bla-tests", "[Vector]" ) {
   Vector<double> x(5);
-  REQUIRE(x.size() == 5);
+  Vector<double> y = x;
+  REQUIRE(y.size() == 5);
+}
+
+TEST_CASE( "bla-tests", "[vector size check]" ) {
+  Vector<double> x(5);
+  x = 3;
+  Vector<double> y = x + x + (-2) * x + x;
+  REQUIRE(y(0) == 3); 
 }
