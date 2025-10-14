@@ -7,6 +7,8 @@ include_directories(src)
 
 add_subdirectory (demos)
 
+
+enable_testing()
 add_subdirectory (tests)
 
 

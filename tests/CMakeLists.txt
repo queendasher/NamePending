@@ -14,3 +14,8 @@ target_sources (tests_vector PUBLIC ../src/vector.hpp ../src/vecexpr.hpp)
 
 target_link_libraries(tests_vector Catch2::Catch2WithMain)
 
+
+
+add_test(NAME catchtest COMMAND tests_vector)
+
+
