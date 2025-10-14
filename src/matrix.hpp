@@ -6,7 +6,7 @@ namespace Mathlib{
     enum ORDERING { ColMajor, RowMajor };
 
     template <typename T, ORDERING ORD = ColMajor, typename TDIST = integral_constant<size_t, 1>>
-    class MatrixView {
+    class MatrixView: public MatExpr<MatrixView<T, ORD, TDIST>> {
     protected:
         size_t rows, cols;
         T* data;
@@ -26,7 +26,7 @@ namespace Mathlib{
         MatrixView(size_t r, size_t c, TDIST _dist, T* d) : rows(r), cols(c), data(d), dist(_dist) { }
 
         template<typename T2>
-        MatrixView& operator=(const MatrixView<T, ORD, TDIST>& other) {
+        MatrixView& operator=(const MatExpr<T2>& other) {
             for (size_t j = 0; j < cols; ++j)
                 for (size_t i = 0; i < rows; ++i)
                     (*this)(i, j) = other(i, j);
@@ -104,6 +104,11 @@ namespace Mathlib{
             swap(rows, other.rows);
             swap(cols, other.cols);
             swap(data, other.data);
+        }
+
+        template <typename T2>
+        Matrix(const MatExpr<T2>& other) : Matrix(other.Rows(), other.Cols()) {
+            *this = other;
         }
 
         using BASE::operator=;
