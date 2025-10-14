@@ -3,62 +3,64 @@
 
 namespace Mathlib
 {
-	template <typename T>
+	template <typename E>
 	class VecExpr {
 	public:
-		auto Upcast() const { return static_cast<const T&> (*this); }
-		size_t Size() const { return Upcast().Size(); }
-		auto operator() (size_t i) const { return Upcast()(i); }
+		auto Downcast() const { return static_cast<const E&>(*this); }
+		size_t Size() const { return Downcast().Size(); }
+		auto operator()(size_t i) const { return Downcast()(i); }
 	};
 	
 
 
-	template <typename TA, typename TB>
-	class SumVecExpr : public VecExpr<SumVecExpr<TA,TB>> {
-		TA a;
-		TB b;
+	template<typename E1, typename E2>
+	class VecExprSum : public VecExpr<VecExprSum<E1, E2>> {
+		E1 a; // left operand
+		E2 b; // right operand
 
 	public:
-		SumVecExpr (TA _a, TB _b) : a(_a), b(_b) { }
+		VecExprSum(E1 _a, E2 _b) : a(_a), b(_b) { 
+			if (a.Size() != b.Size()) throw runtime_error("Vector sizes do not match in sum.");
+		}
 
-		auto operator()(size_t i) const { return a(i)+b(i); }
+		auto operator()(size_t i) const { return a(i) + b(i); }
 		size_t Size() const { return a.Size(); }      
 	};
 	
-	template <typename TA, typename TB>
-	auto operator+(const VecExpr<TA>& a, const VecExpr<TB>& b) {
-		return SumVecExpr(a.Upcast(), b.Upcast());
+	template <typename E1, typename E2>
+	auto operator+(const VecExpr<E1>& a, const VecExpr<E2>& b) {
+		return VecExprSum(a.Downcast(), b.Downcast());
 	}
 
 
 
 	
-	template <typename TSCAL, typename TV>
-	class ScaleVecExpr : public VecExpr<ScaleVecExpr<TSCAL,TV>> {
-		TSCAL scal;
-		TV vec;
+	template<typename ESCAL, typename EV>
+	class VecExprScale : public VecExpr<VecExprScale<ESCAL, EV>> {
+		ESCAL scal; // scalar
+		EV vec; // vector
 
 	public:
-		ScaleVecExpr (TSCAL _scal, TV _vec) : scal(_scal), vec(_vec) { }
+		VecExprScale(ESCAL _scal, EV _vec) : scal(_scal), vec(_vec) { }
 
-		auto operator() (size_t i) const { return scal*vec(i); }
+		auto operator()(size_t i) const { return scal * vec(i); }
 		size_t Size() const { return vec.Size(); }      
 	};
 	
-	template <typename T>
-	auto operator*(double scal, const VecExpr<T>& v) {
-		return ScaleVecExpr(scal, v.Upcast());
+	template <typename E>
+	auto operator*(double scal, const VecExpr<E>& v) {
+		return VecExprScale(scal, v.Downcast());
 	}
 
 
 	
-	template <typename T>
-	ostream& operator<<(ostream& ost, const VecExpr<T>& v) {
+	template <typename E>
+	ostream& operator<<(ostream& os, const VecExpr<E>& v) {
 		if (v.Size() > 0)
-		ost << v(1);
-		for (size_t i = 2; i <= v.Size(); i++)
-		ost << ", " << v(i);
-		return ost;
+			os << v(0);
+		for (size_t i = 1; i < v.Size(); ++i)
+			os << ", " << v(i);
+		return os;
 	}
 }
  

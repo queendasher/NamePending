@@ -8,7 +8,7 @@ int main()
   size_t n = 10;
   Vector<double> x(n), y(n);
 
-  for (size_t i = 1; i <= x.Size(); i++)
+  for (size_t i = 0; i < x.Size(); ++i)
     {
       x(i) = i;
       y(i) = 10;
@@ -24,7 +24,7 @@ int main()
 
   std::cout << "sizeof(x+3*y) = " << sizeof(x+3*y) << std::endl;
   
-  x.Range(2,9) = 3;
+  x.Range(2,5) = 3;
   x.Slice(1,2) = 99;
   
   std::cout << "x = " << x << std::endl;  
