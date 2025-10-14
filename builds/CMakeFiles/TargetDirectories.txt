@@ -1,3 +1,0 @@
-/mnt/c/Users/Admin/OneDrive - TU Wien/Desktop/SciComp/NamePending/builds/CMakeFiles/demo.dir
-/mnt/c/Users/Admin/OneDrive - TU Wien/Desktop/SciComp/NamePending/builds/CMakeFiles/edit_cache.dir
-/mnt/c/Users/Admin/OneDrive - TU Wien/Desktop/SciComp/NamePending/builds/CMakeFiles/rebuild_cache.dir
