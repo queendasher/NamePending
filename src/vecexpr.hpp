@@ -10,9 +10,9 @@ namespace ASC_bla
   class VecExpr
   {
   public:
-    auto upcast() const { return static_cast<const T&> (*this); }
-    size_t size() const { return upcast().size(); }
-    auto operator() (size_t i) const { return upcast()(i); }
+    auto derived() const { return static_cast<const T&> (*this); }
+    size_t size() const { return derived().size(); }
+    auto operator() (size_t i) const { return derived()(i); }
   };
   
  
@@ -31,7 +31,7 @@ namespace ASC_bla
   auto operator+ (const VecExpr<TA> & a, const VecExpr<TB> & b)
   {
     assert (a.size() == b.size());
-    return SumVecExpr(a.upcast(), b.upcast());
+    return SumVecExpr(a.derived(), b.derived());
   }
 
 
@@ -51,7 +51,7 @@ namespace ASC_bla
   template <typename T>
   auto operator* (double scal, const VecExpr<T> & v)
   {
-    return ScaleVecExpr(scal, v.upcast());
+    return ScaleVecExpr(scal, v.derived());
   }
 
 
