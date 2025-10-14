@@ -14,7 +14,7 @@ namespace Mathlib
 		VectorView() = default;
 		VectorView(const VectorView&) = default;
 
-		template <typename TDIST2>
+		template<typename TDIST2>
 		VectorView(const VectorView<T,TDIST2>& other) : data(other.Data()), size(other.Size()), dist(other.Dist()) { }
 
 		VectorView(size_t _size, T* _data) : data(_data), size(_size) { }

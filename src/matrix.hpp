@@ -57,8 +57,8 @@ namespace Mathlib{
 
         Matrix Transpose() const {
             Matrix<T> result(cols, rows);
-            for (size_t j = 1; j <= cols; ++j)
-                for (size_t i = 1; i <= rows; ++i)
+            for (size_t j = 0; j < cols; ++j)
+                for (size_t i = 0; i < rows; ++i)
                     result(j, i) = (*this)(i, j);
             return result;
         }
@@ -73,29 +73,29 @@ namespace Mathlib{
 
             // Create an augmented matrix [A | I]
             Matrix<T> augmented(rows, 2 * cols);
-            for (size_t i = 1; i <= rows; ++i) {
-                for (size_t j = 1; j <= cols; ++j) {
+            for (size_t i = 0; i < rows; ++i) {
+                for (size_t j = 0; j < cols; ++j) {
                     augmented(i, j) = (*this)(i, j);
                     augmented(i, j + cols) = (i == j) ? T(1) : T(0);
                 }
             }
 
             // Perform Gaussian elimination
-            for (size_t i = 1; i <= rows; ++i) {
+            for (size_t i = 0; i < rows; ++i) {
                 // Find pivot (diagonal element)
                 T pivot = augmented(i, i);
                 if (pivot == T(0))
                     throw std::runtime_error("Matrix is singular and cannot be inverted");
 
                 // Normalize pivot row
-                for (size_t j = 1; j <= 2 * cols; ++j)
+                for (size_t j = 0; j < 2 * cols; ++j)
                     augmented(i, j) = augmented(i, j) / pivot;
 
                 // Eliminate other rows
-                for (size_t k = 1; k <= rows; ++k) {
+                for (size_t k = 0; k < rows; ++k) {
                     if (k != i) {
                         T factor = augmented(k, i);
-                        for (size_t j = 1; j <= 2 * cols; ++j)
+                        for (size_t j = 0; j < 2 * cols; ++j)
                             augmented(k, j) = augmented(k, j) - factor * augmented(i, j);
                     }
                 }
@@ -103,8 +103,8 @@ namespace Mathlib{
 
             // Extract the inverse matrix from the augmented matrix
             Matrix<T> inverse(rows, cols);
-            for (size_t i = 1; i <= rows; ++i)
-                for (size_t j = 1; j <= cols; ++j)
+            for (size_t i = 0; i < rows; ++i)
+                for (size_t j = 0; j < cols; ++j)
                     inverse(i, j) = augmented(i, j + cols);
 
             return inverse;
@@ -112,8 +112,8 @@ namespace Mathlib{
 
         Matrix operator-() const {
             Matrix<T> result(rows, cols);
-            for (size_t j = 1; j <= cols; ++j)
-                for (size_t i = 1; i <= rows; ++i)
+            for (size_t j = 0; j < cols; ++j)
+                for (size_t i = 0; i < rows; ++i)
                     result(i, j) = -(*this)(i, j);
             return result;
         }
@@ -123,8 +123,8 @@ namespace Mathlib{
                 throw std::invalid_argument("Matrix dimensions do not match for addition");
 
             Matrix<T> result(rows, cols);
-            for (size_t j = 1; j <= cols; ++j)
-                for (size_t i = 1; i <= rows; ++i)
+            for (size_t j = 0; j < cols; ++j)
+                for (size_t i = 0; i < rows; ++i)
                     result(i, j) = (*this)(i, j) + other(i, j);
             return result;
         }
@@ -138,10 +138,10 @@ namespace Mathlib{
             throw invalid_argument("Matrix dimensions do not match for multiplication");
 
             Matrix<T> result(rows, other.cols);
-            for (size_t i = 1; i <= rows; ++i) {
-                for (size_t j = 1; j <= other.cols; ++j) {
+            for (size_t i = 0; i < rows; ++i) {
+                for (size_t j = 0; j < other.cols; ++j) {
                     T sum = T();
-                    for (size_t k = 1; k <= cols; ++k) {
+                    for (size_t k = 0; k < cols; ++k) {
                         sum = sum + (*this)(i, k) * other(k, j);
                     }
                     result(i, j) = sum;
@@ -152,21 +152,21 @@ namespace Mathlib{
         }
 
         T& operator()(size_t r, size_t c) {
-            if (r > rows || c > cols || r <= 0 || c <= 0)
+            if (r => rows || c => cols || r < 0 || c < 0)
                 throw out_of_range("Matrix index out of range");
             if (ORD == ColMajor)
-                return data[(c-1) * rows + (r-1)];
+                return data[c * rows + r];
             else // RowMajor
-                return data[(r-1) * cols + (c-1)];
+                return data[r * cols + c];
         }
 
         T& operator()(size_t r, size_t c) const {
-            if (r > rows || c > cols || r <= 0 || c <= 0)
+            if (r => rows || c => cols || r < 0 || c < 0)
                 throw out_of_range("Matrix index out of range");
             if (ORD == ColMajor)
-                return data[(c-1) * rows + (r-1)];
+                return data[c * rows + r];
             else // RowMajor
-                return data[(r-1) * cols + (c-1)];
+                return data[r * cols + c];
         }
 
         void print() const {
@@ -176,8 +176,8 @@ namespace Mathlib{
 
     template <typename T> 
     ostream& operator<<(ostream& os, const Matrix<T>& m) {
-        for (size_t i = 1; i <= m.Rows(); ++i) {
-            for (size_t j = 1; j <= m.Cols(); ++j)
+        for (size_t i = 0; i < m.Rows(); ++i) {
+            for (size_t j = 0; j < m.Cols(); ++j)
                 os << m(i, j) << " ";
             os << "\n";
         }
