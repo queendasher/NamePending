@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/queendasher/projects/NamePending
+CMAKE_SOURCE_DIR = "/mnt/c/Users/Admin/OneDrive - TU Wien/Desktop/SciComp/NamePending"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/queendasher/projects/NamePending/builds
+CMAKE_BINARY_DIR = "/mnt/c/Users/Admin/OneDrive - TU Wien/Desktop/SciComp/NamePending/builds"
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/queendasher/projects/NamePending/builds/CMakeFiles /home/queendasher/projects/NamePending/builds//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/Admin/OneDrive - TU Wien/Desktop/SciComp/NamePending/builds/CMakeFiles" "/mnt/c/Users/Admin/OneDrive - TU Wien/Desktop/SciComp/NamePending/builds//CMakeFiles/progress.marks"
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/queendasher/projects/NamePending/builds/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/Admin/OneDrive - TU Wien/Desktop/SciComp/NamePending/builds/CMakeFiles" 0
 .PHONY : all
 
 # The main clean target
