@@ -1,10 +1,11 @@
 #include "mathlib.hpp"
 
 namespace Mathlib{
-    template <typename T>
+    enum ORDERING { ColMajor, RowMajor };
+    template <typename T, ORDERING ORD = ColMajor>
     class Matrix {
     private:
-        size_t rows, cols; // Currently using column-store first
+        size_t rows, cols;
         T* data;
 
     public:
@@ -68,44 +69,43 @@ namespace Mathlib{
 
         Matrix Inverse() const {
             if (rows != cols)
-                throw std::invalid_argument("Matrix must be square");
+                throw std::runtime_error("Matrix must be square to compute its inverse");
 
-            Matrix<T> expanded(rows, 2 * rows);
-
-            // Create expanded matrix [A | I]
+            // Create an augmented matrix [A | I]
+            Matrix<T> augmented(rows, 2 * cols);
             for (size_t i = 1; i <= rows; ++i) {
-                for (size_t j = 1; j <= rows; ++j) {
-                    expanded(i, j) = (*this)(i, j);
-                    expanded(i, j + rows) = (i == j) ? T(1) : T(0);
+                for (size_t j = 1; j <= cols; ++j) {
+                    augmented(i, j) = (*this)(i, j);
+                    augmented(i, j + cols) = (i == j) ? T(1) : T(0);
                 }
             }
 
             // Perform Gaussian elimination
             for (size_t i = 1; i <= rows; ++i) {
-                // Choose pivot (diagonal elements)
-                T pivot = expanded(i, i);
+                // Find pivot (diagonal element)
+                T pivot = augmented(i, i);
                 if (pivot == T(0))
-                    throw runtime_error("Matrix is singular");
+                    throw std::runtime_error("Matrix is singular and cannot be inverted");
 
                 // Normalize pivot row
-                for (size_t j = 1; j <= cols; ++j)
-                    expanded(i, j) = expanded(i, j) / pivot;
+                for (size_t j = 1; j <= 2 * cols; ++j)
+                    augmented(i, j) = augmented(i, j) / pivot;
 
                 // Eliminate other rows
                 for (size_t k = 1; k <= rows; ++k) {
-                    if (k == i) continue;
-
-                    T factor = expanded(k, i);
-                    for (size_t j = 1; j <= cols; ++j)
-                        expanded(k, j) = expanded(i, j) - factor * expanded(i, j);
+                    if (k != i) {
+                        T factor = augmented(k, i);
+                        for (size_t j = 1; j <= 2 * cols; ++j)
+                            augmented(k, j) = augmented(k, j) - factor * augmented(i, j);
+                    }
                 }
             }
 
-            // Extract inverse matrix from gaussian elimination result [I | A^-1]
-            Matrix<T> inverse(rows, rows);
+            // Extract the inverse matrix from the augmented matrix
+            Matrix<T> inverse(rows, cols);
             for (size_t i = 1; i <= rows; ++i)
-                for (size_t j = 1; j <= rows; ++j)
-                    inverse(i, j) = expanded(i, j + rows);
+                for (size_t j = 1; j <= cols; ++j)
+                    inverse(i, j) = augmented(i, j + cols);
 
             return inverse;
         }
@@ -154,13 +154,19 @@ namespace Mathlib{
         T& operator()(size_t r, size_t c) {
             if (r > rows || c > cols || r <= 0 || c <= 0)
                 throw out_of_range("Matrix index out of range");
-            return data[(c-1) * rows + (r-1)];
+            if (ORD == ColMajor)
+                return data[(c-1) * rows + (r-1)];
+            else // RowMajor
+                return data[(r-1) * cols + (c-1)];
         }
 
         T& operator()(size_t r, size_t c) const {
             if (r > rows || c > cols || r <= 0 || c <= 0)
                 throw out_of_range("Matrix index out of range");
-            return data[(c-1) * rows + (r-1)];
+            if (ORD == ColMajor)
+                return data[(c-1) * rows + (r-1)];
+            else // RowMajor
+                return data[(r-1) * cols + (c-1)];
         }
 
         void print() const {
