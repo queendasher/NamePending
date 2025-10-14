@@ -3,7 +3,7 @@
 
 namespace Mathlib
 {
-	template <typename E>
+	template<typename E>
 	class VecExpr {
 	public:
 		auto Downcast() const { return static_cast<const E&>(*this); }
@@ -47,14 +47,14 @@ namespace Mathlib
 		size_t Size() const { return vec.Size(); }      
 	};
 	
-	template <typename E>
+	template<typename E>
 	auto operator*(double scal, const VecExpr<E>& v) {
 		return VecExprScale(scal, v.Downcast());
 	}
 
 
 	
-	template <typename E>
+	template<typename E>
 	ostream& operator<<(ostream& os, const VecExpr<E>& v) {
 		if (v.Size() > 0)
 			os << v(0);

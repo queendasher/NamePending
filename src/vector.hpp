@@ -3,7 +3,7 @@
 
 namespace Mathlib
 {
-	template<typename T, typename TDIST = integral_constant<size_t,1>>
+	template<typename T, typename TDIST = integral_constant<size_t, 1>>
 	class VectorView : public VecExpr<VectorView<T, TDIST>> {
 	protected:
 		T* data;
@@ -11,24 +11,22 @@ namespace Mathlib
 		TDIST dist;
 
 	public:
-		VectorView() = default;
-		VectorView(const VectorView&) = default;
+		VectorView() = default; // initializes members to zero / nullptr
+		VectorView(const VectorView&) = default; // shallow copy
 
 		template<typename TDIST2>
-		VectorView(const VectorView<T,TDIST2>& other) : data(other.Data()), size(other.Size()), dist(other.Dist()) { }
-
+		VectorView(const VectorView<T, TDIST2>& other) : data(other.Data()), size(other.Size()), dist(other.Dist()) { } // allow implicit conversion between different dist types
 		VectorView(size_t _size, T* _data) : data(_data), size(_size) { }
-
 		VectorView(size_t _size, TDIST _dist, T* _data) : data(_data), size(_size), dist(_dist) { }
 
-		template<typename TB>
-		VectorView& operator= (const VecExpr<TB>& other) {
+		template<typename T2>
+		VectorView& operator=(const VecExpr<T2>& other) {
 			for (size_t i = 0; i < size; ++i)
 			data[dist*i] = other(i);
 			return *this;
 		}
 
-		VectorView& operator= (T scal) {
+		VectorView& operator=(T scal) {
 			for (size_t i = 0; i < size; ++i)
 			data[dist*i] = scal;
 			return *this;
