@@ -15,7 +15,8 @@ namespace ASC_bla
     auto operator() (size_t i) const { return derived()(i); }
   };
   
- 
+ // ***************** Sum of two vectors *****************
+
   template <typename TA, typename TB>
   class SumVecExpr : public VecExpr<SumVecExpr<TA,TB>>
   {
@@ -35,7 +36,7 @@ namespace ASC_bla
   }
 
 
-
+// ***************** Scaling a vector *****************
   
   template <typename TSCAL, typename TV>
   class ScaleVecExpr : public VecExpr<ScaleVecExpr<TSCAL,TV>>
@@ -54,7 +55,24 @@ namespace ASC_bla
     return ScaleVecExpr(scal, v.derived());
   }
 
+  // **************** dot product of two vectors *****************
+ 
+  template <typename TA, typename TB>
+  auto dot (const VecExpr<TA> & a, const VecExpr<TB> & b)
+  {
+    assert (a.size() == b.size());
 
+    using elemtypeA = typename std::invoke_result<TA,size_t>::type;
+    using elemtypeB = typename std::invoke_result<TB,size_t>::type;
+    using TSUM = decltype(std::declval<elemtypeA>()*std::declval<elemtypeB>());
+
+    TSUM sum = 0;
+    for (size_t i = 0; i < a.size(); i++)
+      sum += a(i)*b(i);
+    return sum;
+  }
+
+  // ***************** Output operator *****************
 
   template <typename T>
   std::ostream & operator<< (std::ostream & ost, const VecExpr<T> & v)

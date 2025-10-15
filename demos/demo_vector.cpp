@@ -26,6 +26,8 @@ int main()
 
   std::cout << "sizeof(x+3*y) = " << sizeof(x+3*y) << std::endl;
   
+  std::cout << "<x,x> = " << dot(x,x) << std::endl;
+
   x.range(2,9) = 3;
   x.slice(1,5) = 10;
   
