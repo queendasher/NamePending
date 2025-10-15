@@ -9,12 +9,19 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 
-add_executable (tests_vector tests_vector.cpp)
-target_sources (tests_vector PUBLIC ../src/vector.hpp ../src/expression.hpp)
+add_executable(tests_vector tests_vector.cpp)
+target_sources(tests_vector PRIVATE ../src/vector.hpp ../src/expression.hpp)
+target_link_libraries(tests_vector PRIVATE Catch2::Catch2WithMain)
 
-target_link_libraries(tests_vector Catch2::Catch2WithMain)
-
-
+# Put the test exe in <build>/tests for all common configs
+set_target_properties(tests_vector PROPERTIES
+  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/tests
+)
+foreach(cfg Debug Release RelWithDebInfo MinSizeRel)
+  set_target_properties(tests_vector PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY_${cfg} ${CMAKE_BINARY_DIR}/tests
+  )
+endforeach()
 
 add_test(NAME catchtest COMMAND tests_vector)
 

@@ -20,6 +20,5 @@ target_include_directories(mathlib INTERFACE
 add_executable(demo demos/demo.cpp)
 target_link_libraries(demo PRIVATE mathlib)
 
-#Bitte funktioniere
 enable_testing()
-add_subdirectory(tests)
+add_subdirectory(tests EXCLUDE_FROM_ALL)
