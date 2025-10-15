@@ -19,12 +19,3 @@ TEST_CASE( "vector-test 2", "[vector add and scale test]" ) {
   Vector<double> y = x + x + (-2) * x + x;
   REQUIRE(y(0) == 3); 
 }
-
-TEST_CASE( "vector-test 3", "[buggy vector add and scale test]" ) {
-  Vector<double> x(5);
-  x = 3;
-  Vector<double> y = x + x + (-2) * x + x;
-  REQUIRE(y(0) == 4);  // wrong test !!
-}
-
-
