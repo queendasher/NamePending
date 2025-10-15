@@ -4,84 +4,39 @@
 
 using namespace Mathlib;
 
-void TestColRowViews(){
-	Matrix<double, RowMajor> A(3,3);
-	Matrix<double, ColMajor> B(3,3);	
-	Matrix<double, RowMajor> C(3,3);
-	Matrix<double, ColMajor> D(3,3);
-
-	for(size_t i=0; i<3; ++i)
-		for(size_t j=0; j<3; ++j) {
-			A(i,j) = i + j*3;
-			B(i,j) = i + j*3 + 1;
-			C(i,j) = i + j*3 + 2;
-			D(i,j) = i + j*3 + 3;
-		}
-
-	std::cout << "Matrix A (RowMajor):\n" << A << "\n";
-	std::cout << "Matrix B (ColMajor):\n" << B << "\n";
-	std::cout << "Matrix C (RowMajor):\n" << C << "\n";
-	std::cout << "Matrix D (ColMajor):\n" << D << "\n";
-
-	std::cout << "2nd row of each matrix:\n";
-	std::cout << "A.Row(1): " << A.Row(1) << "\n";
-	std::cout << "B.Row(1): " << B.Row(1) << "\n";
-	std::cout << "C.Row(1): " << C.Row(1) << "\n";
-	std::cout << "D.Row(1): " << D.Row(1) << "\n\n";
-
-	std::cout << "2nd column of each matrix:\n";
-	std::cout << "A.Col(1): " << A.Col(1) << "\n";
-	std::cout << "B.Col(1): " << B.Col(1) << "\n";
-	std::cout << "C.Col(1): " << C.Col(1) << "\n";
-	std::cout << "D.Col(1): " << D.Col(1) << "\n\n";
-
-	std::cout << "Row range (1,2) of each matrix:\n";
-	std::cout << "A.RowRange(1,2):\n" << A.RowRange(1,2) << "\n";
-	std::cout << "B.RowRange(1,2):\n" << B.RowRange(1,2) << "\n";
-	std::cout << "C.RowRange(1,2):\n" << C.RowRange(1,2) << "\n";
-	std::cout << "D.RowRange(1,2):\n" << D.RowRange(1,2) << "\n\n";
-
-	std::cout << "Column range (1,2) of each matrix:\n";
-	std::cout << "A.ColsRange(1,2):\n" << A.ColRange(1,2) << "\n";
-	std::cout << "B.ColsRange(1,2):\n" << B.ColRange(1,2) << "\n";
-	std::cout << "C.ColsRange(1,2):\n" << C.ColRange(1,2) << "\n";
-	std::cout << "D.ColsRange(1,2):\n" << D.ColRange(1,2) << "\n\n";
-}
-
-void TestTranspose(){
-	Matrix<double, RowMajor> A(3,2);
-	Matrix<double, ColMajor> B(2,3);	
-	
-	for(size_t i=0; i<3; ++i)
-		for(size_t j=0; j<2; ++j) {
-			A(i,j) = i + j*3;
-			B(j,i) = i + j*3 + 1;
-		}
-
-	std::cout << "Matrix A (RowMajor):\n" << A << "\n";
-	std::cout << "Matrix B (ColMajor):\n" << B << "\n";
-	std::cout << "Transpose of A:\n" << A.Transpose() << "\n";
-}
-
-void TestInverse(){
-	Matrix<Fraction> A(3,3);
-	for(size_t i=0; i<3; ++i)
-		for(size_t j=0; j<3; ++j) 
-			A(i,j) = (i == j) ? Fraction(2) : Fraction(1);
-
-	std::cout << "Matrix A:\n" << A << "\n";
-	std::cout << "Inverse of A:\n" << A.Inverse() << "\n";
-}	
-
 int main()
 {
-	Vector<double> v(5);
-	for(size_t i=0; i<5; ++i)
-		v(i) = i+1;
-	std::cout << "Vector v: " << v << "\n";
+	Matrix<double, RowMajor> A(4, 7);
+	Matrix<double, ColMajor> B(7, 4);
+	Matrix<Fraction> C(3, 3);
+	Vector<double> v(3);
+	Matrix<double> D(3, 3);
 
-	TestTranspose();
-	TestColRowViews();
-	TestInverse();
-	return 0;	
+	for (size_t i = 0; i < A.Rows(); ++i)
+		for (size_t j = 0; j < A.Cols(); ++j) {
+			A(i, j) = i + j + 1;
+			B(j, i) = i + j + 1;
+		}
+
+	for (size_t i = 0; i < C.Rows(); ++i)
+		for (size_t j = 0; j < C.Cols(); ++j) {
+			C(i, j) = (i==j) ? Fraction(2) : Fraction(1);
+			v(i) = i + 1;
+			D(i, j) = (i==j) ? 2.0 : 1.0;
+		}
+
+
+	cout << "A = \n" << A << "\n";
+	cout << "Transpose(A) = \n" << A.Transpose() << "\n\n";
+	cout << "B = \n" << B << "\n";
+	cout << "Rows 2-4 of B = \n" << B.RangeRows(1, 4) << "\n\n";
+	A.RangeCols(1, 5) = 7.0;
+	cout << "After setting Columns 2-5 of A to 7.0:\nA = \n" << A << "\n\n";
+	cout << "C = \n" << C << "\n";
+	cout << "C Inverse = \n" << C.Inverse() << "\n";
+	cout << "5 C = \n" << C + 4*C << "\n";
+	cout << "5 C * C^-1 = \n" << (C +4*C) * C.Inverse() << "\n\n"; // Should be 5 * I
+	// cout << "D = \n" << D << "\n";
+	// cout << "D Inverse = \n" << D.Inverse() << "\n";
+	// cout << "D+3D = \n" << 4*D << "\n";
 }

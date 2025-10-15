@@ -1,106 +1,96 @@
 #include "mathlib.hpp"
 #include "vector.hpp"
 #include "expression.hpp"
+#include <type_traits>
 
 namespace Mathlib{
     enum ORDERING { ColMajor, RowMajor };
-
-    template <typename T, ORDERING ORD = ColMajor, typename TDIST = integral_constant<size_t, 1>>
-    class MatrixView: public MatExpr<MatrixView<T, ORD, TDIST>> {
+    template <typename T, ORDERING ORD = ColMajor>
+    class MatrixView : public MatExpr<MatrixView<T, ORD>> {
     protected:
         size_t rows, cols;
         T* data;
-        TDIST dist;
+        size_t dist;
+
+        constexpr size_t index(size_t r, size_t c) const {
+            return (ORD == ColMajor) ? c * dist + r : r * dist + c;
+        }
 
     public:
-        MatrixView() = default; // initializes members to zero / nullptr
-        MatrixView(const MatrixView&) = default; // shallow copy
+        MatrixView() = default;
+        MatrixView(const MatrixView&) = default;
 
-        template<typename TDIST2>
-        MatrixView(const MatrixView<T, ORD, TDIST2>& other) :  // allow implicit conversion between different dist types
-            rows(other.Rows()), 
-            cols(other.Cols()), 
-            data(other.Data()), 
-            dist(other.Dist()) { }
-        MatrixView(size_t r, size_t c, T* d) : rows(r), cols(c), data(d) { }
-        MatrixView(size_t r, size_t c, TDIST _dist, T* d) : rows(r), cols(c), data(d), dist(_dist) { }
+        // Natural contiguous dist by default: dist = rows (col-major) or cols (row-major)
+        MatrixView(size_t r, size_t c, T* d)
+            : rows(r), cols(c), data(d),
+            dist((ORD == ColMajor) ? r : c) {}
 
-        template<typename T2>
-        MatrixView& operator=(const MatExpr<T2>& other) {
-            for (size_t j = 0; j < cols; ++j)
-                for (size_t i = 0; i < rows; ++i)
-                    (*this)(i, j) = other(i, j);
+        // Explicit dist. Must satisfy dist >= rows (col-major) or dist >= cols (row-major).
+        MatrixView(size_t r, size_t c, size_t _dist, T* d)
+            : rows(r), cols(c), data(d), dist(_dist) {
+            if (!(ORD == ColMajor ? dist >= rows : dist >= cols)) throw invalid_argument("Invalid leading dimension");
+        }
+
+        // Assignment from any matrix expression
+        template<typename E>
+        MatrixView& operator=(const MatExpr<E>& other) {
+            for (size_t i = 0; i < rows; ++i)
+                for (size_t j = 0; j < cols; ++j)
+                    data[index(i, j)] = other(i, j);
             return *this;
         }
 
-        T* Data() const { return data; }
-        size_t Rows() const { return rows; }
-        size_t Cols() const { return cols; }
-        auto Dist() const { return dist; }
+        // Scalar assignment
+        MatrixView& operator=(T scal) {
+            for (size_t i = 0; i < rows; ++i)
+                for (size_t j = 0; j < cols; ++j)
+                    data[index(i, j)] = scal;
+            return *this;
+        }
 
+        // Accessors
+        T*     Data()  const { return data; }
+        size_t Rows()  const { return rows; }
+        size_t Cols()  const { return cols; }
+        size_t Dist()  const { return dist; }
+
+        // Element access
         const T& operator()(size_t r, size_t c) const {
-            if (r >= rows || c >= cols || r < 0 || c < 0)
-                throw out_of_range("Matrix index out of range");
-            if (ORD == ColMajor)
-                return data[c * rows + r];
-            else // RowMajor
-                return data[r * cols + c];
+            if (r >= rows || c >= cols) throw out_of_range("Matrix index out of range");
+            return data[index(r, c)];
         }
-
         T& operator()(size_t r, size_t c) {
-            if (r >= rows || c >= cols || r < 0 || c < 0)
-                throw out_of_range("Matrix index out of range");
-            if (ORD == ColMajor)
-                return data[c * rows + r];
-            else // RowMajor
-                return data[r * cols + c];
+            if (r >= rows || c >= cols) throw out_of_range("Matrix index out of range");
+            return data[index(r, c)];
         }
 
-        auto Row(size_t r) const {
-            if (r >= rows || r < 0)
-                throw out_of_range("Matrix row index out of range");
-            if (ORD == ColMajor)
-                return VectorView<T, size_t>(cols, rows, data + r);
-            else // RowMajor
-                return VectorView<T, size_t>(cols, 1, data + r * cols);
+        // Rows [first, next)
+        MatrixView RangeRows(size_t first, size_t next) const {
+            if (first >= rows || next > rows || first >= next)
+                throw out_of_range("Row range out of range");
+            return MatrixView(next - first, cols, dist, data + index(first, 0));
         }
 
-        auto Col(size_t c) const {
-            if (c >= cols || c < 0)
-                throw out_of_range("Matrix column index out of range");
-            if (ORD == ColMajor)
-                return VectorView<T, size_t>(rows, 1, data + c * rows);
-            else // RowMajor
-                return VectorView<T, size_t>(rows, cols, data + c);
+        // Cols [first, next)
+        MatrixView RangeCols(size_t first, size_t next) const {
+            if (first >= cols || next > cols || first >= next)
+                throw out_of_range("Col range out of range");
+            return MatrixView(rows, next - first, dist, data + index(0, first));
+        }
+
+        auto Row(size_t i) const {
+            if (i >= rows) throw out_of_range("Row out of range");
+            return VectorView<T, size_t>(cols, dist, data + index(i, 0));
+        }
+
+        auto Col(size_t j) const {
+            if (j >= cols) throw out_of_range("Col out of range");
+            return VectorView<T, size_t>(rows, dist, data + index(0, j));
         }
 
         auto Transpose() const {
-            if constexpr (ORD == ColMajor)
-                return MatrixView<T, RowMajor>(cols, rows, data);
-            else // RowMajor
-                return MatrixView<T, ColMajor>(cols, rows, data);
+            return MatrixView<T, (ORD == ColMajor ? RowMajor : ColMajor)>(cols, rows, dist, data);
         }
-
-        // Returns a view of the next 'next' rows starting from 'first'
-        auto RowRange(size_t first, size_t next) const {
-            if (first + next > rows || first < 0 || next < 0)
-                throw out_of_range("Matrix row range out of range");
-            if constexpr (ORD == ColMajor)
-                return MatrixView<T, ColMajor, size_t>(next, cols, rows, data + first * rows);
-            else // RowMajor
-                return MatrixView<T, RowMajor, size_t>(next, cols, 1, data + first * cols);
-        }
-
-        // Returns a view of the next 'next' columns starting from 'first'
-        auto ColRange(size_t first, size_t next) const {
-            if (first + next > cols || first < 0 || next < 0)
-                throw out_of_range("Matrix column range out of range");
-            if constexpr (ORD == ColMajor)
-                return MatrixView<T, ColMajor, size_t>(rows, next, rows, data + first * rows);
-            else // RowMajor
-                return MatrixView<T, RowMajor, size_t>(rows, next, 1, data + first);
-        }
-        
     };
 
 
@@ -164,7 +154,7 @@ namespace Mathlib{
         size_t Rows() const { return rows; }
         size_t Cols() const { return cols; }
 
-        auto Inverse() const {
+        Matrix<T> Inverse() const {
             if (rows != cols)
                 throw runtime_error("Matrix must be square to compute its inverse");
 
@@ -199,86 +189,13 @@ namespace Mathlib{
             }
 
             // Extract the inverse matrix from the augmented matrix
-            return augmented.ColRange(cols, cols);
+            return augmented.RangeCols(cols, 2 * cols);
         }
 
-        Matrix operator-() const {
-            Matrix<T> result(rows, cols);
-            for (size_t j = 0; j < cols; ++j)
-                for (size_t i = 0; i < rows; ++i)
-                    result(i, j) = -(*this)(i, j);
-            return result;
-        }
-
-        Matrix operator+(const Matrix& other) const {
-            if (rows != other.rows || cols != other.cols)
-                throw std::invalid_argument("Matrix dimensions do not match for addition");
-
-            Matrix<T> result(rows, cols);
-            for (size_t j = 0; j < cols; ++j)
-                for (size_t i = 0; i < rows; ++i)
-                    result(i, j) = (*this)(i, j) + other(i, j);
-            return result;
-        }
-
-        Matrix operator-(const Matrix& other) const {
-            return *this + (-other);
-        }
-
-        Matrix operator*(const Matrix& other) const {
-        if (cols != other.rows)
-            throw invalid_argument("Matrix dimensions do not match for multiplication");
-
-            Matrix<T> result(rows, other.cols);
-            for (size_t i = 0; i < rows; ++i) {
-                for (size_t j = 0; j < other.cols; ++j) {
-                    T sum = T();
-                    for (size_t k = 0; k < cols; ++k) {
-                        sum = sum + (*this)(i, k) * other(k, j);
-                    }
-                    result(i, j) = sum;
-                }
-            }
-
-            return result;
-        }
-
-        T& operator()(size_t r, size_t c) {
-            if (r >= rows || c >= cols || r < 0 || c < 0)
-                throw out_of_range("Matrix index out of range");
-            if (ORD == ColMajor)
-                return data[c * rows + r];
-            else // RowMajor
-                return data[r * cols + c];
-        }
-
-        T& operator()(size_t r, size_t c) const {
-            if (r >= rows || c >= cols || r < 0 || c < 0)
-                throw out_of_range("Matrix index out of range");
-            if (ORD == ColMajor)
-                return data[c * rows + r];
-            else // RowMajor
-                return data[r * cols + c];
-        }
-
-        void print() const {
-            cout << *this;
-        }
     };
 
-    template <typename T, ORDERING ORD> 
-    ostream& operator<<(ostream& os, const Matrix<T, ORD>& m) {
-        for (size_t i = 0; i < m.Rows(); ++i) {
-            for (size_t j = 0; j < m.Cols(); ++j)
-                os << m(i, j) << " ";
-            os << "\n";
-        }
-
-        return os;
-    }
-    
-    template <typename T, ORDERING ORD, typename TDIST>
-    ostream& operator<<(ostream& os, const MatrixView<T, ORD, TDIST>& m) {
+    template <typename T, ORDERING ORD>
+    ostream& operator<<(ostream& os, const MatrixView<T, ORD>& m) {
         for (size_t i = 0; i < m.Rows(); ++i) {
             for (size_t j = 0; j < m.Cols(); ++j)
                 os << m(i, j) << " ";

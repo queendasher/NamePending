@@ -19,8 +19,8 @@ namespace Mathlib
 		VectorView(size_t _size, T* _data) : data(_data), size(_size) { }
 		VectorView(size_t _size, TDIST _dist, T* _data) : data(_data), size(_size), dist(_dist) { }
 
-		template<typename T2>
-		VectorView& operator=(const VecExpr<T2>& other) {
+		template<typename E>
+		VectorView& operator=(const VecExpr<E>& other) {
 			for (size_t i = 0; i < size; ++i)
 				data[dist*i] = other(i);
 			return *this;

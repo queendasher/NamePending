@@ -159,10 +159,38 @@ namespace Mathlib {
             return this->expanded(_lcm).p <= f.expanded(_lcm).p;
         }
 
+        bool operator>(const Fraction& f) const {
+            return !(*this <= f);
+        }
+
+        bool operator>=(const Fraction& f) const {
+            return !(*this < f);
+        }
+
         void print() const {
             cout << (this);
         }
     };
+
+    Fraction operator*(double scal, const Fraction& f) {
+       return Fraction(scal * f.getP(), f.getQ());
+    }
+
+    Fraction operator*(const Fraction& f, double scal) {
+        return scal * f;
+    }
+
+    Fraction operator*(int scal, const Fraction& f) {
+        return Fraction(scal * f.getP(), f.getQ());
+    }
+
+    Fraction operator*(const Fraction& f, int scal) {
+        return scal * f;
+    }
+
+    Fraction abs(const Fraction& f) {
+        return Fraction(f.getP() < 0 ? -f.getP() : f.getP(), f.getQ());
+    }
 
     ostream& operator<<(ostream& os, const Fraction& f) {
         os << f.getP();

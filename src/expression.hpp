@@ -43,12 +43,11 @@ namespace Mathlib
 		auto operator()(size_t i) const { return scal * vec(i); }
 		size_t Size() const { return vec.Size(); }      
 	};
-	
+
 	template<typename E>
 	auto operator*(double scal, const VecExpr<E>& v) {
 		return VecExprScale(scal, v.Downcast());
 	}
-
 	
 	template<typename E>
 	ostream& operator<<(ostream& os, const VecExpr<E>& v) {
@@ -71,6 +70,8 @@ namespace Mathlib
 		auto operator()(size_t r, size_t c) const { return Downcast()(r, c); }
 	};	
 
+
+
 	template<typename E1, typename E2>
 	class MatExprSum : public MatExpr<MatExprSum<E1, E2>> {
 		E1 a; // left operand
@@ -92,6 +93,8 @@ namespace Mathlib
 		return MatExprSum(a.Downcast(), b.Downcast());
 	}
 
+
+
 	template<typename E1, typename E2>
 	class MatExprMul : public MatExpr<MatExprMul<E1, E2>> {
 		E1 a; // left operand
@@ -99,27 +102,32 @@ namespace Mathlib
 
 	public:
 		MatExprMul(E1 _a, E2 _b) : a(_a), b(_b) { 
-			if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
-				throw runtime_error("Matrix sizes do not match in sum.");
+			if (a.Cols() != b.Rows()) 
+				throw runtime_error("Matrix sizes do not match in multiplication.");
 		}
 
-		auto operator()(size_t r, size_t c) const { 
-			// Takes the type of the first element of the left operand, 
-			// removes references and const-qualifiers, and uses that as the type for sum
-			// Then initializes sum to zero to avoid garbage values from memory
-			typename std::decay_t<decltype(a(0,0))> sum = 0;
+		// This is actually horribly inefficient for chained multiplications.
+		// If a (or b) is a MatExprMul, each a(r,k) is its own dot product which
+		// recursively recomputes the dot products for all of its children.
+		// For a chain of m multiplications, the cost of this implementation is O(n^m)
+		// whereas the simpler approach with temporaries would be O(m*n^3).
+		// Needs to be fixed ASAP.
+		auto operator()(size_t r, size_t c) const {
+			decay_t<decltype(a(0,0))> sum(0); // Value-initialize to zero
 			for (size_t k = 0; k < a.Cols(); ++k)
-				sum += a(r, k) * b(k, c);
+				sum = sum + a(r, k) * b(k, c);
 			return sum;
 		}
 		size_t Rows() const { return a.Rows(); }
-		size_t Cols() const { return a.Cols(); }
+		size_t Cols() const { return b.Cols(); }
 	};
 
 	template <typename E1, typename E2>
 	auto operator*(const MatExpr<E1>& a, const MatExpr<E2>& b) {
 		return MatExprMul(a.Downcast(), b.Downcast());
 	}
+
+
 
 	template<typename ESCAL, typename EM>
 	class MatExprScale : public MatExpr<MatExprScale<ESCAL, EM>> {
@@ -134,7 +142,7 @@ namespace Mathlib
 	};
 
 	template<typename E>
-	auto operator*(double scal, const MatExpr<E>& m) {
+	auto operator*(const double scal, const MatExpr<E>& m) {
 		return MatExprScale(scal, m.Downcast());
 	}
 
@@ -142,7 +150,7 @@ namespace Mathlib
 	ostream& operator<<(ostream& os, const MatExpr<E>& m) {
 		for (size_t i = 0; i < m.Rows(); ++i) {
 			for (size_t j = 0; j < m.Cols(); ++j)
-				os << m(i, j) << ", ";
+				os << m(i, j) << " ";
 			os << "\n";
 		}
 		return os;
