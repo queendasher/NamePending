@@ -3,14 +3,14 @@
 #define CATCH_CONFIG_MAIN
 #include <catch2/catch_test_macros.hpp>
 
-#include <vector.hpp>
-using namespace ASC_bla;
+#include "../src/vector.hpp"
+using namespace Mathlib;
 
 
 TEST_CASE( "vector-test", "[vector size test]" ) {
   Vector<double> x(5);
   Vector<double> y = x;
-  REQUIRE(y.size() == 5);
+  REQUIRE(y.Size() == 5);
 }
 
 TEST_CASE( "vector-test 2", "[vector add and scale test]" ) {

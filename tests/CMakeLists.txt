@@ -10,7 +10,7 @@ FetchContent_MakeAvailable(Catch2)
 
 
 add_executable (tests_vector tests_vector.cpp)
-target_sources (tests_vector PUBLIC ../src/vector.hpp ../src/vecexpr.hpp)
+target_sources (tests_vector PUBLIC ../src/vector.hpp ../src/expression.hpp)
 
 target_link_libraries(tests_vector Catch2::Catch2WithMain)
 
