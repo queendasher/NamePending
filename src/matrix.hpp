@@ -8,9 +8,9 @@ namespace Mathlib{
     template <typename T, ORDERING ORD = ColMajor>
     class MatrixView : public MatExpr<MatrixView<T, ORD>> {
     protected:
-        size_t rows, cols;
-        T* data;
-        size_t dist;
+        size_t rows{}, cols{};
+        T* data{};
+        size_t dist{};
 
         constexpr size_t index(size_t r, size_t c) const {
             return (ORD == ColMajor) ? c * dist + r : r * dist + c;
@@ -64,28 +64,51 @@ namespace Mathlib{
             return data[index(r, c)];
         }
 
-        // Rows [first, next)
-        MatrixView RangeRows(size_t first, size_t next) const {
-            if (first >= rows || next > rows || first >= next)
-                throw out_of_range("Row range out of range");
-            return MatrixView(next - first, cols, dist, data + index(first, 0));
+        auto Row(size_t r) const {
+            if (r >= rows) throw out_of_range("Row out of range");
+            auto row_view = VectorView<T, size_t>();
+            if constexpr (ORD == ColMajor)
+                row_view = VectorView<T, size_t>(cols, dist, data + r);
+            else 
+                row_view = VectorView<T, size_t>(cols, 1, data + r*dist);
+            return row_view;
         }
 
-        // Cols [first, next)
-        MatrixView RangeCols(size_t first, size_t next) const {
-            if (first >= cols || next > cols || first >= next)
-                throw out_of_range("Col range out of range");
-            return MatrixView(rows, next - first, dist, data + index(0, first));
+        auto Col(size_t c) const {
+            if (c >= cols) throw out_of_range("Col out of range");
+            auto col_view = VectorView<T, size_t>();
+            if constexpr (ORD == ColMajor)
+                col_view = VectorView<T, size_t>(rows, 1, data + c*dist);
+            else 
+                col_view = VectorView<T, size_t>(rows, dist, data + c);
+            
+                return col_view;
         }
 
-        auto Row(size_t i) const {
-            if (i >= rows) throw out_of_range("Row out of range");
-            return VectorView<T, size_t>(cols, dist, data + index(i, 0));
+        // Return a MatrixView corresponding to the specified range of rows [first, next)
+        auto RowRange(size_t first, size_t next) const {
+            if (first >= next || next > rows) throw out_of_range("Row range out of range");
+            auto mat_view = MatrixView<T, ORD>();
+            if constexpr (ORD == ColMajor)
+                mat_view = MatrixView<T, ORD>(next - first, cols, dist, data + first);
+            else
+                mat_view = MatrixView<T, ORD>(next - first, cols, dist, data + first*dist);
+            return mat_view;
         }
 
-        auto Col(size_t j) const {
-            if (j >= cols) throw out_of_range("Col out of range");
-            return VectorView<T, size_t>(rows, dist, data + index(0, j));
+        // Return a MatrixView corresponding to the specified range of columns [first, next)
+        auto ColRange(size_t first, size_t next) const {
+            if (first >= next || next > cols) throw out_of_range("Col range out of range");
+            auto mat_view = MatrixView<T, ORD>();
+            if constexpr (ORD == ColMajor)
+                mat_view = MatrixView<T, ORD>(rows, next - first, dist, data + first*dist);
+            else
+                mat_view = MatrixView<T, ORD>(rows, next - first, dist, data + first);
+            return mat_view;
+        }
+
+        auto SubMatrix(size_t r_first, size_t r_next, size_t c_first, size_t c_next) {
+            return RowRange(r_first, r_next).ColRange(c_first, c_next);
         }
 
         auto Transpose() const {

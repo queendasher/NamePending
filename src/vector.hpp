@@ -6,9 +6,9 @@ namespace Mathlib
 	template<typename T, typename TDIST = integral_constant<size_t, 1>>
 	class VectorView : public VecExpr<VectorView<T, TDIST>> {
 	protected:
-		T* data;
-		size_t size;
-		TDIST dist;
+		T* data{};
+		size_t size{};
+		TDIST dist{};
 
 	public:
 		VectorView() = default; // initializes members to zero / nullptr
