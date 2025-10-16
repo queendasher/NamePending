@@ -174,9 +174,6 @@ namespace Mathlib{
             delete[] data;
         }
 
-        size_t Rows() const { return rows; }
-        size_t Cols() const { return cols; }
-
         Matrix<T> Inverse() const {
             if (rows != cols)
                 throw runtime_error("Matrix must be square to compute its inverse");

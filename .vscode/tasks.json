@@ -53,16 +53,18 @@
 		"label": "CMake: Build Tests",
 		"type": "shell",
 		"command": "cmake",
-		"args": ["--build", "builds", "--config", "Debug", "-v", "--target", "tests_vector"],
+		"args": ["--build", "builds", "--config", "Debug", "-v", "--target", "tests-all"],
 		"options": { "cwd": "${workspaceFolder}" },
 		"group": "build",
 		"problemMatcher": "$gcc",
 		"dependsOn": "CMake: Configure"
 		},
+
 		{
-		"label": "Tests: Run Tests",
+		"label": "Tests: Run All (CTest)",
 		"type": "shell",
-		"command": "${workspaceFolder}/builds/tests/tests_vector",
+		"command": "ctest",
+		"args": ["--test-dir", "builds", "-C", "Debug", "--output-on-failure", "-L", "unit"],
 		"options": { "cwd": "${workspaceFolder}" },
 		"group": "test",
 		"dependsOn": "CMake: Build Tests",

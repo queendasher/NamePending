@@ -60,7 +60,7 @@ namespace Mathlib
 	public:
 		Vector(size_t size) : VectorView<T>(size, new T[size]) { }
 
-		Vector(const Vector& other) : Vector(other.Size()) { 
+		Vector(const Vector& other) : Vector(other.Size()) {
 			*this = other;
 		}
 
@@ -74,8 +74,6 @@ namespace Mathlib
 			*this = other;
 		}
 
-		~Vector() { delete[] data; }
-
 		using BASE::operator=;
 		Vector& operator=(const Vector& other) {
 			for (size_t i = 0; i < size; i++)
@@ -87,7 +85,9 @@ namespace Mathlib
 			swap(size, other.size);
 			swap(data, other.data);
 			return *this;
-			}
+		}
+
+		~Vector() { delete[] data; }
 	};
 
 
