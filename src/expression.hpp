@@ -162,39 +162,39 @@ namespace Mathlib
 
 
 	// Scalar multiplication from left
-	template<typename ESCAL, typename EV>
-	class VecExprScaleL : public VecExpr<VecExprScaleL<ESCAL, EV>> {
-		ESCAL scal; // scalar
+	template<typename TSCAL, typename EV>
+	class VecExprScaleL : public VecExpr<VecExprScaleL<TSCAL, EV>> {
+		TSCAL scal; // scalar
 		EV vec; // vector
 
 	public:
-		VecExprScaleL(ESCAL _scal, EV _vec) : scal(_scal), vec(_vec) { }
+		VecExprScaleL(TSCAL _scal, EV _vec) : scal(_scal), vec(_vec) { }
 
 		auto operator()(size_t i) const { return scal * vec(i); }
 		size_t Size() const { return vec.Size(); }      
 	};
 
-	template<typename E>
-	auto operator*(double scal, const VecExpr<E>& v) {
+	template<typename TSCAL, typename EV>
+	auto operator*(const TSCAL scal, const VecExpr<EV>& v) {
 		return VecExprScaleL(scal, v.Downcast());
 	}
 
 
 	// Scalar multiplication from right
-	template<typename EV, typename ESCAL>
-	class VecExprScaleR : public VecExpr<VecExprScaleR<EV, ESCAL>> {
+	template<typename EV, typename TSCAL>
+	class VecExprScaleR : public VecExpr<VecExprScaleR<EV, TSCAL>> {
 		EV vec; // vector
-		ESCAL scal; // scalar
+		TSCAL scal; // scalar
 
 	public:
-		VecExprScaleR(EV _vec, ESCAL _scal) : vec(_vec), scal(_scal) { }
+		VecExprScaleR(EV _vec, TSCAL _scal) : vec(_vec), scal(_scal) { }
 
 		auto operator()(size_t i) const { return vec(i) * scal; }
 		size_t Size() const { return vec.Size(); }
 	};
 
-	template<typename E>
-	auto operator*(const VecExpr<E>& v, double scal) {
+	template<typename EV, typename TSCAL>
+	auto operator*(const VecExpr<EV>& v, const TSCAL scal) {
 		return VecExprScaleR(v.Downcast(), scal);
 	}
 
@@ -325,13 +325,13 @@ namespace Mathlib
 
 
 	// Scalar multiplication from left
-	template<typename ESCAL, typename EM>
-	class MatExprScaleL : public MatExpr<MatExprScaleL<ESCAL, EM>> {
-		ESCAL scal; // scalar
+	template<typename TSCAL, typename EM>
+	class MatExprScaleL : public MatExpr<MatExprScaleL<TSCAL, EM>> {
+		TSCAL scal; // scalar
 		EM mat; // matrix
 
 	public:
-		MatExprScaleL(ESCAL _scal, EM _mat) : scal(_scal), mat(_mat) { }
+		MatExprScaleL(TSCAL _scal, EM _mat) : scal(_scal), mat(_mat) { }
 		auto operator()(size_t r, size_t c) const { return scal * mat(r, c); }
 		size_t Rows() const { return mat.Rows(); }
 		size_t Cols() const { return mat.Cols(); }
@@ -339,20 +339,20 @@ namespace Mathlib
 		auto Col(size_t c) const { return scal * mat.Col(c); }
 	};
 
-	template<typename E>
-	auto operator*(const double scal, const MatExpr<E>& m) {
+	template<typename TSCAL, typename E>
+	auto operator*(const TSCAL scal, const MatExpr<E>& m) {
 		return MatExprScaleL(scal, m.Downcast());
 	}
 
 
 	// Scalar multiplication from right
-	template<typename EM, typename ESCAL>
-	class MatExprScaleR : public MatExpr<MatExprScaleR<EM, ESCAL>> {
+	template<typename EM, typename TSCAL>
+	class MatExprScaleR : public MatExpr<MatExprScaleR<EM, TSCAL>> {
 		EM mat; // matrix
-		ESCAL scal; // scalar
+		TSCAL scal; // scalar
 
 	public:
-		MatExprScaleR(EM _mat, ESCAL _scal) : mat(_mat), scal(_scal) { }
+		MatExprScaleR(EM _mat, TSCAL _scal) : mat(_mat), scal(_scal) { }
 
 		auto operator()(size_t r, size_t c) const { return mat(r, c) * scal; }
 		size_t Rows() const { return mat.Rows(); }
@@ -361,8 +361,8 @@ namespace Mathlib
 		auto Col(size_t c) const { return mat.Col(c) * scal; }
 	};
 
-	template<typename E>
-	auto operator*(const MatExpr<E>& m, const double scal) {
+	template<typename EM, typename TSCAL>
+	auto operator*(const MatExpr<EM>& m, const TSCAL scal) {
 		return MatExprScaleR(m.Downcast(), scal);
 	}
 

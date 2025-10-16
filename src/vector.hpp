@@ -11,7 +11,7 @@ namespace Mathlib
 	protected:
 		T* data{};
 		size_t size{};
-		TDIST dist{};
+		TDIST dist;
 
 	public:
 		VectorView() = default; // initializes members to zero / nullptr

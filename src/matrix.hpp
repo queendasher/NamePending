@@ -11,11 +11,10 @@ namespace Mathlib{
     template <typename T, ORDERING ORD = ColMajor>
     class MatrixView : public MatExpr<MatrixView<T, ORD>> {
     protected:
-        size_t rows{}, cols{};
+        size_t rows{}, cols{}, dist{};
         T* data{};
-        size_t dist{};
 
-        constexpr size_t index(size_t r, size_t c) const {
+        size_t index(size_t r, size_t c) const {
             return (ORD == ColMajor) ? c * dist + r : r * dist + c;
         }
 
@@ -84,8 +83,7 @@ namespace Mathlib{
                 col_view = VectorView<T, size_t>(rows, 1, data + c*dist);
             else 
                 col_view = VectorView<T, size_t>(rows, dist, data + c);
-            
-                return col_view;
+            return col_view;
         }
 
         // Return a MatrixView corresponding to the specified range of rows [first, next)
@@ -116,6 +114,10 @@ namespace Mathlib{
 
         auto Transpose() const {
             return MatrixView<T, (ORD == ColMajor ? RowMajor : ColMajor)>(cols, rows, dist, data);
+        }
+
+        auto Diag() const {
+            return VectorView<T, size_t>(std::min(rows, cols), dist + 1, data);
         }
     };
 
@@ -177,42 +179,99 @@ namespace Mathlib{
             delete[] data;
         }
 
-        Matrix<T> Inverse() const {
-            if (rows != cols)
-                throw runtime_error("Matrix must be square to compute its inverse");
+        Matrix<T, ORD> Invert() const {
+            if(rows != cols) throw runtime_error("Matrix must be square to compute inverse");
+            size_t n = rows;
 
-            // Create an augmented matrix [A | I]
-            Matrix<T> augmented(rows, 2 * cols);
-            for (size_t i = 0; i < rows; ++i) {
-                for (size_t j = 0; j < cols; ++j) {
-                    augmented(i, j) = (*this)(i, j);
-                    augmented(i, j + cols) = (i == j) ? T(1) : T(0);
+            Matrix<T, ORD> M(*this);
+            Matrix<T, ORD> I(rows, cols);
+
+            for (size_t i = 0; i < n; ++i) {
+                for (size_t j = 0; j < n; ++j) {   
+                    I(i, j) = T(int(i == j));
                 }
             }
+           
+            // Perform simultaneous row operations on M and I
+            // to transform M into the identity matrix and I into M^-1
+            // using Gauss-Jordan elimination
 
-            // Perform Gaussian elimination
-            for (size_t i = 0; i < rows; ++i) {
-                // Find pivot (diagonal element)
-                T pivot = augmented(i, i);
-                if (pivot == T(0))
-                    throw runtime_error("Matrix is singular and cannot be inverted");
+            for (size_t i = 0; i < n; ++i) {
+                if (M(i, i) == T(0)) { 
+                    // Find a row below the i-th row with a non-zero entry in the i-th column...
+                    size_t pivot_row = i + 1;
+                    while (pivot_row < n && M(pivot_row, i) == T(0)) {
+                        ++pivot_row;
+                    }
 
-                // Normalize pivot row
-                for (size_t j = 0; j < 2 * cols; ++j)
-                    augmented(i, j) = augmented(i, j) / pivot;
-
-                // Eliminate other rows
-                for (size_t k = 0; k < rows; ++k) {
-                    if (k != i) {
-                        T factor = augmented(k, i);
-                        for (size_t j = 0; j < 2 * cols; ++j)
-                            augmented(k, j) = augmented(k, j) - factor * augmented(i, j);
+                    // ...and add it to the i-th row (easier than swapping)
+                    if (pivot_row < n) {
+                        M.Row(i) = M.Row(i) + M.Row(pivot_row);
+                        I.Row(i) = I.Row(i) + I.Row(pivot_row);
+                    } else {
+                        throw runtime_error("Matrix is singular and cannot be inverted");
                     }
                 }
+
+                // Normalize the i-th row to make M(i, i) = 1
+                I.Row(i) = (T(1) / M(i, i)) * I.Row(i);
+                M.Row(i) = (T(1) / M(i, i)) * M.Row(i);
+
+                // Eliminate all other entries in the i-th column
+                for (size_t k = 0; k < n; ++k) 
+                { 
+                    if (k == i) continue;
+                    I.Row(k) = (-M(k, i)) * I.Row(i) + I.Row(k);
+                    M.Row(k) = (-M(k, i)) * M.Row(i) + M.Row(k);
+                }
             }
 
-            // Extract the inverse matrix from the augmented matrix
-            return augmented.RangeCols(cols, 2 * cols);
+            return I;
+        }
+
+        T Trace() const {
+            if (rows != cols) throw runtime_error("Matrix must be square to compute trace");
+            T trace = T(0);
+            for (size_t i = 0; i < rows; ++i)
+                trace = trace + (*this).Diag()(i);
+            return trace;
+        }
+
+        T Det() const {
+            if (rows != cols) throw runtime_error("Matrix must be square to compute determinant");
+            size_t n = rows;
+
+            Matrix<T, ORD> M(*this);
+            T det = T(1);
+
+            // Perform Gaussian elimination to convert M to upper triangular form
+            for (size_t i = 0; i < n; ++i) {
+                if (M(i, i) == T(0)) { 
+                    // Find a row below the i-th row with a non-zero entry in the i-th column...
+                    size_t pivot_row = i + 1;
+                    while (pivot_row < n && M(pivot_row, i) == T(0)) {
+                        ++pivot_row;
+                    }
+
+                    // ...and add it to the i-th row (easier than swapping)
+                    if (pivot_row < n) {
+                        M.Row(i) = M.Row(i) + M.Row(pivot_row);
+                    } else {
+                        return T(0); // Matrix is singular
+                    }
+                }
+
+                // Eliminate all entries below the pivot in the i-th column
+                for (size_t k = i + 1; k < n; ++k) { 
+                    M.Row(k) = (-M(k, i) / M(i, i)) * M.Row(i) + M.Row(k);
+                }
+            }
+
+            // The determinant is the product of the diagonal entries
+            for (size_t i = 0; i < n; ++i)
+                det = det * M.Diag()(i);
+
+            return det;
         }
 
     };
