@@ -106,27 +106,22 @@ namespace Mathlib
 	};
 
 	template <typename E1, typename E2>
-	auto operator*(const VecExpr<E1>& a, const VecExpr<E2>& b) {
+	auto VecMul(const VecExpr<E1>& a, const VecExpr<E2>& b) {
 		return VecExprMul(a.Downcast(), b.Downcast());
 	}
 
-	// Vector-matrix multiplication
-	template<typename EV, typename EM>
-	class VecExprMulMatFromR : public VecExpr<VecExprMulMatFromR<EV, EM>> {
-		EV vec; // left operand
-		EM mat; // right operand
 
-	public:
-		VecExprMulMatFromR(EV _vec, EM _mat) : vec(_vec), mat(_mat) { }
-
-		auto operator()(size_t i) const { return Dot(mat.Row(i), vec); }
-		size_t Size() const { return mat.Cols(); }
-	};
-
+	// Dot product
 	template <typename E1, typename E2>
-	auto operator*(const VecExpr<E1>& v, const MatExpr<E2>& m) {
-		return VecExprMulMatFromR(v.Downcast(), m.Downcast());
-	}
+    auto Dot(const VecExpr<E1>& a, const VecExpr<E2>& b) {
+        if (a.Size() != b.Size()) throw runtime_error("Vector sizes do not match for dot product");
+        using SumType = decay_t<decltype(a(0) * b(0))>;
+        SumType result(0);
+        for (size_t i = 0; i < a.Size(); ++i) {
+			result = result + a(i) * b(i);
+		}
+        return result;
+    }
 
 
 	// Matrix-vector multiplication
@@ -148,19 +143,6 @@ namespace Mathlib
 	}
 
 
-	// Dot product
-	template <typename E1, typename E2>
-    auto Dot(const VecExpr<E1>& a, const VecExpr<E2>& b) {
-        if (a.Size() != b.Size()) throw invalid_argument("Vector sizes do not match for dot product");
-        using SumType = decay_t<decltype(a(0) * b(0))>;
-        SumType result(0);
-        for (size_t i = 0; i < a.Size(); ++i) {
-			result = result + a(i) * b(i);
-		}
-        return result;
-    }
-
-
 	// Scalar multiplication from left
 	template<typename TSCAL, typename EV>
 	class VecExprScaleL : public VecExpr<VecExprScaleL<TSCAL, EV>> {
@@ -177,25 +159,6 @@ namespace Mathlib
 	template<typename TSCAL, typename EV>
 	auto operator*(const TSCAL scal, const VecExpr<EV>& v) {
 		return VecExprScaleL(scal, v.Downcast());
-	}
-
-
-	// Scalar multiplication from right
-	template<typename EV, typename TSCAL>
-	class VecExprScaleR : public VecExpr<VecExprScaleR<EV, TSCAL>> {
-		EV vec; // vector
-		TSCAL scal; // scalar
-
-	public:
-		VecExprScaleR(EV _vec, TSCAL _scal) : vec(_vec), scal(_scal) { }
-
-		auto operator()(size_t i) const { return vec(i) * scal; }
-		size_t Size() const { return vec.Size(); }
-	};
-
-	template<typename EV, typename TSCAL>
-	auto operator*(const VecExpr<EV>& v, const TSCAL scal) {
-		return VecExprScaleR(v.Downcast(), scal);
 	}
 
 
@@ -289,6 +252,31 @@ namespace Mathlib
 	}
 
 
+	// Elementwise multiplication
+	template<typename E1, typename E2>
+	class MatExprElemMul : public MatExpr<MatExprElemMul<E1, E2>> {
+		E1 a; // left operand
+		E2 b; // right operand
+
+	public:
+		MatExprElemMul(E1 _a, E2 _b) : a(_a), b(_b) { 
+			if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
+				throw runtime_error("Matrix sizes do not match in elementwise multiplication.");
+		}
+
+		auto operator()(size_t r, size_t c) const { return a(r, c) * b(r, c); }
+		size_t Rows() const { return a.Rows(); }
+		size_t Cols() const { return a.Cols(); }
+		auto Row(size_t r) const { return VecMul(a.Row(r), b.Row(r)); }
+		auto Col(size_t c) const { return VecMul(a.Col(c), b.Col(c)); }
+	};
+	
+	template <typename E1, typename E2>
+	auto MatMul(const MatExpr<E1>& a, const MatExpr<E2>& b) {
+		return MatExprMul(a.Downcast(), b.Downcast());
+	}
+
+
 	// Matrix multiplication
 	template<typename E1, typename E2>
 	class MatExprMul : public MatExpr<MatExprMul<E1, E2>> {
@@ -342,28 +330,6 @@ namespace Mathlib
 	template<typename TSCAL, typename E>
 	auto operator*(const TSCAL scal, const MatExpr<E>& m) {
 		return MatExprScaleL(scal, m.Downcast());
-	}
-
-
-	// Scalar multiplication from right
-	template<typename EM, typename TSCAL>
-	class MatExprScaleR : public MatExpr<MatExprScaleR<EM, TSCAL>> {
-		EM mat; // matrix
-		TSCAL scal; // scalar
-
-	public:
-		MatExprScaleR(EM _mat, TSCAL _scal) : mat(_mat), scal(_scal) { }
-
-		auto operator()(size_t r, size_t c) const { return mat(r, c) * scal; }
-		size_t Rows() const { return mat.Rows(); }
-		size_t Cols() const { return mat.Cols(); }
-		auto Row(size_t r) const { return mat.Row(r) * scal; }
-		auto Col(size_t c) const { return mat.Col(c) * scal; }
-	};
-
-	template<typename EM, typename TSCAL>
-	auto operator*(const MatExpr<EM>& m, const TSCAL scal) {
-		return MatExprScaleR(m.Downcast(), scal);
 	}
 
 

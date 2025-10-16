@@ -26,13 +26,8 @@ TEST_CASE( "vector performance" ) {
 		return v3;
 	};
 
-	BENCHMARK("Vector subtraction") {
-		Vector<double> v4 = v2 - v1;
-		return v4;
-	};
-
 	BENCHMARK("Scalar multiplication") {
-		Vector<double> v5 = v1 * 3.14;
+		Vector<double> v5 = 3.14 * v1;
 		return v5;
 	};
 

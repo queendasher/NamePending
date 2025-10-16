@@ -106,17 +106,16 @@ TEST_CASE( "expression templates" ) {
 	REQUIRE(dot_product == 130); // 0*10 + 1*11 + 2*12 + 3*13 + 4*14 = 130
 
 	Vector<int> v7(5);
-	v7 = v1 * v2; // Test element-wise multiplication
+	v7 = VecMul(v1, v2); // Test element-wise multiplication
 	REQUIRE(v7.Size() == 5);
 	for (size_t i = 0; i < v7.Size(); ++i)
 		REQUIRE(v7(i) == static_cast<int>(i * (i + 10))); // v7 should be [0, 11, 24, 39, 56]
 
 	Vector<int> v8(5);
-	v8 = (v1 + v2) * (v2 - v1) + (-v1); // Test combined expression
-	// v8 should be [(10*10 + 0), (12*10 - 1), (14*10 - 2), (16*10 - 3), (18*10 - 4)] = [100, 119, 138, 157, 176]
+	v8 = 3 * VecMul((v1 + v2), (v2 - v1)) + (-v1); // Test combined expression
 	REQUIRE(v8.Size() == 5);
 	for (size_t i = 0; i < v8.Size(); ++i)
-		REQUIRE(v8(i) == static_cast<int>(100 + i * 19));
+		REQUIRE(v8(i) == static_cast<int>(300 + i * 59)); // v8 should be [300, 359, 418, 477, 536]
 }
 
 
@@ -165,10 +164,10 @@ TEST_CASE( "error handling" ) {
 	REQUIRE_THROWS_AS(v1 - v2, std::runtime_error);
 
 	// Mismatched sizes for element-wise multiplication
-	REQUIRE_THROWS_AS(v1 * v2, std::runtime_error);
+	REQUIRE_THROWS_AS(VecMul(v1, v2), std::runtime_error);
 
 	// Mismatched sizes for dot product
-	REQUIRE_THROWS_AS(Dot(v1, v2), std::invalid_argument);
+	REQUIRE_THROWS_AS(Dot(v1, v2), std::runtime_error);
 
 	// Out of range access
 	REQUIRE_THROWS_AS(v1(5), std::out_of_range);
