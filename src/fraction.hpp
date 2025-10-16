@@ -1,3 +1,6 @@
+#ifndef FILE_FRACTION
+#define FILE_FRACTION
+
 #include "mathlib.hpp"
 
 namespace Mathlib {
@@ -199,3 +202,5 @@ namespace Mathlib {
         return os;
     }
 }
+
+#endif

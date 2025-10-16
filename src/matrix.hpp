@@ -1,3 +1,6 @@
+#ifndef FILE_MATRIX
+#define FILE_MATRIX
+
 #include "mathlib.hpp"
 #include "vector.hpp"
 #include "expression.hpp"
@@ -225,3 +228,5 @@ namespace Mathlib{
         return os;
     }
 }
+
+#endif

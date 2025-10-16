@@ -5,8 +5,6 @@
 
 using namespace Mathlib;
 
-int main()
-{
-	Vector<int> v1(5);
-	Vector<int> v2 = v1;        // Copy constructor
+int main() {
+	Vector<int> v1(-1);
 }

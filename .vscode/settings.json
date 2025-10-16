@@ -45,6 +45,11 @@
         "ostream": "cpp",
         "sstream": "cpp",
         "streambuf": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "test_performance": "cpp",
+        "bitset": "cpp",
+        "span": "cpp",
+        "regex": "cpp",
+        "format": "cpp"
     }
 }

@@ -1,3 +1,6 @@
+#ifndef FILE_POLYNOMIAL
+#define FILE_POLYNOMIAL
+
 #include "mathlib.hpp"
 
 namespace Mathlib {
@@ -64,7 +67,7 @@ namespace Mathlib {
         }
 
         double Polynomial::evaluate(double a, double b) const {
-            Polynomial integral = this->integral();
+            Polynomial integral = this->integral(0.0);
 
             return integral.evaluate(b) - integral.evaluate(a);
         }
@@ -103,7 +106,7 @@ namespace Mathlib {
                 throw invalid_argument("Tolerance < 0");
             }
 
-            Polynomial d = derivative();
+            Polynomial d = derivative(1);
             double xk = x0;
             
             for (int k = 0; k < max_iter; ++k) {
@@ -173,3 +176,5 @@ namespace Mathlib {
         return os << "\n";
     }
 }
+
+#endif

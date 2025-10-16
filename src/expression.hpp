@@ -29,6 +29,9 @@ namespace Mathlib
 	/*
 	// Vector expressions
 	*/
+
+
+	// Addition
 	template<typename E1, typename E2>
 	class VecExprSum : public VecExpr<VecExprSum<E1, E2>> {
 		E1 a; // left operand
@@ -48,23 +51,44 @@ namespace Mathlib
 		return VecExprSum(a.Downcast(), b.Downcast());
 	}
 
-	
-	template<typename ESCAL, typename EV>
-	class VecExprScale : public VecExpr<VecExprScale<ESCAL, EV>> {
-		ESCAL scal; // scalar
-		EV vec; // vector
+
+	// Subtraction
+	template<typename E1, typename E2>
+	class VecExprSub : public VecExpr<VecExprSub<E1, E2>> {
+		E1 a; // left operand
+		E2 b; // right operand
 
 	public:
-		VecExprScale(ESCAL _scal, EV _vec) : scal(_scal), vec(_vec) { }
+		VecExprSub(E1 _a, E2 _b) : a(_a), b(_b) {
+			if (a.Size() != b.Size()) throw runtime_error("Vector sizes do not match in subtraction.");
+		}
 
-		auto operator()(size_t i) const { return scal * vec(i); }
-		size_t Size() const { return vec.Size(); }      
+		auto operator()(size_t i) const { return a(i) - b(i); }
+		size_t Size() const { return a.Size(); }
 	};
 
-	template<typename E>
-	auto operator*(double scal, const VecExpr<E>& v) {
-		return VecExprScale(scal, v.Downcast());
+	template <typename E1, typename E2>
+	auto operator-(const VecExpr<E1>& a, const VecExpr<E2>& b) {
+		return VecExprSub(a.Downcast(), b.Downcast());
 	}
+
+
+	// Unary negation
+	template<typename E>
+	class VecExprNeg : public VecExpr<VecExprNeg<E>> {
+		E vec;
+
+	public:
+		VecExprNeg(E _vec) : vec(_vec) { }
+		auto operator()(size_t i) const { return -vec(i); }
+		size_t Size() const { return vec.Size(); }
+	};
+
+	template <typename E>
+	auto operator-(const VecExpr<E>& v) {
+		return VecExprNeg(v.Downcast());
+	}
+
 
 	// Elementwise multiplication
 	template<typename E1, typename E2>
@@ -86,6 +110,7 @@ namespace Mathlib
 		return VecExprMul(a.Downcast(), b.Downcast());
 	}
 
+	// Vector-matrix multiplication
 	template<typename EV, typename EM>
 	class VecExprMulMatFromR : public VecExpr<VecExprMulMatFromR<EV, EM>> {
 		EV vec; // left operand
@@ -104,6 +129,7 @@ namespace Mathlib
 	}
 
 
+	// Matrix-vector multiplication
 	template<typename EM, typename EV>
 	class VecExprMulMatFromL : public VecExpr<VecExprMulMatFromL<EM, EV>> {
 		EM mat; // left operand
@@ -121,6 +147,8 @@ namespace Mathlib
 		return VecExprMulMatFromL(m.Downcast(), v.Downcast());
 	}
 
+
+	// Dot product
 	template <typename E1, typename E2>
     auto Dot(const VecExpr<E1>& a, const VecExpr<E2>& b) {
         if (a.Size() != b.Size()) throw invalid_argument("Vector sizes do not match for dot product");
@@ -131,7 +159,47 @@ namespace Mathlib
 		}
         return result;
     }
-	
+
+
+	// Scalar multiplication from left
+	template<typename ESCAL, typename EV>
+	class VecExprScaleL : public VecExpr<VecExprScaleL<ESCAL, EV>> {
+		ESCAL scal; // scalar
+		EV vec; // vector
+
+	public:
+		VecExprScaleL(ESCAL _scal, EV _vec) : scal(_scal), vec(_vec) { }
+
+		auto operator()(size_t i) const { return scal * vec(i); }
+		size_t Size() const { return vec.Size(); }      
+	};
+
+	template<typename E>
+	auto operator*(double scal, const VecExpr<E>& v) {
+		return VecExprScaleL(scal, v.Downcast());
+	}
+
+
+	// Scalar multiplication from right
+	template<typename EV, typename ESCAL>
+	class VecExprScaleR : public VecExpr<VecExprScaleR<EV, ESCAL>> {
+		EV vec; // vector
+		ESCAL scal; // scalar
+
+	public:
+		VecExprScaleR(EV _vec, ESCAL _scal) : vec(_vec), scal(_scal) { }
+
+		auto operator()(size_t i) const { return vec(i) * scal; }
+		size_t Size() const { return vec.Size(); }
+	};
+
+	template<typename E>
+	auto operator*(const VecExpr<E>& v, double scal) {
+		return VecExprScaleR(v.Downcast(), scal);
+	}
+
+
+	// Output
 	template<typename E>
 	ostream& operator<<(ostream& os, const VecExpr<E>& v) {
 		if (v.Size() > 0)
@@ -148,6 +216,9 @@ namespace Mathlib
 	/*
 	// Matrix expressions
 	*/
+
+
+	// Addition 
 	template<typename E1, typename E2>
 	class MatExprSum : public MatExpr<MatExprSum<E1, E2>> {
 		E1 a; // left operand
@@ -172,7 +243,53 @@ namespace Mathlib
 	}
 
 
+	// Subtraction
+	template<typename E1, typename E2>
+	class MatExprSub : public MatExpr<MatExprSub<E1, E2>> {
+		E1 a; // left operand
+		E2 b; // right operand
 
+	public:
+		MatExprSub(E1 _a, E2 _b) : a(_a), b(_b) { 
+			if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
+				throw runtime_error("Matrix sizes do not match in subtraction.");
+		}
+
+		auto operator()(size_t r, size_t c) const { return a(r, c) - b(r, c); }
+		size_t Rows() const { return a.Rows(); }
+		size_t Cols() const { return a.Cols(); }
+		auto Row(size_t r) const { return a.Row(r) - b.Row(r); }
+		auto Col(size_t c) const { return a.Col(c) - b.Col(c); }
+	};
+
+	template <typename E1, typename E2>
+	auto operator-(const MatExpr<E1>& a, const MatExpr<E2>& b) {
+		return MatExprSub(a.Downcast(), b.Downcast());
+	}
+
+
+	// Unary negation
+	template<typename E>
+	class MatExprNeg : public MatExpr<MatExprNeg<E>> {
+		E mat;
+
+	public:
+		MatExprNeg(E _mat) : mat(_mat) { }
+
+		auto operator()(size_t r, size_t c) const { return -mat(r, c); }
+		size_t Rows() const { return mat.Rows(); }
+		size_t Cols() const { return mat.Cols(); }
+		auto Row(size_t r) const { return -mat.Row(r); }
+		auto Col(size_t c) const { return -mat.Col(c); }
+	};
+
+	template <typename E>
+	auto operator-(const MatExpr<E>& m) {
+		return MatExprNeg(m.Downcast());
+	}
+
+
+	// Matrix multiplication
 	template<typename E1, typename E2>
 	class MatExprMul : public MatExpr<MatExprMul<E1, E2>> {
 		E1 a; // left operand
@@ -189,7 +306,7 @@ namespace Mathlib
 		// recursively recomputes the dot products for all of its children.
 		// For a chain of m multiplications, the cost of this implementation is O(n^m)
 		// whereas the simpler approach with temporaries would be O(m*n^3).
-		// Needs to be fixed ASAP.
+		// Avoid inlining matrix multiplications, create temporaries instead.
 		auto operator()(size_t r, size_t c) const {
 			return Dot(a.Row(r), b.Col(c));
 		}
@@ -207,14 +324,14 @@ namespace Mathlib
 	}
 
 
-
+	// Scalar multiplication from left
 	template<typename ESCAL, typename EM>
-	class MatExprScale : public MatExpr<MatExprScale<ESCAL, EM>> {
+	class MatExprScaleL : public MatExpr<MatExprScaleL<ESCAL, EM>> {
 		ESCAL scal; // scalar
 		EM mat; // matrix
 
 	public:
-		MatExprScale(ESCAL _scal, EM _mat) : scal(_scal), mat(_mat) { }
+		MatExprScaleL(ESCAL _scal, EM _mat) : scal(_scal), mat(_mat) { }
 		auto operator()(size_t r, size_t c) const { return scal * mat(r, c); }
 		size_t Rows() const { return mat.Rows(); }
 		size_t Cols() const { return mat.Cols(); }
@@ -224,9 +341,33 @@ namespace Mathlib
 
 	template<typename E>
 	auto operator*(const double scal, const MatExpr<E>& m) {
-		return MatExprScale(scal, m.Downcast());
+		return MatExprScaleL(scal, m.Downcast());
 	}
 
+
+	// Scalar multiplication from right
+	template<typename EM, typename ESCAL>
+	class MatExprScaleR : public MatExpr<MatExprScaleR<EM, ESCAL>> {
+		EM mat; // matrix
+		ESCAL scal; // scalar
+
+	public:
+		MatExprScaleR(EM _mat, ESCAL _scal) : mat(_mat), scal(_scal) { }
+
+		auto operator()(size_t r, size_t c) const { return mat(r, c) * scal; }
+		size_t Rows() const { return mat.Rows(); }
+		size_t Cols() const { return mat.Cols(); }
+		auto Row(size_t r) const { return mat.Row(r) * scal; }
+		auto Col(size_t c) const { return mat.Col(c) * scal; }
+	};
+
+	template<typename E>
+	auto operator*(const MatExpr<E>& m, const double scal) {
+		return MatExprScaleR(m.Downcast(), scal);
+	}
+
+
+	// Output
 	template<typename E>
 	ostream& operator<<(ostream& os, const MatExpr<E>& m) {
 		for (size_t i = 0; i < m.Rows(); ++i) {

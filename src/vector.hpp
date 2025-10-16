@@ -1,3 +1,6 @@
+#ifndef FILE_VECTOR
+#define FILE_VECTOR
+
 #include "mathlib.hpp"
 #include "expression.hpp"
 
@@ -36,14 +39,26 @@ namespace Mathlib
 		size_t Size() const { return size; }
 		auto Dist() const { return dist; }
 
-		T& operator()(size_t i) { return data[dist*i]; }
-		const T& operator()(size_t i) const { return data[dist*i]; }
+		T& operator()(size_t i) { 
+			if (i >= size) throw out_of_range("Vector index out of range");
+			return data[dist*i]; 
+		}
 
+		const T& operator()(size_t i) const { 
+			if (i >= size) throw out_of_range("Vector index out of range");
+			return data[dist*i]; 
+		}
+
+		// Create a sub-view of the vector from [first, next)
 		auto Range(size_t first, size_t next) const {
+			if (first >= next || next > size) throw out_of_range("Range out of range");
 			return VectorView<T, size_t>(next-first, dist, data+first*dist);
 		}
 
+		// Create a slice view of every 'slice'-th element starting from 'first'
 		auto Slice(size_t first, size_t slice) const {
+			if (first >= size) throw out_of_range("Slice out of range");
+			if (slice == 0) throw invalid_argument("Slice step cannot be zero");
 			return VectorView<T, size_t>(size/slice, dist*slice, data+first*dist);
 		}
 	};
@@ -58,7 +73,16 @@ namespace Mathlib
 		using BASE::data;
 
 	public:
-		Vector(size_t size) : VectorView<T>(size, new T[size]) { }
+		Vector(size_t size_) : VectorView<T>() { 
+			size = size_; 
+			T* data_;
+			try {
+				data_ = new T[size_];
+			} catch (bad_alloc&) {
+				throw runtime_error("Memory allocation failed");
+			}
+			*this = VectorView<T>(size, data_);
+		}
 
 		Vector(const Vector& other) : Vector(other.Size()) {
 			*this = other;
@@ -76,14 +100,19 @@ namespace Mathlib
 
 		using BASE::operator=;
 		Vector& operator=(const Vector& other) {
+			size = other.size;
 			for (size_t i = 0; i < size; i++)
-			data[i] = other(i);
+				data[i] = other(i);
 			return *this;
 		}
 
 		Vector& operator=(Vector&& other) {
-			swap(size, other.size);
-			swap(data, other.data);
+			if (this == &other) return *this; // self-assignment check
+			delete[] data;
+			size = other.size;
+			data = other.data;
+			other.size = 0;
+			other.data = nullptr;
 			return *this;
 		}
 
@@ -100,3 +129,5 @@ namespace Mathlib
 		return os;
 	}
 }
+
+#endif
