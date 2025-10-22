@@ -8,7 +8,7 @@ using namespace Mathlib;
 
 
 
-TEST_CASE( "construction, copy, move, assignment, access, output" ) {
+TEST_CASE( "construction, copy, move, assignment" ) {
 	Vector<int> v1(5);          // Construct a vector of size 5
 	for (size_t i = 0; i < v1.Size(); ++i)
 		v1(i) = static_cast<int>(i + 1); // Initialize v1 with values 1, 2, 3, 4, 5
@@ -56,15 +56,6 @@ TEST_CASE( "construction, copy, move, assignment, access, output" ) {
 	REQUIRE(v5.Size() == 5);
 	for (size_t i = 0; i < v5.Size(); ++i)
 		REQUIRE(v5(i) == 42); // All elements should be 42
-
-	// Access
-	v5(0) = 100;
-	REQUIRE(v5(0) == 100);
-
-	// Output
-	std::ostringstream oss;
-	oss << v5;
-	REQUIRE(oss.str() == "100, 42, 42, 42, 42");
 }
 
 

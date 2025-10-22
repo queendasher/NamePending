@@ -143,6 +143,7 @@ namespace Mathlib{
             swap(rows, other.rows);
             swap(cols, other.cols);
             swap(data, other.data);
+            swap(this->dist, other.dist);
         }
 
         template <typename T2>
