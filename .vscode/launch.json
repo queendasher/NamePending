@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
     {
-        "name": "Execute /builds/bin/demo",
+        "name": "Execute /build/bin/demo",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/builds/bin/demo",
+        "program": "${workspaceFolder}/build/bin/demo",
         "cwd": "${workspaceFolder}",
         "MIMode": "gdb",
         "externalConsole": false,
