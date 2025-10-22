@@ -1,24 +1,26 @@
 cmake_minimum_required(VERSION 3.20)
 project(NamePending LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+set (CMAKE_CXX_STANDARD 17)
 
-# Set output directories for build targets
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+include_directories(src)
 
-# Header-only library from files in ./src
-add_library(mathlib INTERFACE)
-target_include_directories(mathlib INTERFACE
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-)
 
-# Demo executable
-add_executable(demo demos/demo.cpp)
-target_link_libraries(demo PRIVATE mathlib)
+find_package(Python 3.8 COMPONENTS Interpreter Development REQUIRED)
 
-enable_testing()
-add_subdirectory(tests EXCLUDE_FROM_ALL)
+execute_process(
+  COMMAND "${Python_EXECUTABLE}" -m pybind11 --cmakedir
+  OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE PYBIND11_DIR)
+list(APPEND CMAKE_PREFIX_PATH "${PYBIND11_DIR}")
+find_package(pybind11 CONFIG REQUIRED)
+
+
+add_subdirectory (demos)
+
+
+pybind11_add_module(bla src/bind_bla.cpp)
+
+install (TARGETS bla DESTINATION ASCsoft)
+install (FILES src/vector.hpp DESTINATION ASCsoft/include)
+
+
