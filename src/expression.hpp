@@ -1,5 +1,7 @@
 #ifndef FILE_EXPRESSION
 #define FILE_EXPRESSION
+#include <type_traits>
+#include <concepts>
 
 namespace Mathlib
 {
@@ -21,6 +23,11 @@ namespace Mathlib
 		size_t Size() const { return Downcast().Size(); }
 		auto operator()(size_t i) const { return Downcast()(i); }
 	};
+
+
+
+
+
 
 
 
@@ -327,10 +334,10 @@ namespace Mathlib
 		auto Col(size_t c) const { return scal * mat.Col(c); }
 	};
 
-	template<typename TSCAL, typename E>
-	auto operator*(const TSCAL scal, const MatExpr<E>& m) {
-		return MatExprScaleL(scal, m.Downcast());
-	}
+	// template<typename TSCAL, typename EM>
+	// auto operator*(TSCAL scal, const MatExpr<EM>& m) {
+	// 	return MatExprScaleL(scal, m.Downcast());
+	// }
 
 
 	// Output

@@ -21,7 +21,7 @@
       "label": "CMake: Configure",
       "type": "shell",
       "command": "cmake",
-      "args": ["-S", ".", "-B", "build", "-DCMAKE_BUILD_TYPE=Debug"],
+      "args": ["-S", ".", "-B", "build", "-DCMAKE_BUILD_TYPE=Release"],
       "options": { "cwd": "${workspaceFolder}" }
     },
 
@@ -29,7 +29,7 @@
       "label": "CMake: Build Demo",
       "type": "shell",
       "command": "cmake",
-      "args": ["--build", "build", "--config", "Debug", "-v", "--target", "demo"],
+      "args": ["--build", "build", "--config", "Release", "-v", "--target", "demo"],
       "options": { "cwd": "${workspaceFolder}" },
       "group": { "kind": "build", "isDefault": true },
       "problemMatcher": "$gcc",
@@ -40,7 +40,7 @@
       "label": "CMake: Build Tests",
       "type": "shell",
       "command": "cmake",
-      "args": ["--build", "build", "--config", "Debug", "-v", "--target", "tests-all"],
+      "args": ["--build", "build", "--config", "Release", "-v", "--target", "tests-all"],
       "options": { "cwd": "${workspaceFolder}" },
       "group": "build",
       "problemMatcher": "$gcc",
@@ -53,7 +53,7 @@
       "command": "ctest",
       "args": [
         "--test-dir", "build",
-        "-C", "Debug",
+        "-C", "Release",
         "--output-on-failure",
         "-L", "unit"
       ],
@@ -69,7 +69,7 @@
       "command": "ctest",
       "args": [
         "--test-dir", "build",
-        "-C", "Debug",
+        "-C", "Release",
         "-V",          // verbose: always show stdout (benchmark results)
         "-L", "perf"
       ],

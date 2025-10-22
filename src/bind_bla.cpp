@@ -113,8 +113,13 @@ PYBIND11_MODULE(bla, m) {
 		.def("__neg__", [](Matrix<double, RowMajor> & self)
 		{ return Matrix<double, RowMajor> (-self); })
 
-		.def("__mul__", [](Matrix<double, RowMajor> & self, Matrix<double, RowMajor> & other)
-		{ return Matrix<double, RowMajor> (self*other); })
+		.def("__mul__", [](Matrix<double, RowMajor> & self, 
+							Matrix<double, RowMajor> & other) { 
+			Matrix<double, RowMajor> result(self.Rows(), other.Cols());
+			result = self * other;
+		  
+		  	return result;
+		})
 
 		.def("__str__", [](const Matrix<double, RowMajor> & self) {
 			std::stringstream str;

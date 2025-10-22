@@ -6,14 +6,16 @@
 using namespace Mathlib;
 
 int main() {
-    Matrix<double, ColMajor> m1(4, 3);
-    for (size_t i = 0; i < m1.Rows(); ++i)
-        for (size_t j = 0; j < m1.Cols(); ++j)
-            m1(i, j) = static_cast<double>(i * m1.Cols() + j);
+    Matrix<double, ColMajor> m1(3, 3);
+    Matrix<double, ColMajor> m2(3, 3);
 
-    cout << m1 << endl;
-    Matrix<double, ColMajor> m2 = std::move(m1);
+    for (size_t i = 0; i < 3; ++i)
+        for (size_t j = 0; j < 3; ++j) {
+            m1(i, j) = i + j + 1;
+        }
+
+    cout << m1 << "\n";
+    m2 = m1 * m1;
     cout << m2 << endl;
-    cout << m1.Rows() << endl;
 }
 
