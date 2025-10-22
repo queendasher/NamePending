@@ -77,6 +77,15 @@
       "group": "test",
       "dependsOn": "CMake: Build Tests",
       "problemMatcher": []
+    },
+
+    {
+      "label": "CMake: Build Pybind Module",
+      "type": "cmake",
+      "command": "build",
+      "targets": ["bla"],
+      "problemMatcher": [],
+      "dependsOn": "CMake: Configure"
     }
   ]
 }

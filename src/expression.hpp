@@ -318,7 +318,7 @@ namespace Mathlib
 		return MatExprMul(a.Downcast(), b.Downcast());
 	}
 
-
+/*
 	// Scalar multiplication from left
 	template<typename TSCAL, typename EM>
 	class MatExprScaleL : public MatExpr<MatExprScaleL<TSCAL, EM>> {
@@ -333,6 +333,23 @@ namespace Mathlib
 		auto Row(size_t r) const { return scal * mat.Row(r); }
 		auto Col(size_t c) const { return scal * mat.Col(c); }
 	};
+*/
+
+	// (double-)Scalar multiplication from left
+	template<typename EM>
+	class MatExprScaleL : public MatExpr<MatExprScaleL<EM>> {
+		double scal; // scalar
+		EM mat; // matrix
+
+	public:
+		MatExprScaleL(double _scal, EM _mat) : scal(_scal), mat(_mat) { }
+		auto operator()(size_t r, size_t c) const { return scal * mat(r, c); }
+		size_t Rows() const { return mat.Rows(); }
+		size_t Cols() const { return mat.Cols(); }
+		auto Row(size_t r) const { return scal * mat.Row(r); }
+		auto Col(size_t c) const { return scal * mat.Col(c); }
+	};
+
 
 	// template<typename TSCAL, typename EM>
 	// auto operator*(TSCAL scal, const MatExpr<EM>& m) {

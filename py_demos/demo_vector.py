@@ -3,8 +3,16 @@
 # sys.path.append('/Users/joachim/texjs/lva/ws2324/ScientificComputing/ASC-bla/build')
 # from bla import Vector
 
+# for Development
+# use shared-object-file from the build folder (faster workflow)
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), "../build"))
+from bla import Vector
+# ~ for Development
+
 # import from the installed ASCsoft package:
-from ASCsoft.bla import Vector
+#from ASCsoft.bla import Vector
 
 x = Vector(3)
 y = Vector(3)
