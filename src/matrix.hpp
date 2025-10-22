@@ -14,7 +14,7 @@ namespace Mathlib{
         size_t rows{}, cols{}, dist{};
         T* data{};
 
-        size_t index(size_t r, size_t c) const {
+        constexpr size_t index(size_t r, size_t c) const {
             return (ORD == ColMajor) ? c * dist + r : r * dist + c;
         }
 
@@ -58,11 +58,11 @@ namespace Mathlib{
 
         // Element access
         const T& operator()(size_t r, size_t c) const {
-            if (r >= rows || c >= cols) throw out_of_range("Matrix index out of range");
+            //if (r >= rows || c >= cols) throw out_of_range("Matrix index out of range");
             return data[index(r, c)];
         }
         T& operator()(size_t r, size_t c) {
-            if (r >= rows || c >= cols) throw out_of_range("Matrix index out of range");
+            //if (r >= rows || c >= cols) throw out_of_range("Matrix index out of range");
             return data[index(r, c)];
         }
 

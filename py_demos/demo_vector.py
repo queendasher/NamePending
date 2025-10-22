@@ -16,6 +16,7 @@ y[:] = 2
 print ("x =", x)
 print ("y =", y)
 print ("x+3*y =", x+3*y)
+print ("-y =", -y)
 
 
 x = Vector(10)

@@ -21,6 +21,6 @@ add_subdirectory (demos)
 pybind11_add_module(bla src/bind_bla.cpp)
 
 install (TARGETS bla DESTINATION ASCsoft)
-install (FILES src/vector.hpp DESTINATION ASCsoft/include)
+install (FILES src/vector.hpp src/matrix.hpp DESTINATION ASCsoft/include)
 
 
