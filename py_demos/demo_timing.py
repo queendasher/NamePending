@@ -6,7 +6,7 @@ from time import time
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), "../build"))
-from bla import Vector
+from ASCsoft.bla import Vector
 # ~ for Development
 
 #from ASCsoft.bla import Matrix

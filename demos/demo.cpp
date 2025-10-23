@@ -16,6 +16,7 @@ int main() {
 
     cout << m1 << "\n";
     m2 = m1 * m1;
+    m2 = 3 * m1;
     cout << m2 << endl;
 }
 

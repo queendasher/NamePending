@@ -1,7 +1,5 @@
 #ifndef FILE_EXPRESSION
 #define FILE_EXPRESSION
-#include <type_traits>
-#include <concepts>
 
 namespace Mathlib
 {
@@ -121,9 +119,8 @@ namespace Mathlib
 	// Dot product
 	template <typename E1, typename E2>
     auto Dot(const VecExpr<E1>& a, const VecExpr<E2>& b) {
-        if (a.Size() != b.Size()) throw runtime_error("Vector sizes do not match for dot product");
-        using SumType = decay_t<decltype(a(0) * b(0))>;
-        SumType result(0);
+        // if (a.Size() != b.Size()) throw runtime_error("Vector sizes do not match for dot product");
+        decay_t<decltype(a(0) * b(0))> result(0);
         for (size_t i = 0; i < a.Size(); ++i) {
 			result = result + a(i) * b(i);
 		}
@@ -196,8 +193,8 @@ namespace Mathlib
 
 	public:
 		MatExprSum(E1 _a, E2 _b) : a(_a), b(_b) { 
-			if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
-				throw runtime_error("Matrix sizes do not match in sum.");
+			// if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
+			// 	throw runtime_error("Matrix sizes do not match in sum.");
 		}
 
 		auto operator()(size_t r, size_t c) const { return a(r, c) + b(r, c); }
@@ -221,8 +218,8 @@ namespace Mathlib
 
 	public:
 		MatExprSub(E1 _a, E2 _b) : a(_a), b(_b) { 
-			if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
-				throw runtime_error("Matrix sizes do not match in subtraction.");
+			// if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
+			// 	throw runtime_error("Matrix sizes do not match in subtraction.");
 		}
 
 		auto operator()(size_t r, size_t c) const { return a(r, c) - b(r, c); }
@@ -267,8 +264,8 @@ namespace Mathlib
 
 	public:
 		MatExprElemMul(E1 _a, E2 _b) : a(_a), b(_b) { 
-			if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
-				throw runtime_error("Matrix sizes do not match in elementwise multiplication.");
+			// if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
+			// 	throw runtime_error("Matrix sizes do not match in elementwise multiplication.");
 		}
 
 		auto operator()(size_t r, size_t c) const { return a(r, c) * b(r, c); }
@@ -292,8 +289,8 @@ namespace Mathlib
 
 	public:
 		MatExprMul(E1 _a, E2 _b) : a(_a), b(_b) { 
-			if (a.Cols() != b.Rows()) 
-				throw runtime_error("Matrix sizes do not match in multiplication.");
+			// if (a.Cols() != b.Rows()) 
+			// 	throw runtime_error("Matrix sizes do not match in multiplication.");
 		}
 
 		// This is actually horribly inefficient for chained multiplications.
@@ -318,7 +315,7 @@ namespace Mathlib
 		return MatExprMul(a.Downcast(), b.Downcast());
 	}
 
-/*
+
 	// Scalar multiplication from left
 	template<typename TSCAL, typename EM>
 	class MatExprScaleL : public MatExpr<MatExprScaleL<TSCAL, EM>> {
@@ -333,28 +330,11 @@ namespace Mathlib
 		auto Row(size_t r) const { return scal * mat.Row(r); }
 		auto Col(size_t c) const { return scal * mat.Col(c); }
 	};
-*/
 
-	// (double-)Scalar multiplication from left
 	template<typename EM>
-	class MatExprScaleL : public MatExpr<MatExprScaleL<EM>> {
-		double scal; // scalar
-		EM mat; // matrix
-
-	public:
-		MatExprScaleL(double _scal, EM _mat) : scal(_scal), mat(_mat) { }
-		auto operator()(size_t r, size_t c) const { return scal * mat(r, c); }
-		size_t Rows() const { return mat.Rows(); }
-		size_t Cols() const { return mat.Cols(); }
-		auto Row(size_t r) const { return scal * mat.Row(r); }
-		auto Col(size_t c) const { return scal * mat.Col(c); }
-	};
-
-
-	// template<typename TSCAL, typename EM>
-	// auto operator*(TSCAL scal, const MatExpr<EM>& m) {
-	// 	return MatExprScaleL(scal, m.Downcast());
-	// }
+	auto operator*(double scal, const MatExpr<EM>& m) {
+		return MatExprScaleL(scal, m.Downcast());
+	}
 
 
 	// Output
