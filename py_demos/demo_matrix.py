@@ -2,20 +2,23 @@
 # use shared-object-file from the build folder (faster workflow)
 import sys
 import os
+import numpy as np
 sys.path.append(os.path.join(os.path.dirname(__file__), "../build"))
 from bla import Matrix
 # ~ for Development
 
 #from ASCsoft.bla import Matrix
 
-
-A = Matrix(2,2)
+n = 8
+A = Matrix(n,n)
 
 # Set elements
-A[0,0] = 1
-A[0,1] = 2
-A[1,0] = 3
-A[1,1] = 4
+for i in range(n):
+    for j in range(n):
+        A[i,j] = i*n + j
 
-print("Matrix A:")
+A_np = np.asarray(A)
+
 print(A)
+print("\n")
+print(A_np)

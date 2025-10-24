@@ -7,6 +7,7 @@
 # use shared-object-file from the build folder (faster workflow)
 import sys
 import os
+import numpy as np
 sys.path.append(os.path.join(os.path.dirname(__file__), "../build"))
 from bla import Vector
 # ~ for Development
@@ -21,21 +22,10 @@ for i in range(len(x)):
     x[i] = i
 y[:] = 2    
 
-print ("x =", x)
-print ("y =", y)
-print ("x+3*y =", x+3*y)
-print ("-y =", -y)
+x_np = np.asarray(x)
 
-
-x = Vector(10)
-x[0:] = 1
-print (x)
-
-x[3:7] = 2
-print (x)
-
-x[0:10:2] = 3
-print (x)
+print(x)
+print(x_np)
 
 
 
