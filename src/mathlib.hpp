@@ -9,7 +9,6 @@
 #include <numeric>
 #include <complex>
 #include <type_traits>
-using namespace std;
 
 namespace Mathlib {
     

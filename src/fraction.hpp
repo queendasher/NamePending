@@ -11,9 +11,9 @@ namespace Mathlib {
 
         void reduce() {
             if(q == 0) {
-                throw logic_error("Divide by zero.");
+                throw std::logic_error("Divide by zero.");
             }
-            int _gcd = gcd(p, q);
+            int _gcd = std::gcd(p, q);
 
             p /= _gcd;
             q /= _gcd;
@@ -71,7 +71,7 @@ namespace Mathlib {
 
         Fraction expanded(int q_new) const {
             if (q_new % q != 0) {
-                throw invalid_argument("New denominator must be a whole number multiple of the current denominator.");
+                throw std::invalid_argument("New denominator must be a whole number multiple of the current denominator.");
             }
 
             Fraction result;
@@ -128,14 +128,14 @@ namespace Mathlib {
 
         Fraction operator||(const Fraction& f) const {
             int _lcm = std::lcm(q, f.q);
-            int _max = max(this->expanded(_lcm).p, f.expanded(_lcm).p);
+            int _max = std::max(this->expanded(_lcm).p, f.expanded(_lcm).p);
             
             return Fraction(_max, _lcm);
         }
 
         Fraction operator&&(const Fraction& f) const {
             int _lcm = std::lcm(q, f.q);
-            int _min = min(this->expanded(_lcm).p, f.expanded(_lcm).p);
+            int _min = std::min(this->expanded(_lcm).p, f.expanded(_lcm).p);
             
             return Fraction(_min, _lcm);
         }
@@ -171,7 +171,7 @@ namespace Mathlib {
         }
 
         void print() const {
-            cout << (this);
+            std::cout << (this);
         }
     };
 
@@ -195,7 +195,7 @@ namespace Mathlib {
         return Fraction(f.getP() < 0 ? -f.getP() : f.getP(), f.getQ());
     }
 
-    ostream& operator<<(ostream& os, const Fraction& f) {
+    std::ostream& operator<<(std::ostream& os, const Fraction& f) {
         os << f.getP();
         if(f.getQ() != 1)
             os << "/" << f.getQ();

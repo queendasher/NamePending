@@ -6,7 +6,7 @@
 
 namespace Mathlib
 {
-	template<typename T, typename TDIST = integral_constant<size_t, 1>>
+	template<typename T, typename TDIST = std::integral_constant<size_t, 1>>
 	class VectorView : public VecExpr<VectorView<T, TDIST>> {
 	protected:
 		T* data{};
@@ -40,25 +40,25 @@ namespace Mathlib
 		auto Dist() const { return dist; }
 
 		T& operator()(size_t i) { 
-			if (i >= size) throw out_of_range("Vector index out of range");
+			if (i >= size) throw std::out_of_range("Vector index out of range");
 			return data[dist*i]; 
 		}
 
 		const T& operator()(size_t i) const { 
-			if (i >= size) throw out_of_range("Vector index out of range");
+			if (i >= size) throw std::out_of_range("Vector index out of range");
 			return data[dist*i]; 
 		}
 
 		// Create a sub-view of the vector from [first, next)
 		auto Range(size_t first, size_t next) const {
-			if (first >= next || next > size) throw out_of_range("Range out of range");
+			if (first >= next || next > size) throw std::out_of_range("Range out of range");
 			return VectorView<T, size_t>(next-first, dist, data+first*dist);
 		}
 
 		// Create a slice view of every 'slice'-th element starting from 'first'
 		auto Slice(size_t first, size_t slice) const {
-			if (first >= size) throw out_of_range("Slice out of range");
-			if (slice == 0) throw invalid_argument("Slice step cannot be zero");
+			if (first >= size) throw std::out_of_range("Slice out of range");
+			if (slice == 0) throw std::invalid_argument("Slice step cannot be zero");
 			return VectorView<T, size_t>(size/slice, dist*slice, data+first*dist);
 		}
 	};
@@ -78,8 +78,8 @@ namespace Mathlib
 			T* data_;
 			try {
 				data_ = new T[size_];
-			} catch (bad_alloc&) {
-				throw runtime_error("Memory allocation failed");
+			} catch (std::bad_alloc&) {
+				throw std::runtime_error("Memory allocation failed");
 			}
 			*this = VectorView<T>(size, data_);
 		}
@@ -89,8 +89,8 @@ namespace Mathlib
 		}
 
 		Vector(Vector&& other) : VectorView<T>(0, nullptr) {
-			swap(size, other.size);
-			swap(data, other.data);
+			std::swap(size, other.size);
+			std::swap(data, other.data);
 		}
 
 		template <typename T2>
@@ -121,7 +121,7 @@ namespace Mathlib
 
 
 	template <typename T, typename TDIST>
-	ostream& operator<<(ostream& os, const VectorView<T, TDIST>& v) {
+	std::ostream& operator<<(std::ostream& os, const VectorView<T, TDIST>& v) {
 		if (v.Size() > 0)
 			os << v(0);
 		for (size_t i = 1; i < v.Size(); ++i)

@@ -127,7 +127,8 @@
       "type": "cmake",
       "command": "build",
       "targets": [
-        "bla"
+        //"bla",
+        "all"
       ],
       "problemMatcher": [],
       "dependsOn": "CMake: Configure"

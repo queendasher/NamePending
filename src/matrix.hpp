@@ -30,7 +30,7 @@ namespace Mathlib{
         // Explicit dist. Must satisfy dist >= rows (col-major) or dist >= cols (row-major).
         MatrixView(size_t r, size_t c, size_t _dist, T* d)
             : rows(r), cols(c), data(d), dist(_dist) {
-            if (!(ORD == ColMajor ? dist >= rows : dist >= cols)) throw invalid_argument("Invalid leading dimension");
+            if (!(ORD == ColMajor ? dist >= rows : dist >= cols)) throw std::invalid_argument("Invalid leading dimension");
         }
 
         // Assignment from any matrix expression
@@ -58,16 +58,16 @@ namespace Mathlib{
 
         // Element access
         const T& operator()(size_t r, size_t c) const {
-            //if (r >= rows || c >= cols) throw out_of_range("Matrix index out of range");
+            //if (r >= rows || c >= cols) throw std::out_of_range("Matrix index out of range");
             return data[index(r, c)];
         }
         T& operator()(size_t r, size_t c) {
-            //if (r >= rows || c >= cols) throw out_of_range("Matrix index out of range");
+            //if (r >= rows || c >= cols) throw std::out_of_range("Matrix index out of range");
             return data[index(r, c)];
         }
 
         auto Row(size_t r) const {
-            //if (r >= rows) throw out_of_range("Row out of range");
+            //if (r >= rows) throw std::out_of_range("Row out of range");
             auto row_view = VectorView<T, size_t>();
             if constexpr (ORD == ColMajor)
                 row_view = VectorView<T, size_t>(cols, dist, data + r);
@@ -77,7 +77,7 @@ namespace Mathlib{
         }
 
         auto Col(size_t c) const {
-            //if (c >= cols) throw out_of_range("Col out of range");
+            //if (c >= cols) throw std::out_of_range("Col out of range");
             auto col_view = VectorView<T, size_t>();
             if constexpr (ORD == ColMajor)
                 col_view = VectorView<T, size_t>(rows, 1, data + c*dist);
@@ -88,7 +88,7 @@ namespace Mathlib{
 
         // Return a MatrixView corresponding to the specified range of rows [first, next)
         auto RowRange(size_t first, size_t next) const {
-            //if (first >= next || next > rows) throw out_of_range("Row range out of range");
+            //if (first >= next || next > rows) throw std::out_of_range("Row range out of range");
             auto mat_view = MatrixView<T, ORD>();
             if constexpr (ORD == ColMajor)
                 mat_view = MatrixView<T, ORD>(next - first, cols, dist, data + first);
@@ -99,7 +99,7 @@ namespace Mathlib{
 
         // Return a MatrixView corresponding to the specified range of columns [first, next)
         auto ColRange(size_t first, size_t next) const {
-            //if (first >= next || next > cols) throw out_of_range("Col range out of range");
+            //if (first >= next || next > cols) throw std::out_of_range("Col range out of range");
             auto mat_view = MatrixView<T, ORD>();
             if constexpr (ORD == ColMajor)
                 mat_view = MatrixView<T, ORD>(rows, next - first, dist, data + first*dist);
@@ -140,10 +140,10 @@ namespace Mathlib{
         }
 
         Matrix(Matrix&& other) : MatrixView<T, ORD>(0, 0, nullptr) {
-            swap(rows, other.rows);
-            swap(cols, other.cols);
-            swap(data, other.data);
-            swap(this->dist, other.dist);
+            std::swap(rows, other.rows);
+            std::swap(cols, other.cols);
+            std::swap(data, other.data);
+            std::swap(this->dist, other.dist);
         }
 
         template <typename T2>
@@ -181,7 +181,7 @@ namespace Mathlib{
         }
 
         Matrix<T, ORD> Invert() const {
-            if(rows != cols) throw runtime_error("Matrix must be square to compute inverse");
+            if(rows != cols) throw std::runtime_error("Matrix must be square to compute inverse");
             size_t n = rows;
 
             Matrix<T, ORD> M(*this);
@@ -210,7 +210,7 @@ namespace Mathlib{
                         M.Row(i) = M.Row(i) + M.Row(pivot_row);
                         I.Row(i) = I.Row(i) + I.Row(pivot_row);
                     } else {
-                        throw runtime_error("Matrix is singular and cannot be inverted");
+                        throw std::runtime_error("Matrix is singular and cannot be inverted");
                     }
                 }
 
@@ -231,7 +231,7 @@ namespace Mathlib{
         }
 
         T Trace() const {
-            if (rows != cols) throw runtime_error("Matrix must be square to compute trace");
+            if (rows != cols) throw std::runtime_error("Matrix must be square to compute trace");
             T trace = T(0);
             for (size_t i = 0; i < rows; ++i)
                 trace = trace + (*this).Diag()(i);
@@ -239,7 +239,7 @@ namespace Mathlib{
         }
 
         T Det() const {
-            if (rows != cols) throw runtime_error("Matrix must be square to compute determinant");
+            if (rows != cols) throw std::runtime_error("Matrix must be square to compute determinant");
             size_t n = rows;
 
             Matrix<T, ORD> M(*this);
@@ -278,7 +278,7 @@ namespace Mathlib{
     };
 
     template <typename T, ORDERING ORD>
-    ostream& operator<<(ostream& os, const MatrixView<T, ORD>& m) {
+    std::ostream& operator<<(std::ostream& os, const MatrixView<T, ORD>& m) {
         for (size_t i = 0; i < m.Rows(); ++i) {
             for (size_t j = 0; j < m.Cols(); ++j)
                 os << m(i, j) << " ";

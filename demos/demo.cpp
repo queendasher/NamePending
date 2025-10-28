@@ -4,6 +4,7 @@
 #include <time.h>
 
 using namespace Mathlib;
+using namespace std;
 
 int main() {
     Matrix<double, ColMajor> m1(3, 3);

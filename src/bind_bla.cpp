@@ -5,6 +5,7 @@
 #include "matrix.hpp"
 
 using namespace Mathlib;
+using namespace std;
 namespace py = pybind11;
 
 

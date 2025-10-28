@@ -44,7 +44,7 @@ namespace Mathlib
 
 	public:
 		VecExprSum(E1 _a, E2 _b) : a(_a), b(_b) { 
-			if (a.Size() != b.Size()) throw runtime_error("Vector sizes do not match in sum.");
+			if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match in sum.");
 		}
 
 		auto operator()(size_t i) const { return a(i) + b(i); }
@@ -65,7 +65,7 @@ namespace Mathlib
 
 	public:
 		VecExprSub(E1 _a, E2 _b) : a(_a), b(_b) {
-			if (a.Size() != b.Size()) throw runtime_error("Vector sizes do not match in subtraction.");
+			if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match in subtraction.");
 		}
 
 		auto operator()(size_t i) const { return a(i) - b(i); }
@@ -103,7 +103,7 @@ namespace Mathlib
 
 	public:
 		VecExprMul(E1 _a, E2 _b) : a(_a), b(_b) {
-			if (a.Size() != b.Size()) throw runtime_error("Vector sizes do not match in multiplication.");
+			if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match in multiplication.");
 		}
 
 		auto operator()(size_t i) const { return a(i) * b(i); }
@@ -119,8 +119,8 @@ namespace Mathlib
 	// Dot product
 	template <typename E1, typename E2>
     auto Dot(const VecExpr<E1>& a, const VecExpr<E2>& b) {
-        // if (a.Size() != b.Size()) throw runtime_error("Vector sizes do not match for dot product");
-        decay_t<decltype(a(0) * b(0))> result(0);
+        // if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match for dot product");
+        std::decay_t<decltype(a(0) * b(0))> result(0);
         for (size_t i = 0; i < a.Size(); ++i) {
 			result = result + a(i) * b(i);
 		}
@@ -168,7 +168,7 @@ namespace Mathlib
 
 	// Output
 	template<typename E>
-	ostream& operator<<(ostream& os, const VecExpr<E>& v) {
+	std::ostream& operator<<(std::ostream& os, const VecExpr<E>& v) {
 		if (v.Size() > 0)
 			os << v(0);
 		for (size_t i = 1; i < v.Size(); ++i)
@@ -194,7 +194,7 @@ namespace Mathlib
 	public:
 		MatExprSum(E1 _a, E2 _b) : a(_a), b(_b) { 
 			// if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
-			// 	throw runtime_error("Matrix sizes do not match in sum.");
+			// 	throw std::runtime_error("Matrix sizes do not match in sum.");
 		}
 
 		auto operator()(size_t r, size_t c) const { return a(r, c) + b(r, c); }
@@ -219,7 +219,7 @@ namespace Mathlib
 	public:
 		MatExprSub(E1 _a, E2 _b) : a(_a), b(_b) { 
 			// if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
-			// 	throw runtime_error("Matrix sizes do not match in subtraction.");
+			// 	throw std::runtime_error("Matrix sizes do not match in subtraction.");
 		}
 
 		auto operator()(size_t r, size_t c) const { return a(r, c) - b(r, c); }
@@ -265,7 +265,7 @@ namespace Mathlib
 	public:
 		MatExprElemMul(E1 _a, E2 _b) : a(_a), b(_b) { 
 			// if (a.Rows() != b.Rows() || a.Cols() != b.Cols()) 
-			// 	throw runtime_error("Matrix sizes do not match in elementwise multiplication.");
+			// 	throw std::runtime_error("Matrix sizes do not match in elementwise multiplication.");
 		}
 
 		auto operator()(size_t r, size_t c) const { return a(r, c) * b(r, c); }
@@ -290,7 +290,7 @@ namespace Mathlib
 	public:
 		MatExprMul(E1 _a, E2 _b) : a(_a), b(_b) { 
 			// if (a.Cols() != b.Rows()) 
-			// 	throw runtime_error("Matrix sizes do not match in multiplication.");
+			// 	throw std::runtime_error("Matrix sizes do not match in multiplication.");
 		}
 
 		// This is actually horribly inefficient for chained multiplications.
@@ -339,7 +339,7 @@ namespace Mathlib
 
 	// Output
 	template<typename E>
-	ostream& operator<<(ostream& os, const MatExpr<E>& m) {
+	std::ostream& operator<<(std::ostream& os, const MatExpr<E>& m) {
 		for (size_t i = 0; i < m.Rows(); ++i) {
 			for (size_t j = 0; j < m.Cols(); ++j)
 				os << m(i, j) << " ";

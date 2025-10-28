@@ -6,7 +6,7 @@
 namespace Mathlib {
     class Polynomial {
     private:
-        vector<double> coefficients;
+        std::vector<double> coefficients;
             int n;
 
             void Polynomial::trim() {
@@ -24,7 +24,7 @@ namespace Mathlib {
             coefficients[0] = 0.0;
         }
 
-        Polynomial(vector<double>& coefficients) {
+        Polynomial(std::vector<double>& coefficients) {
             this->n = coefficients.size() - 1;
             this->coefficients = coefficients;
             this->trim();
@@ -53,7 +53,7 @@ namespace Mathlib {
 
         int getDegree() const { return n ; }
 
-        vector<double> getCoeffs() const { return coefficients; }
+        std::vector<double> getCoeffs() const { return coefficients; }
 
         double Polynomial::evaluate(double x) const {
             double result = 0.0;
@@ -81,7 +81,7 @@ namespace Mathlib {
                 return Polynomial(); // Derivative of Polynomial of degree 0 is 0
             }
 
-            vector<double> derivative_coeffs(this->n, 0.0);
+            std::vector<double> derivative_coeffs(this->n, 0.0);
 
             for (int i = 0; i < this->n; ++i) {
                 derivative_coeffs[i] = coefficients[i+1] * (i+1); // c*x^n becomes c*n*x^(n-1)
@@ -91,7 +91,7 @@ namespace Mathlib {
         }
 
         Polynomial Polynomial::integral(double c) const {
-            vector<double> integral_coeffs(this->n+2, 0.0);
+            std::vector<double> integral_coeffs(this->n+2, 0.0);
             integral_coeffs[0] = c;
 
             for (int i = 0; i <= this->n; ++i) {
@@ -103,7 +103,7 @@ namespace Mathlib {
 
         double Polynomial::computeZero(double x0, double tau, int max_iter) const {
             if(tau < 0) {
-                throw invalid_argument("Tolerance < 0");
+                throw std::invalid_argument("Tolerance < 0");
             }
 
             Polynomial d = derivative(1);
@@ -115,17 +115,17 @@ namespace Mathlib {
                 }
                 
                 if (fabs(d.evaluate(xk)) < tau) {
-                    throw runtime_error("Derivative too small, Newton's method inapplicable.");
+                    throw std::runtime_error("Derivative too small, Newton's method inapplicable.");
                 }
                 
                 xk = xk - evaluate(xk) / d.evaluate(xk);
             }
 
-            throw runtime_error("Failed to converge in time.");
+            throw std::runtime_error("Failed to converge in time.");
         }
 
         Polynomial Polynomial::operator+(const Polynomial& p) const {
-            vector<double> result_coeffs(max(n, p.n) + 1, 0.0);
+            std::vector<double> result_coeffs(std::max(n, p.n) + 1, 0.0);
             
             for (int i = 0; i < result_coeffs.size(); ++i) {
                 if (i <= n) result_coeffs[i] += coefficients[i];
@@ -136,7 +136,7 @@ namespace Mathlib {
         }
 
         Polynomial Polynomial::operator*(const Polynomial& p) const {
-            vector<double> result_coeffs(n+p.n + 1, 0.0);
+            std::vector<double> result_coeffs(n+p.n + 1, 0.0);
 
             for (int i = 0; i <= n; ++i) {
                 for (int j = 0; j <= p.n; ++j) {
@@ -150,12 +150,12 @@ namespace Mathlib {
 
 
         void Polynomial::print() const {
-            cout << *this;
+            std::cout << *this;
         }
     };
 
-    ostream& operator<<(ostream& os, const Polynomial& p) {
-        vector<double> coefficients = p.getCoeffs();
+    std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
+        std::vector<double> coefficients = p.getCoeffs();
         int n = p.getDegree();
 
         for (int i = n; i >= 0; --i) {
