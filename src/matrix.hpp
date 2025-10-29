@@ -2,15 +2,19 @@
 #define FILE_MATRIX
 
 #include "mathlib.hpp"
-#include "vector.hpp"
 #include "expression.hpp"
+#include "vector.hpp"
 #include <type_traits>
 
 namespace Mathlib{
+    enum ORDERING { ColMajor, RowMajor };
+
     class T_Lapack { };
     static constexpr T_Lapack Lapack;
 
-    enum ORDERING { ColMajor, RowMajor };
+    template <typename T1, typename T2, ORDERING OA, ORDERING OB>
+    class LapackMultExpr;
+
     template <typename T, ORDERING ORD = ColMajor>
     class MatrixView : public MatExpr<MatrixView<T, ORD>> {
     protected:
@@ -42,6 +46,13 @@ namespace Mathlib{
             for (size_t i = 0; i < rows; ++i)
                 for (size_t j = 0; j < cols; ++j)
                     data[index(i, j)] = other(i, j);
+            return *this;
+        }
+
+        // Assignment from Lapack multiplication
+        template <typename TA, typename TB, ORDERING OA, ORDERING OB>
+        MatrixView& operator=(const LapackMultExpr<TA, TB, OA, OB>& other) {
+            MultMatMatLapack(other.a, other.b, *this);
             return *this;
         }
 
@@ -280,6 +291,21 @@ namespace Mathlib{
 
     };
 
+    template <typename T1, typename T2, ORDERING OA, ORDERING OB>
+    class LapackMultExpr {
+    public:
+        MatrixView<T1, OA> a;
+        MatrixView<T2, OB> b;
+
+        LapackMultExpr(const MatrixView<T1, OA>& _a, const MatrixView<T2, OB>& _b)
+            : a(_a), b(_b) { }
+    };
+
+    template <typename T1, typename T2, ORDERING OA, ORDERING OB>
+    auto operator|(const MatExprMul<MatrixView<T1, OA>, MatrixView<T2, OB>>& expr, T_Lapack) {
+        return LapackMultExpr<T1, T2, OA, OB>(expr.Left(), expr.Right());
+    }
+
     template <typename T, ORDERING ORD>
     std::ostream& operator<<(std::ostream& os, const MatrixView<T, ORD>& m) {
         for (size_t i = 0; i < m.Rows(); ++i) {
@@ -291,5 +317,7 @@ namespace Mathlib{
         return os;
     }
 }
+
+#include "lapack_interface.hpp"
 
 #endif

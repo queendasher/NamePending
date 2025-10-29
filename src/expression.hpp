@@ -276,8 +276,8 @@ namespace Mathlib
 	};
 	
 	template <typename E1, typename E2>
-	auto MatMul(const MatExpr<E1>& a, const MatExpr<E2>& b) {
-		return MatExprMul(a.Downcast(), b.Downcast());
+	auto MatMulElem(const MatExpr<E1>& a, const MatExpr<E2>& b) {
+		return MatExprElemMul(a.Downcast(), b.Downcast());
 	}
 
 
@@ -307,6 +307,8 @@ namespace Mathlib
 		size_t Cols() const { return b.Cols(); }
 		auto Row(size_t r) const { return a.Row(r) * b; }
 		auto Col(size_t c) const { return a * b.Col(c); }
+		const E1& Left() const { return a; }
+		const E2& Right() const { return b; }
 
 	};
 

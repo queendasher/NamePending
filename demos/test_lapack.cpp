@@ -1,8 +1,7 @@
 #include <iostream>
 
-#include <vector.hpp>
-#include <matrix.hpp>
-#include <lapack_interface.hpp>
+#include "matrix.hpp"
+#include "lapack_interface.hpp"
 
 
 using namespace Mathlib;
@@ -24,7 +23,7 @@ int main()
 	cout << "A = " << A << endl;
 	cout << "B = " << B << endl;
 	Matrix<double, RowMajor> C(n,n);
-	multMatMatLapack(A, B, C);
+	C = A*B | Lapack;
 	cout << "C = A*B = " << C << endl;
 
 }
