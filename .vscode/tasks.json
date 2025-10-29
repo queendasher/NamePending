@@ -57,7 +57,7 @@
       },
       "group": {
         "kind": "build",
-        "isDefault": true
+        "isDefault": false
       },
       "problemMatcher": "$gcc",
       "dependsOn": "CMake: Configure"
@@ -127,11 +127,14 @@
       "type": "cmake",
       "command": "build",
       "targets": [
-        //"bla",
         "all"
       ],
       "problemMatcher": [],
-      "dependsOn": "CMake: Configure"
+      "dependsOn": "CMake: Configure",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
     }
   ]
 }

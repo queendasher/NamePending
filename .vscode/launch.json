@@ -8,7 +8,7 @@
         "name": "Execute /build/bin/demo",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/bin/demo",
+        "program": "${workspaceFolder}/build/test_lapack",
         "cwd": "${workspaceFolder}",
         "MIMode": "gdb",
         "externalConsole": false,
