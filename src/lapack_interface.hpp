@@ -5,6 +5,7 @@
 #include <string>
 
 #include "vector.hpp"
+#include "matrix.hpp"
 
 // Already included via vector.hpp->mathlib.hpp
 //#include <complex>
@@ -59,7 +60,6 @@ namespace Mathlib
   // doublereal *b, integer *ldb, doublereal *beta, doublereal *c__, 
   // integer *ldc);
 
-  /*  
   // c = a*b
   template <ORDERING OA, ORDERING OB>
   void multMatMatLapack (MatrixView<double, OA> a,
@@ -69,19 +69,19 @@ namespace Mathlib
     char transa_ = (OA == ColMajor) ? 'N' : 'T';
     char transb_ = (OB == ColMajor) ? 'N' : 'T'; 
   
-    integer n = c.rows();
-    integer m = c.cols();
-    integer k = a.dist();
+    integer n = c.Rows();
+    integer m = c.Cols();
+    integer k = a.Dist();
   
     double alpha = 1.0;
     double beta = 0;
-    integer lda = std::max(a.dist(), 1ul);
-    integer ldb = std::max(b.dist(), 1ul);
-    integer ldc = std::max(c.dist(), 1ul);
+    integer lda = std::max(a.Dist(), 1ul);
+    integer ldb = std::max(b.Dist(), 1ul);
+    integer ldc = std::max(c.Dist(), 1ul);
 
     int err =
-      dgemm_ (&transa_, &transb_, &n, &m, &k, &alpha, 
-              a.Data(), &lda, b.Data(), &ldb, &beta, c.Data(), &ldc);
+      dgemm_(&transa_, &transb_, &n, &m, &k, &alpha, 
+            a.Data(), &lda, b.Data(), &ldb, &beta, c.Data(), &ldc);
 
     if (err != 0)
       throw std::runtime_error(std::string("MultMatMat got error "+std::to_string(err)));
@@ -92,9 +92,9 @@ namespace Mathlib
                         MatrixView<double, OB> b,
                         MatrixView<double, RowMajor> c)
   {
-    multMatMatLapack (trans(b), trans(a), trans(c));
+    multMatMatLapack(b.Transpose(), a.Transpose(), c.Transpose());
   }
-  */
+
 
   
 

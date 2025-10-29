@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <vector.hpp>
+#include <matrix.hpp>
 #include <lapack_interface.hpp>
 
 
@@ -10,20 +11,20 @@ using namespace std;
 
 int main()
 {
-  Vector<double> x(5);
-  Vector<double> y(5);
+	size_t n = 5;
+	Matrix<double, RowMajor> A(n,n);
+	Matrix<double, ColMajor> B(n,n);
 
-  for (int i = 0; i < x.Size(); ++i)
-    {
-      x(i) = i;
-      y(i) = 2;
-    }
+	for(size_t i = 0; i < n; ++i)
+	for(size_t j = 0; j < n; ++j) {
+		A(i,j) = i + (j*n);
+		B(i,j) = i + (j*n);
+	}
 
-  cout << "x = " << x << endl;
-  cout << "y = " << y << endl;
-  
-  addVectorLapack (2, x, y);  
-  cout << "y+2*x = " << y << endl;
+	Matrix<double, RowMajor> C(n,n);
+	multMatMatLapack(A, B, C);
+	cout << "C = A*B = " << C << endl;
+
 }
 
   
