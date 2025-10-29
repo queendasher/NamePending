@@ -21,6 +21,8 @@ int main()
 		B(i,j) = i + (j*n);
 	}
 
+	cout << "A = " << A << endl;
+	cout << "B = " << B << endl;
 	Matrix<double, RowMajor> C(n,n);
 	multMatMatLapack(A, B, C);
 	cout << "C = A*B = " << C << endl;

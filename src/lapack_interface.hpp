@@ -88,7 +88,7 @@ namespace Mathlib
   }
                        
   template <ORDERING OA, ORDERING OB>
-  int multMatMatLapack (MatrixView<double, OA> a,
+  void multMatMatLapack (MatrixView<double, OA> a,
                         MatrixView<double, OB> b,
                         MatrixView<double, RowMajor> c)
   {
@@ -97,8 +97,7 @@ namespace Mathlib
 
 
   
-
-  /*
+  // LU decomposition and linear system solver
   template <ORDERING ORD>
   class LapackLU {
     Matrix <double, ORD> a;
@@ -158,7 +157,6 @@ namespace Mathlib
     // Matrix<double,ORD> UFactor() const { ... }
     // Matrix<double,ORD> PFactor() const { ... }
   };
-  */ 
 
   
 }

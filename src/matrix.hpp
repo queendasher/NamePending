@@ -7,6 +7,9 @@
 #include <type_traits>
 
 namespace Mathlib{
+    class T_Lapack { };
+    static constexpr T_Lapack Lapack;
+
     enum ORDERING { ColMajor, RowMajor };
     template <typename T, ORDERING ORD = ColMajor>
     class MatrixView : public MatExpr<MatrixView<T, ORD>> {
