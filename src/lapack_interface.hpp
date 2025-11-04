@@ -6,9 +6,6 @@
 
 #include "matrix.hpp"
 
-// Already included via vector.hpp->mathlib.hpp
-//#include <complex>
-
 typedef int integer;
 typedef integer logical;
 typedef float real;
@@ -33,13 +30,13 @@ namespace Mathlib
 {
 
 
-  // BLAS-1 functions:
+	// BLAS-1 functions:
 
-  /*
-    int daxpy_(integer *n, doublereal *da, doublereal *dx, 
-    integer *incx, doublereal *dy, integer *incy);
-  */
-  // y += alpha x
+	/*
+		int daxpy_(integer *n, doublereal *da, doublereal *dx, 
+		integer *incx, doublereal *dy, integer *incy);
+	*/
+	// y += alpha x
 	template <typename SX, typename SY>
 	void AddVectorLapack (double alpha, VectorView<double,SX> x, VectorView<double,SY> y)
 	{
@@ -104,11 +101,11 @@ namespace Mathlib
 		
 	public:
 		LapackLU (Matrix<double,ORD> _a)
-		: a(std::move(_a)), ipiv(a.rows()) {
-		integer m = a.rows();
+		: a(std::move(_a)), ipiv(a.Rows()) {
+		integer m = a.Rows();
 		if (m == 0) return;
-		integer n = a.cols();
-		integer lda = a.dist();
+		integer n = a.Cols();
+		integer lda = a.Dist();
 		integer info;
 		
 		// int dgetrf_(integer *m, integer *n, doublereal *a, 
@@ -120,9 +117,9 @@ namespace Mathlib
 		// b overwritten with A^{-1} b
 		void Solve (VectorView<double> b) const {
 		char transa =  (ORD == ColMajor) ? 'N' : 'T';
-		integer n = a.rows();
+		integer n = a.Rows();
 		integer nrhs = 1;
-		integer lda = a.dist();
+		integer lda = a.Dist();
 		integer ldb = b.size();
 		integer info;
 

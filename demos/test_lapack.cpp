@@ -34,7 +34,7 @@ int main()
 			cout << "Lapack Benchmarking: " << endl;
 			auto start = std::chrono::high_resolution_clock::now();
 			for (size_t i = 0; i < runs; ++i)
-				multMatMatLapack(A, B, C);
+				C = A * B | Lapack;
 			auto end = std::chrono::high_resolution_clock::now();
 			double time = std::chrono::duration<double>(end-start).count();
 					

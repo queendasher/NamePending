@@ -44,7 +44,7 @@ namespace Mathlib
 
 	public:
 		VecExprSum(E1 _a, E2 _b) : a(_a), b(_b) { 
-			if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match in sum.");
+			// if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match in sum.");
 		}
 
 		auto operator()(size_t i) const { return a(i) + b(i); }
@@ -65,7 +65,7 @@ namespace Mathlib
 
 	public:
 		VecExprSub(E1 _a, E2 _b) : a(_a), b(_b) {
-			if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match in subtraction.");
+			// if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match in subtraction.");
 		}
 
 		auto operator()(size_t i) const { return a(i) - b(i); }
@@ -103,7 +103,7 @@ namespace Mathlib
 
 	public:
 		VecExprMul(E1 _a, E2 _b) : a(_a), b(_b) {
-			if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match in multiplication.");
+			// if (a.Size() != b.Size()) throw std::runtime_error("Vector sizes do not match in multiplication.");
 		}
 
 		auto operator()(size_t i) const { return a(i) * b(i); }

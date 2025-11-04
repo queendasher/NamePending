@@ -6,9 +6,13 @@ The library provides template classes **Vector**, **Matrix**, **Fraction** and *
 
 ## Installation
 
-install it via git-clone:
+You can clone the repo via git-clone:
 
     git clone https://github.com/queendasher/NamePending.git
+
+Or install the python package via:
+
+    pip install git+https://github.com/queendasher/NamePending.git
 
 
 To configure and build some tests do
@@ -24,15 +28,24 @@ To configure and build some tests do
 
 To use NamePending in your code, set the compiler include path properly, and include the header files
 
-    #include "../src/fraction.hpp"
+    #include "../src/vector.hpp"
     #include "../src/matrix.hpp"
+
+For faster Matrix operations, an interface with Lapack is implemented. To use these features, include
+
+    #include "../src/lapack_interface.hpp"
+
+An interface with Python using pybind11 is also provided for Matrix and Vector. After installing with pip, use
+
+    import ASC.soft.bla
+
+See the "Using NamePending in Python" section for more information.
 
 All objects are implemented in the namespace Mathlib. To use them with less typing, you can set
 
     namespace mLib = Mathlib;
 
 or even
-
     
     using namespace Mathlib;
 
@@ -65,12 +78,7 @@ for(size_t i = 1; i <= n; ++i)
 Matrix product = m1 * m2;
 ```
 
-You can extract a row or a column from a matrix:
+For a more in-depth look at features, see the individual sections for each class.
 
-```cpp
-// Todo: Implement row extraction
-```
-
-TODO ...  
 
    
