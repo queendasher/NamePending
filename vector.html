@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Welcome to NamePending’s documentation! &#8212; Introduction to Scientific Computing</title>
+    <title>The Vector class &#8212; Introduction to Scientific Computing</title>
   
   
   
@@ -57,12 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'vector';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The Vector class" href="vector.html" />
+    <link rel="next" title="The Matrix class" href="matrix.html" />
+    <link rel="prev" title="Welcome to NamePending’s documentation!" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -125,8 +124,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -145,7 +142,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="intro.html">
   
   
   
@@ -176,14 +173,14 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
                     Welcome to NamePending’s documentation!
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="vector.html">The Vector class</a></li>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The Vector class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="matrix.html">The Matrix class</a></li>
 </ul>
 
@@ -254,7 +251,7 @@
       
       
       
-      <li><a href="_sources/intro.md" target="_blank"
+      <li><a href="_sources/vector.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -338,7 +335,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Welcome to NamePending’s documentation!</h1>
+    <h1>The Vector class</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -348,8 +345,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-namepending">Using NamePending</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-vector-object">Creating a Vector object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations">Arithmetic operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-functions">Other functions</a></li>
 </ul>
             </nav>
         </div>
@@ -361,79 +359,64 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-namepending-s-documentation">
-<h1>Welcome to NamePending’s documentation!<a class="headerlink" href="#welcome-to-namepending-s-documentation" title="Link to this heading">#</a></h1>
-<p>NamePending is a C++ library for basic linear algebra operations.
-The library provides template classes <strong>Vector</strong>, <strong>Matrix</strong>, <strong>Fraction</strong> and <strong>Polynomial</strong>.</p>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<p>You can clone the repo via git-clone:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/queendasher/NamePending.git
-</pre></div>
-</div>
-<p>Or install the python package via:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install git+https://github.com/queendasher/NamePending.git
-</pre></div>
-</div>
-<p>To configure and build some tests do</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>cd NamePending
-mkdir build
-cd build
-cmake ..
-make
+  <section class="tex2jax_ignore mathjax_ignore" id="the-vector-class">
+<h1>The Vector class<a class="headerlink" href="#the-vector-class" title="Link to this heading">#</a></h1>
+<p>With the Vector class you may create any Vector of size and perform operations on them. An interface to Lapack is implemented, enabling very efficient computations.</p>
+<section id="creating-a-vector-object">
+<h2>Creating a Vector object<a class="headerlink" href="#creating-a-vector-object" title="Link to this heading">#</a></h2>
+<p>Vector uses template parameters.</p>
+<ul class="simple">
+<li><p><strong>typename T:</strong> Set data type of stored data. Custom data types are incompatible with Lapack or Python interfacing.</p></li>
+<li><p><strong>typename TDIST:</strong> Choose the distance between two data entries in the memory. Default is <code class="docutils literal notranslate"><span class="pre">std::integral_constant&lt;1&gt;</span></code>.</p></li>
+</ul>
+<p>Create a double-Vector of size 4:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="n">Vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="n">vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">24</span><span class="w"> </span><span class="c1">// Overwrite all elements with 24</span>
 </pre></div>
 </div>
 </section>
-<section id="using-namepending">
-<h2>Using NamePending<a class="headerlink" href="#using-namepending" title="Link to this heading">#</a></h2>
-<p>To use NamePending in your code, set the compiler include path properly, and include the header files</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#include &quot;../src/vector.hpp&quot;
-#include &quot;../src/matrix.hpp&quot;
+<section id="arithmetic-operations">
+<h2>Arithmetic operations<a class="headerlink" href="#arithmetic-operations" title="Link to this heading">#</a></h2>
+<p>You may permorm arithmetic operations on Vector objects with operator overloads. Scalar multiplication is currently only supported for the double type.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="n">Vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec1</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="n">Vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vec2</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="n">Vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+
+<span class="c1">// Fill vec1, vec2 with data...</span>
+
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vec2</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">vec2</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec1</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">vec1</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">dotProd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Dot</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span><span class="w"> </span><span class="n">vec2</span><span class="p">);</span>
+<span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">VecMul</span><span class="p">(</span><span class="n">vec1</span><span class="p">,</span><span class="w"> </span><span class="n">vec2</span><span class="p">);</span><span class="w"> </span><span class="c1">// Element-wise multiplication</span>
 </pre></div>
 </div>
-<p>For faster Matrix operations, an interface with Lapack is implemented. To use these features, include</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#include &quot;../src/lapack_interface.hpp&quot;
+<p>Operator overloads are implemented via expression templates using CRTP, enabling comfortable chaining of operations without incurring additional computational or memory cost.</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vec2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vec1</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>An interface with Python using pybind11 is also provided for Matrix and Vector. After installing with pip, use</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import ASC.soft.bla
-</pre></div>
-</div>
-<p>See the “Using NamePending in Python” section for more information.</p>
-<p>All objects are implemented in the namespace Mathlib. To use them with less typing, you can set</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>namespace mLib = Mathlib;
-</pre></div>
-</div>
-<p>or even</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>using namespace Mathlib;
-</pre></div>
-</div>
-<p>You can create vectors and compute with vectors like:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="n">y</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="n">z</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">Size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
-<span class="w">   </span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
-<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0</span>
-<span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">+</span><span class="mi">3</span><span class="o">*</span><span class="n">y</span><span class="p">;</span>
-<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;z = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>You can create matrices and compute with matrices like:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
-<span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
-<span class="n">Matrix</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">m2</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
-<span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span>
-<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">j</span><span class="p">)</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">        </span><span class="n">m1</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5</span><span class="p">;</span>
-<span class="w">        </span><span class="n">m2</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.0</span><span class="p">;</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="n">Matrix</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m2</span><span class="p">;</span>
-</pre></div>
-</div>
-<p>For a more in-depth look at features, see the individual sections for each class.</p>
 </section>
-<div class="toctree-wrapper compound">
+<section id="other-functions">
+<h2>Other functions<a class="headerlink" href="#other-functions" title="Link to this heading">#</a></h2>
+<p>Vector provides functions for creating views containing certain elements of the original vector.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Range</span></code>-function creates a sub-view of the vector from [<code class="docutils literal notranslate"><span class="pre">begin</span></code>,<code class="docutils literal notranslate"><span class="pre">end</span></code>):</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="c1">// View containing the elements with index 1 and 2:</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">rangeView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="p">);</span>
+</pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Slice</span></code>-function creates a sub-view containing every <code class="docutils literal notranslate"><span class="pre">n</span></code>-th element starting with <code class="docutils literal notranslate"><span class="pre">start</span></code>:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="c1">// View containing the elements with index 1 and 3:</span>
+<span class="k">auto</span><span class="w"> </span><span class="n">sliceView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vec</span><span class="p">.</span><span class="n">Slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -466,12 +449,21 @@ make
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to NamePending’s documentation!</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="vector.html"
+       href="matrix.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The Vector class</p>
+        <p class="prev-next-title">The Matrix class</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -491,8 +483,9 @@ make
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-namepending">Using NamePending</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-vector-object">Creating a Vector object</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arithmetic-operations">Arithmetic operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-functions">Other functions</a></li>
 </ul>
   </nav></div>
 

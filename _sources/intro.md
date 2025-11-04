@@ -1,40 +1,53 @@
-# Welcome to ASC-bla's documentation!
+# Welcome to NamePending's documentation!
 
 
-ASC-bla is a C++ library for basic linear algebra operations.
-The library provides template classes **Vector** and **Matrix**.
+NamePending is a C++ library for basic linear algebra operations.
+The library provides template classes **Vector**, **Matrix**, **Fraction** and **Polynomial**.
 
 ## Installation
 
-install it via git-clone:
+You can clone the repo via git-clone:
 
-    git clone https://github.com/TUWien-ASC/ASC-bla.git
+    git clone https://github.com/queendasher/NamePending.git
+
+Or install the python package via:
+
+    pip install git+https://github.com/queendasher/NamePending.git
 
 
 To configure and build some tests do
 
-    cd ASC-bla
+    cd NamePending
     mkdir build
     cd build
     cmake ..
     make
     
 
-## Using ASC-bla
+## Using NamePending
 
-To use ASC-bla in your code, set the compiler include path properly, and include the header files
+To use NamePending in your code, set the compiler include path properly, and include the header files
 
-    #include <vector.h>
-    #include <matrix.h>
+    #include "../src/vector.hpp"
+    #include "../src/matrix.hpp"
 
-All objects are implemented in the namespace ASC_bla. To use them with less typing, you can set
+For faster Matrix operations, an interface with Lapack is implemented. To use these features, include
 
-    namespace bla = ASC_bla;
+    #include "../src/lapack_interface.hpp"
+
+An interface with Python using pybind11 is also provided for Matrix and Vector. After installing with pip, use
+
+    import ASC.soft.bla
+
+See the "Using NamePending in Python" section for more information.
+
+All objects are implemented in the namespace Mathlib. To use them with less typing, you can set
+
+    namespace mLib = Mathlib;
 
 or even
-
     
-    using namespace ASC_bla;
+    using namespace Mathlib;
 
     
 
@@ -50,24 +63,22 @@ z = x+3*y;
 cout << "z = " << z << endl;
 ```
 
-For matrices you can choose between row-major (`RowMajor`) or column-major (`ColMajor`) storage,
-default is row-major.
+You can create matrices and compute with matrices like:
 
 ```cpp
-Matrix<double,RowMajor> m1(5,3), m2(3,3);
-for (int i = 0; i < m1.Height(); i++)
-  for (int j = 0; j < m1.Width(); j++)
-    m1(i,j) = i+j;
-m2 = 3.7;
+size_t n = 3;
+Matrix<double> m1(n, n);
+Matrix<double> m2(n, n);
+for(size_t i = 1; i <= n; ++i)
+    for(size_t j = 1; j <= n; ++j)
+    {
+        m1(i, j) = 1.5;
+        m2(i, j) = 2.0;
+    }
 Matrix product = m1 * m2;
 ```
 
-You can extract a row or a column from a matrix:
+For a more in-depth look at features, see the individual sections for each class.
 
-```cpp
-Vector col1 = product.Col(1);
-```
-
-some changes ...  
 
    
