@@ -3,6 +3,9 @@
 
 format: jb-book
 root: intro.md
+chapters:
+- file: vector.md
+- file: matrix.md
 
 
 
