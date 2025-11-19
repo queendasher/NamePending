@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
     {
-        "name": "Execute /build/bin/demo",
+        "name": "Execute /build/demo",
         "type": "cppdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/build/test_lapack",
+        "program": "${workspaceFolder}/build/demos/demo",
         "cwd": "${workspaceFolder}",
         "MIMode": "gdb",
         "externalConsole": false,

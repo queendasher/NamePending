@@ -49,6 +49,13 @@ namespace Mathlib{
             return *this;
         }
 
+        // Assignment from multiplication of two matrices
+        template <typename T1, typename T2, ORDERING OA, ORDERING OB>
+        MatrixView& operator=(const MatExprMul<MatrixView<T1, OA>, MatrixView<T2, OB>>& expr) {
+            AddMatMat(expr.Left(), expr.Right(), *this);
+            return *this;
+        }
+
         // Assignment from Lapack multiplication
         template <typename TA, typename TB, ORDERING OA, ORDERING OB>
         MatrixView& operator=(const LapackMultExpr<TA, TB, OA, OB>& other) {
@@ -319,5 +326,6 @@ namespace Mathlib{
 }
 
 #include "lapack_interface.hpp"
+#include "matrix_simd_ops.hpp"
 
 #endif

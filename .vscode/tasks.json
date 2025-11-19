@@ -33,8 +33,8 @@
         ".",
         "-B",
         "build",
-        //"-DCMAKE_BUILD_TYPE=Debug"
-        "-DCMAKE_BUILD_TYPE=Release"
+        "-DCMAKE_BUILD_TYPE=Debug"
+        //"-DCMAKE_BUILD_TYPE=Release"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -48,7 +48,7 @@
         "--build",
         "build",
         "--config",
-        "Release",
+        "Debug",
         "-v",
         "--target",
         "demo"
@@ -58,7 +58,7 @@
       },
       "group": {
         "kind": "build",
-        "isDefault": false
+        "isDefault": true
       },
       "problemMatcher": "$gcc",
       "dependsOn": "CMake: Configure"
@@ -124,7 +124,7 @@
       "problemMatcher": []
     },
     {
-      "label": "CMake: Build Pybind Module",
+      "label": "CMake: Build PyBind",
       "type": "cmake",
       "command": "build",
       "targets": [
@@ -134,7 +134,7 @@
       "dependsOn": "CMake: Configure",
       "group": {
         "kind": "build",
-        "isDefault": true
+        "isDefault": false
       }
     }
   ]
