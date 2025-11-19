@@ -1,0 +1,3 @@
+[submodule "NamePending-HPC"]
+	path = NamePending-HPC
+	url = https://github.com/queendasher/NamePending-HPC.git
