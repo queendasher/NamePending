@@ -15,9 +15,19 @@ int main() {
     for (size_t i = 0; i < rows; ++i)
         for (size_t j = 0; j < cols; ++j) {
             m1(i, j) = i + j + 1;
+            m2(i, j) = i + j + 2;
         }
 
     res = m1 * m2;
+
+    
+    cout << "m1:" << endl;
+    cout << m1 << endl;
+
+    cout << "m2:" << endl;
+    cout << m2 << endl;
+
+    cout << "\nres:" << endl;
     cout << res << endl;
 }
 
