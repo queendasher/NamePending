@@ -119,24 +119,1016 @@
 6 0 th1 thds a9 "Thread 1"
 6 0 th2 thds a9 "Thread 2"
 6 0 th3 thds a9 "Thread 3"
-5 timer0 thdstate "timer one"  "0 1 0"
-12 2.29694 thdstate th0 timer0 idx 
-13 2.41289 thdstate th0 
-12 2.41375 thdstate th0 timer0 idx 
-13 2.45916 thdstate th0 
-12 2.46002 thdstate th0 timer0 idx 
-13 2.50547 thdstate th0 
-12 2.50638 thdstate th0 timer0 idx 
-13 2.54178 thdstate th0 
-12 2.54267 thdstate th0 timer0 idx 
-13 2.54797 thdstate th0 
-12 2.54824 thdstate th0 timer0 idx 
-13 2.55321 thdstate th0 
-12 2.55351 thdstate th0 timer0 idx 
-13 2.56057 thdstate th0 
-12 2.29875 thdstate th1 timer0 idx 
-13 2.66037 thdstate th1 
-12 2.35116 thdstate th2 timer0 idx 
-13 2.6688 thdstate th2 
-12 2.29816 thdstate th3 timer0 idx 
-13 2.59142 thdstate th3 
+6 0 th4 thds a9 "Thread 4"
+6 0 th5 thds a9 "Thread 5"
+6 0 th6 thds a9 "Thread 6"
+6 0 th7 thds a9 "Thread 7"
+5 timer0 thdstate " "  "1 0 0"
+12 10.562 thdstate th0 timer0 idx 
+13 71.2856 thdstate th0 
+12 71.286 thdstate th0 timer0 idx 
+13 83.4676 thdstate th0 
+12 83.4686 thdstate th0 timer0 idx 
+13 93.5459 thdstate th0 
+12 93.5467 thdstate th0 timer0 idx 
+13 106.923 thdstate th0 
+12 106.924 thdstate th0 timer0 idx 
+13 121.123 thdstate th0 
+12 121.124 thdstate th0 timer0 idx 
+13 131.295 thdstate th0 
+12 131.296 thdstate th0 timer0 idx 
+13 147.527 thdstate th0 
+12 147.528 thdstate th0 timer0 idx 
+13 165.766 thdstate th0 
+12 165.767 thdstate th0 timer0 idx 
+13 180.634 thdstate th0 
+12 180.635 thdstate th0 timer0 idx 
+13 191.49 thdstate th0 
+12 191.491 thdstate th0 timer0 idx 
+13 204.726 thdstate th0 
+12 204.727 thdstate th0 timer0 idx 
+13 220.036 thdstate th0 
+12 220.036 thdstate th0 timer0 idx 
+13 229.695 thdstate th0 
+12 229.696 thdstate th0 timer0 idx 
+13 241.251 thdstate th0 
+12 241.251 thdstate th0 timer0 idx 
+13 252.981 thdstate th0 
+12 252.982 thdstate th0 timer0 idx 
+13 267.4 thdstate th0 
+12 267.4 thdstate th0 timer0 idx 
+13 278.037 thdstate th0 
+12 278.037 thdstate th0 timer0 idx 
+13 292.291 thdstate th0 
+12 292.291 thdstate th0 timer0 idx 
+13 307.394 thdstate th0 
+12 307.395 thdstate th0 timer0 idx 
+13 320.448 thdstate th0 
+12 320.449 thdstate th0 timer0 idx 
+13 329.962 thdstate th0 
+12 329.962 thdstate th0 timer0 idx 
+13 348.651 thdstate th0 
+12 348.651 thdstate th0 timer0 idx 
+13 375.7 thdstate th0 
+12 375.7 thdstate th0 timer0 idx 
+13 394.244 thdstate th0 
+12 394.244 thdstate th0 timer0 idx 
+13 412.569 thdstate th0 
+12 412.57 thdstate th0 timer0 idx 
+13 441.799 thdstate th0 
+12 441.8 thdstate th0 timer0 idx 
+13 460.129 thdstate th0 
+12 460.13 thdstate th0 timer0 idx 
+13 484.206 thdstate th0 
+12 484.207 thdstate th0 timer0 idx 
+13 506.63 thdstate th0 
+12 506.631 thdstate th0 timer0 idx 
+13 529.089 thdstate th0 
+12 529.09 thdstate th0 timer0 idx 
+13 562 thdstate th0 
+12 562 thdstate th0 timer0 idx 
+13 597.707 thdstate th0 
+12 597.707 thdstate th0 timer0 idx 
+13 621.337 thdstate th0 
+12 621.338 thdstate th0 timer0 idx 
+13 633.085 thdstate th0 
+12 633.085 thdstate th0 timer0 idx 
+13 647.146 thdstate th0 
+12 647.146 thdstate th0 timer0 idx 
+13 658.475 thdstate th0 
+12 658.476 thdstate th0 timer0 idx 
+13 668.651 thdstate th0 
+12 668.651 thdstate th0 timer0 idx 
+13 681.707 thdstate th0 
+12 681.708 thdstate th0 timer0 idx 
+13 690.236 thdstate th0 
+12 690.236 thdstate th0 timer0 idx 
+13 699.939 thdstate th0 
+12 699.94 thdstate th0 timer0 idx 
+13 708.97 thdstate th0 
+12 708.97 thdstate th0 timer0 idx 
+13 717.052 thdstate th0 
+12 717.052 thdstate th0 timer0 idx 
+13 722.765 thdstate th0 
+12 722.765 thdstate th0 timer0 idx 
+13 729.671 thdstate th0 
+12 729.671 thdstate th0 timer0 idx 
+13 734.631 thdstate th0 
+12 734.632 thdstate th0 timer0 idx 
+13 739.584 thdstate th0 
+12 739.585 thdstate th0 timer0 idx 
+13 744.657 thdstate th0 
+12 744.657 thdstate th0 timer0 idx 
+13 749.86 thdstate th0 
+12 749.86 thdstate th0 timer0 idx 
+13 755.794 thdstate th0 
+12 755.794 thdstate th0 timer0 idx 
+13 761.968 thdstate th0 
+12 761.969 thdstate th0 timer0 idx 
+13 766.673 thdstate th0 
+12 766.673 thdstate th0 timer0 idx 
+13 771.387 thdstate th0 
+12 771.387 thdstate th0 timer0 idx 
+13 776.091 thdstate th0 
+12 776.091 thdstate th0 timer0 idx 
+13 781.162 thdstate th0 
+12 781.163 thdstate th0 timer0 idx 
+13 785.991 thdstate th0 
+12 785.991 thdstate th0 timer0 idx 
+13 790.834 thdstate th0 
+12 790.834 thdstate th0 timer0 idx 
+13 795.989 thdstate th0 
+12 795.989 thdstate th0 timer0 idx 
+13 801.038 thdstate th0 
+12 801.039 thdstate th0 timer0 idx 
+13 805.895 thdstate th0 
+12 805.896 thdstate th0 timer0 idx 
+13 810.988 thdstate th0 
+12 810.988 thdstate th0 timer0 idx 
+13 815.971 thdstate th0 
+12 815.971 thdstate th0 timer0 idx 
+13 820.865 thdstate th0 
+12 820.866 thdstate th0 timer0 idx 
+13 824.912 thdstate th0 
+12 10.5638 thdstate th1 timer0 idx 
+13 71.2665 thdstate th1 
+12 71.2672 thdstate th1 timer0 idx 
+13 87.304 thdstate th1 
+12 87.3047 thdstate th1 timer0 idx 
+13 97.0833 thdstate th1 
+12 97.0844 thdstate th1 timer0 idx 
+13 107.756 thdstate th1 
+12 107.756 thdstate th1 timer0 idx 
+13 120.209 thdstate th1 
+12 120.21 thdstate th1 timer0 idx 
+13 131.1 thdstate th1 
+12 131.101 thdstate th1 timer0 idx 
+13 143.748 thdstate th1 
+12 143.749 thdstate th1 timer0 idx 
+13 157.208 thdstate th1 
+12 157.209 thdstate th1 timer0 idx 
+13 168.874 thdstate th1 
+12 168.874 thdstate th1 timer0 idx 
+13 179.542 thdstate th1 
+12 179.542 thdstate th1 timer0 idx 
+13 189.937 thdstate th1 
+12 189.937 thdstate th1 timer0 idx 
+13 199.937 thdstate th1 
+12 199.937 thdstate th1 timer0 idx 
+13 212.813 thdstate th1 
+12 212.814 thdstate th1 timer0 idx 
+13 224.43 thdstate th1 
+12 224.43 thdstate th1 timer0 idx 
+13 235.428 thdstate th1 
+12 235.429 thdstate th1 timer0 idx 
+13 246.611 thdstate th1 
+12 246.612 thdstate th1 timer0 idx 
+13 255.394 thdstate th1 
+12 255.395 thdstate th1 timer0 idx 
+13 265.745 thdstate th1 
+12 265.746 thdstate th1 timer0 idx 
+13 276.413 thdstate th1 
+12 276.414 thdstate th1 timer0 idx 
+13 287.996 thdstate th1 
+12 287.998 thdstate th1 timer0 idx 
+13 297.453 thdstate th1 
+12 297.454 thdstate th1 timer0 idx 
+13 308.728 thdstate th1 
+12 308.729 thdstate th1 timer0 idx 
+13 318.211 thdstate th1 
+12 318.213 thdstate th1 timer0 idx 
+13 327.233 thdstate th1 
+12 327.234 thdstate th1 timer0 idx 
+13 338.055 thdstate th1 
+12 338.056 thdstate th1 timer0 idx 
+13 348.31 thdstate th1 
+12 348.311 thdstate th1 timer0 idx 
+13 359.346 thdstate th1 
+12 359.347 thdstate th1 timer0 idx 
+13 370.677 thdstate th1 
+12 370.678 thdstate th1 timer0 idx 
+13 381.092 thdstate th1 
+12 381.093 thdstate th1 timer0 idx 
+13 392.032 thdstate th1 
+12 392.033 thdstate th1 timer0 idx 
+13 401.238 thdstate th1 
+12 401.239 thdstate th1 timer0 idx 
+13 409.654 thdstate th1 
+12 409.654 thdstate th1 timer0 idx 
+13 419.122 thdstate th1 
+12 419.122 thdstate th1 timer0 idx 
+13 432.772 thdstate th1 
+12 432.773 thdstate th1 timer0 idx 
+13 442.245 thdstate th1 
+12 442.246 thdstate th1 timer0 idx 
+13 455.237 thdstate th1 
+12 455.237 thdstate th1 timer0 idx 
+13 469.414 thdstate th1 
+12 469.415 thdstate th1 timer0 idx 
+13 481.495 thdstate th1 
+12 481.496 thdstate th1 timer0 idx 
+13 491.774 thdstate th1 
+12 491.775 thdstate th1 timer0 idx 
+13 502.734 thdstate th1 
+12 502.735 thdstate th1 timer0 idx 
+13 513.507 thdstate th1 
+12 513.508 thdstate th1 timer0 idx 
+13 523.83 thdstate th1 
+12 523.831 thdstate th1 timer0 idx 
+13 533.095 thdstate th1 
+12 533.096 thdstate th1 timer0 idx 
+13 539.715 thdstate th1 
+12 539.716 thdstate th1 timer0 idx 
+13 548.779 thdstate th1 
+12 548.78 thdstate th1 timer0 idx 
+13 556.782 thdstate th1 
+12 556.783 thdstate th1 timer0 idx 
+13 562.976 thdstate th1 
+12 562.977 thdstate th1 timer0 idx 
+13 575.598 thdstate th1 
+12 575.599 thdstate th1 timer0 idx 
+13 585.115 thdstate th1 
+12 585.115 thdstate th1 timer0 idx 
+13 595.258 thdstate th1 
+12 595.258 thdstate th1 timer0 idx 
+13 609.668 thdstate th1 
+12 609.669 thdstate th1 timer0 idx 
+13 614.909 thdstate th1 
+12 614.91 thdstate th1 timer0 idx 
+13 622.002 thdstate th1 
+12 622.003 thdstate th1 timer0 idx 
+13 631.729 thdstate th1 
+12 631.731 thdstate th1 timer0 idx 
+13 650.618 thdstate th1 
+12 650.619 thdstate th1 timer0 idx 
+13 656.958 thdstate th1 
+12 656.958 thdstate th1 timer0 idx 
+13 672.478 thdstate th1 
+12 672.479 thdstate th1 timer0 idx 
+13 682.758 thdstate th1 
+12 682.759 thdstate th1 timer0 idx 
+13 690.225 thdstate th1 
+12 690.226 thdstate th1 timer0 idx 
+13 697.789 thdstate th1 
+12 697.789 thdstate th1 timer0 idx 
+13 705.169 thdstate th1 
+12 705.17 thdstate th1 timer0 idx 
+13 720.121 thdstate th1 
+12 720.122 thdstate th1 timer0 idx 
+13 729.472 thdstate th1 
+12 10.5636 thdstate th2 timer0 idx 
+13 71.2003 thdstate th2 
+12 71.2012 thdstate th2 timer0 idx 
+13 87.3545 thdstate th2 
+12 87.3554 thdstate th2 timer0 idx 
+13 100.494 thdstate th2 
+12 100.494 thdstate th2 timer0 idx 
+13 111.167 thdstate th2 
+12 111.168 thdstate th2 timer0 idx 
+13 120.564 thdstate th2 
+12 120.565 thdstate th2 timer0 idx 
+13 131.208 thdstate th2 
+12 131.209 thdstate th2 timer0 idx 
+13 144.82 thdstate th2 
+12 144.821 thdstate th2 timer0 idx 
+13 159.156 thdstate th2 
+12 159.157 thdstate th2 timer0 idx 
+13 172.296 thdstate th2 
+12 172.297 thdstate th2 timer0 idx 
+13 183.166 thdstate th2 
+12 183.167 thdstate th2 timer0 idx 
+13 199.277 thdstate th2 
+12 199.277 thdstate th2 timer0 idx 
+13 212.782 thdstate th2 
+12 212.783 thdstate th2 timer0 idx 
+13 223.751 thdstate th2 
+12 223.751 thdstate th2 timer0 idx 
+13 238.02 thdstate th2 
+12 238.021 thdstate th2 timer0 idx 
+13 250.913 thdstate th2 
+12 250.914 thdstate th2 timer0 idx 
+13 262.772 thdstate th2 
+12 262.773 thdstate th2 timer0 idx 
+13 270.421 thdstate th2 
+12 270.422 thdstate th2 timer0 idx 
+13 281.215 thdstate th2 
+12 281.216 thdstate th2 timer0 idx 
+13 293.117 thdstate th2 
+12 293.118 thdstate th2 timer0 idx 
+13 299.871 thdstate th2 
+12 299.872 thdstate th2 timer0 idx 
+13 305.349 thdstate th2 
+12 305.35 thdstate th2 timer0 idx 
+13 317.902 thdstate th2 
+12 317.903 thdstate th2 timer0 idx 
+13 329.321 thdstate th2 
+12 329.322 thdstate th2 timer0 idx 
+13 345.251 thdstate th2 
+12 345.252 thdstate th2 timer0 idx 
+13 355.787 thdstate th2 
+12 355.788 thdstate th2 timer0 idx 
+13 369.219 thdstate th2 
+12 369.22 thdstate th2 timer0 idx 
+13 386.531 thdstate th2 
+12 386.532 thdstate th2 timer0 idx 
+13 393.761 thdstate th2 
+12 393.762 thdstate th2 timer0 idx 
+13 406.433 thdstate th2 
+12 406.434 thdstate th2 timer0 idx 
+13 419.104 thdstate th2 
+12 419.105 thdstate th2 timer0 idx 
+13 427.033 thdstate th2 
+12 427.034 thdstate th2 timer0 idx 
+13 442.811 thdstate th2 
+12 442.811 thdstate th2 timer0 idx 
+13 456.124 thdstate th2 
+12 456.125 thdstate th2 timer0 idx 
+13 469.777 thdstate th2 
+12 469.778 thdstate th2 timer0 idx 
+13 487.802 thdstate th2 
+12 487.803 thdstate th2 timer0 idx 
+13 505.192 thdstate th2 
+12 505.193 thdstate th2 timer0 idx 
+13 521.662 thdstate th2 
+12 521.663 thdstate th2 timer0 idx 
+13 536.274 thdstate th2 
+12 536.274 thdstate th2 timer0 idx 
+13 546.215 thdstate th2 
+12 546.216 thdstate th2 timer0 idx 
+13 564.1 thdstate th2 
+12 564.101 thdstate th2 timer0 idx 
+13 578.253 thdstate th2 
+12 578.254 thdstate th2 timer0 idx 
+13 587.027 thdstate th2 
+12 587.028 thdstate th2 timer0 idx 
+13 594.329 thdstate th2 
+12 594.33 thdstate th2 timer0 idx 
+13 601 thdstate th2 
+12 601.001 thdstate th2 timer0 idx 
+13 608.746 thdstate th2 
+12 608.747 thdstate th2 timer0 idx 
+13 615.285 thdstate th2 
+12 615.286 thdstate th2 timer0 idx 
+13 622.017 thdstate th2 
+12 622.017 thdstate th2 timer0 idx 
+13 633.425 thdstate th2 
+12 633.426 thdstate th2 timer0 idx 
+13 640.562 thdstate th2 
+12 640.563 thdstate th2 timer0 idx 
+13 650.151 thdstate th2 
+12 650.152 thdstate th2 timer0 idx 
+13 656.218 thdstate th2 
+12 656.219 thdstate th2 timer0 idx 
+13 666.482 thdstate th2 
+12 666.483 thdstate th2 timer0 idx 
+13 673.584 thdstate th2 
+12 673.585 thdstate th2 timer0 idx 
+13 684.479 thdstate th2 
+12 684.479 thdstate th2 timer0 idx 
+13 694.983 thdstate th2 
+12 694.984 thdstate th2 timer0 idx 
+13 703.668 thdstate th2 
+12 703.669 thdstate th2 timer0 idx 
+13 710.646 thdstate th2 
+12 710.647 thdstate th2 timer0 idx 
+13 720.666 thdstate th2 
+12 720.666 thdstate th2 timer0 idx 
+13 727.058 thdstate th2 
+12 727.059 thdstate th2 timer0 idx 
+13 741.625 thdstate th2 
+12 741.625 thdstate th2 timer0 idx 
+13 753.293 thdstate th2 
+12 753.293 thdstate th2 timer0 idx 
+13 767.055 thdstate th2 
+12 767.055 thdstate th2 timer0 idx 
+13 775.152 thdstate th2 
+12 10.6266 thdstate th3 timer0 idx 
+13 72.8022 thdstate th3 
+12 72.803 thdstate th3 timer0 idx 
+13 83.4308 thdstate th3 
+12 83.4316 thdstate th3 timer0 idx 
+13 95.1445 thdstate th3 
+12 95.1456 thdstate th3 timer0 idx 
+13 105.25 thdstate th3 
+12 105.251 thdstate th3 timer0 idx 
+13 115.657 thdstate th3 
+12 115.658 thdstate th3 timer0 idx 
+13 129.7 thdstate th3 
+12 129.701 thdstate th3 timer0 idx 
+13 138.861 thdstate th3 
+12 138.862 thdstate th3 timer0 idx 
+13 149.016 thdstate th3 
+12 149.017 thdstate th3 timer0 idx 
+13 159.79 thdstate th3 
+12 159.791 thdstate th3 timer0 idx 
+13 171.005 thdstate th3 
+12 171.006 thdstate th3 timer0 idx 
+13 181.27 thdstate th3 
+12 181.271 thdstate th3 timer0 idx 
+13 191.686 thdstate th3 
+12 191.686 thdstate th3 timer0 idx 
+13 202.114 thdstate th3 
+12 202.115 thdstate th3 timer0 idx 
+13 211.034 thdstate th3 
+12 211.036 thdstate th3 timer0 idx 
+13 228.103 thdstate th3 
+12 228.104 thdstate th3 timer0 idx 
+13 237.959 thdstate th3 
+12 237.961 thdstate th3 timer0 idx 
+13 251.529 thdstate th3 
+12 251.53 thdstate th3 timer0 idx 
+13 269.158 thdstate th3 
+12 269.158 thdstate th3 timer0 idx 
+13 277.29 thdstate th3 
+12 277.292 thdstate th3 timer0 idx 
+13 294.171 thdstate th3 
+12 294.172 thdstate th3 timer0 idx 
+13 302.453 thdstate th3 
+12 302.454 thdstate th3 timer0 idx 
+13 319.082 thdstate th3 
+12 319.082 thdstate th3 timer0 idx 
+13 330.649 thdstate th3 
+12 330.65 thdstate th3 timer0 idx 
+13 339.791 thdstate th3 
+12 339.792 thdstate th3 timer0 idx 
+13 349.481 thdstate th3 
+12 349.481 thdstate th3 timer0 idx 
+13 365.339 thdstate th3 
+12 365.34 thdstate th3 timer0 idx 
+13 382.861 thdstate th3 
+12 382.862 thdstate th3 timer0 idx 
+13 399.151 thdstate th3 
+12 399.152 thdstate th3 timer0 idx 
+13 410.278 thdstate th3 
+12 410.279 thdstate th3 timer0 idx 
+13 421.138 thdstate th3 
+12 421.139 thdstate th3 timer0 idx 
+13 431.599 thdstate th3 
+12 431.6 thdstate th3 timer0 idx 
+13 447.213 thdstate th3 
+12 447.214 thdstate th3 timer0 idx 
+13 462.779 thdstate th3 
+12 462.78 thdstate th3 timer0 idx 
+13 472.799 thdstate th3 
+12 472.8 thdstate th3 timer0 idx 
+13 486.021 thdstate th3 
+12 486.021 thdstate th3 timer0 idx 
+13 504.058 thdstate th3 
+12 504.059 thdstate th3 timer0 idx 
+13 519.547 thdstate th3 
+12 519.548 thdstate th3 timer0 idx 
+13 529.073 thdstate th3 
+12 529.074 thdstate th3 timer0 idx 
+13 539.42 thdstate th3 
+12 539.421 thdstate th3 timer0 idx 
+13 546.972 thdstate th3 
+12 546.973 thdstate th3 timer0 idx 
+13 557.49 thdstate th3 
+12 557.491 thdstate th3 timer0 idx 
+13 567.977 thdstate th3 
+12 567.978 thdstate th3 timer0 idx 
+13 574.777 thdstate th3 
+12 574.778 thdstate th3 timer0 idx 
+13 582.018 thdstate th3 
+12 582.019 thdstate th3 timer0 idx 
+13 588.614 thdstate th3 
+12 588.615 thdstate th3 timer0 idx 
+13 595.106 thdstate th3 
+12 595.107 thdstate th3 timer0 idx 
+13 601.666 thdstate th3 
+12 601.667 thdstate th3 timer0 idx 
+13 608.726 thdstate th3 
+12 608.727 thdstate th3 timer0 idx 
+13 615.091 thdstate th3 
+12 615.091 thdstate th3 timer0 idx 
+13 623.364 thdstate th3 
+12 623.365 thdstate th3 timer0 idx 
+13 629.165 thdstate th3 
+12 629.166 thdstate th3 timer0 idx 
+13 636.221 thdstate th3 
+12 636.222 thdstate th3 timer0 idx 
+13 644.98 thdstate th3 
+12 644.981 thdstate th3 timer0 idx 
+13 651.436 thdstate th3 
+12 651.436 thdstate th3 timer0 idx 
+13 658.494 thdstate th3 
+12 658.495 thdstate th3 timer0 idx 
+13 664.805 thdstate th3 
+12 664.806 thdstate th3 timer0 idx 
+13 673.582 thdstate th3 
+12 673.583 thdstate th3 timer0 idx 
+13 679.311 thdstate th3 
+12 679.312 thdstate th3 timer0 idx 
+13 690.491 thdstate th3 
+12 690.491 thdstate th3 timer0 idx 
+13 696.565 thdstate th3 
+12 696.566 thdstate th3 timer0 idx 
+13 705.485 thdstate th3 
+12 705.486 thdstate th3 timer0 idx 
+13 713.599 thdstate th3 
+12 713.599 thdstate th3 timer0 idx 
+13 722.725 thdstate th3 
+12 10.5626 thdstate th4 timer0 idx 
+13 72.9318 thdstate th4 
+12 72.9326 thdstate th4 timer0 idx 
+13 83.0346 thdstate th4 
+12 83.0353 thdstate th4 timer0 idx 
+13 98.8269 thdstate th4 
+12 98.8277 thdstate th4 timer0 idx 
+13 112.211 thdstate th4 
+12 112.212 thdstate th4 timer0 idx 
+13 122.566 thdstate th4 
+12 122.567 thdstate th4 timer0 idx 
+13 136.083 thdstate th4 
+12 136.084 thdstate th4 timer0 idx 
+13 150.583 thdstate th4 
+12 150.584 thdstate th4 timer0 idx 
+13 163.509 thdstate th4 
+12 163.51 thdstate th4 timer0 idx 
+13 176.355 thdstate th4 
+12 176.356 thdstate th4 timer0 idx 
+13 187.68 thdstate th4 
+12 187.681 thdstate th4 timer0 idx 
+13 198.916 thdstate th4 
+12 198.916 thdstate th4 timer0 idx 
+13 211.608 thdstate th4 
+12 211.609 thdstate th4 timer0 idx 
+13 223.263 thdstate th4 
+12 223.264 thdstate th4 timer0 idx 
+13 236.523 thdstate th4 
+12 236.524 thdstate th4 timer0 idx 
+13 247.336 thdstate th4 
+12 247.337 thdstate th4 timer0 idx 
+13 275.166 thdstate th4 
+12 275.167 thdstate th4 timer0 idx 
+13 297.434 thdstate th4 
+12 297.435 thdstate th4 timer0 idx 
+13 325.658 thdstate th4 
+12 325.659 thdstate th4 timer0 idx 
+13 335.332 thdstate th4 
+12 335.333 thdstate th4 timer0 idx 
+13 342.825 thdstate th4 
+12 342.826 thdstate th4 timer0 idx 
+13 351.557 thdstate th4 
+12 351.558 thdstate th4 timer0 idx 
+13 362.663 thdstate th4 
+12 362.664 thdstate th4 timer0 idx 
+13 371.791 thdstate th4 
+12 371.792 thdstate th4 timer0 idx 
+13 381.664 thdstate th4 
+12 381.665 thdstate th4 timer0 idx 
+13 389.347 thdstate th4 
+12 389.347 thdstate th4 timer0 idx 
+13 399.54 thdstate th4 
+12 399.54 thdstate th4 timer0 idx 
+13 409.852 thdstate th4 
+12 409.853 thdstate th4 timer0 idx 
+13 420.71 thdstate th4 
+12 420.711 thdstate th4 timer0 idx 
+13 430.001 thdstate th4 
+12 430.002 thdstate th4 timer0 idx 
+13 445.924 thdstate th4 
+12 445.925 thdstate th4 timer0 idx 
+13 453.75 thdstate th4 
+12 453.751 thdstate th4 timer0 idx 
+13 466.581 thdstate th4 
+12 466.582 thdstate th4 timer0 idx 
+13 486.57 thdstate th4 
+12 486.571 thdstate th4 timer0 idx 
+13 509.681 thdstate th4 
+12 509.681 thdstate th4 timer0 idx 
+13 524.589 thdstate th4 
+12 524.59 thdstate th4 timer0 idx 
+13 559.11 thdstate th4 
+12 559.112 thdstate th4 timer0 idx 
+13 583.864 thdstate th4 
+12 583.864 thdstate th4 timer0 idx 
+13 597.253 thdstate th4 
+12 597.254 thdstate th4 timer0 idx 
+13 625.235 thdstate th4 
+12 625.236 thdstate th4 timer0 idx 
+13 642.657 thdstate th4 
+12 642.657 thdstate th4 timer0 idx 
+13 650.619 thdstate th4 
+12 650.62 thdstate th4 timer0 idx 
+13 659.426 thdstate th4 
+12 659.427 thdstate th4 timer0 idx 
+13 666.296 thdstate th4 
+12 666.297 thdstate th4 timer0 idx 
+13 674.504 thdstate th4 
+12 674.504 thdstate th4 timer0 idx 
+13 680.962 thdstate th4 
+12 680.963 thdstate th4 timer0 idx 
+13 687.775 thdstate th4 
+12 687.776 thdstate th4 timer0 idx 
+13 695.381 thdstate th4 
+12 695.382 thdstate th4 timer0 idx 
+13 700.376 thdstate th4 
+12 700.376 thdstate th4 timer0 idx 
+13 705.181 thdstate th4 
+12 705.182 thdstate th4 timer0 idx 
+13 710.167 thdstate th4 
+12 710.168 thdstate th4 timer0 idx 
+13 715.197 thdstate th4 
+12 715.198 thdstate th4 timer0 idx 
+13 719.942 thdstate th4 
+12 719.942 thdstate th4 timer0 idx 
+13 725.348 thdstate th4 
+12 725.348 thdstate th4 timer0 idx 
+13 731.493 thdstate th4 
+12 731.493 thdstate th4 timer0 idx 
+13 736.388 thdstate th4 
+12 736.388 thdstate th4 timer0 idx 
+13 741.174 thdstate th4 
+12 741.174 thdstate th4 timer0 idx 
+13 747.176 thdstate th4 
+12 747.176 thdstate th4 timer0 idx 
+13 752.955 thdstate th4 
+12 752.955 thdstate th4 timer0 idx 
+13 759.975 thdstate th4 
+12 759.975 thdstate th4 timer0 idx 
+13 765.571 thdstate th4 
+12 765.571 thdstate th4 timer0 idx 
+13 770.592 thdstate th4 
+12 770.592 thdstate th4 timer0 idx 
+13 775.465 thdstate th4 
+12 775.465 thdstate th4 timer0 idx 
+13 779.809 thdstate th4 
+12 10.7097 thdstate th5 timer0 idx 
+13 71.1999 thdstate th5 
+12 71.2007 thdstate th5 timer0 idx 
+13 82.501 thdstate th5 
+12 82.5017 thdstate th5 timer0 idx 
+13 92.0172 thdstate th5 
+12 92.018 thdstate th5 timer0 idx 
+13 105.645 thdstate th5 
+12 105.645 thdstate th5 timer0 idx 
+13 116.168 thdstate th5 
+12 116.168 thdstate th5 timer0 idx 
+13 126.231 thdstate th5 
+12 126.232 thdstate th5 timer0 idx 
+13 140.385 thdstate th5 
+12 140.386 thdstate th5 timer0 idx 
+13 154.961 thdstate th5 
+12 154.962 thdstate th5 timer0 idx 
+13 164.758 thdstate th5 
+12 164.759 thdstate th5 timer0 idx 
+13 179.438 thdstate th5 
+12 179.439 thdstate th5 timer0 idx 
+13 189.975 thdstate th5 
+12 189.975 thdstate th5 timer0 idx 
+13 199.419 thdstate th5 
+12 199.42 thdstate th5 timer0 idx 
+13 214.651 thdstate th5 
+12 214.652 thdstate th5 timer0 idx 
+13 228.057 thdstate th5 
+12 228.058 thdstate th5 timer0 idx 
+13 241.243 thdstate th5 
+12 241.244 thdstate th5 timer0 idx 
+13 250.888 thdstate th5 
+12 250.889 thdstate th5 timer0 idx 
+13 259.287 thdstate th5 
+12 259.288 thdstate th5 timer0 idx 
+13 269.156 thdstate th5 
+12 269.157 thdstate th5 timer0 idx 
+13 281.117 thdstate th5 
+12 281.118 thdstate th5 timer0 idx 
+13 289.668 thdstate th5 
+12 289.669 thdstate th5 timer0 idx 
+13 303.329 thdstate th5 
+12 303.33 thdstate th5 timer0 idx 
+13 314.746 thdstate th5 
+12 314.747 thdstate th5 timer0 idx 
+13 326.397 thdstate th5 
+12 326.398 thdstate th5 timer0 idx 
+13 336.416 thdstate th5 
+12 336.417 thdstate th5 timer0 idx 
+13 346.715 thdstate th5 
+12 346.716 thdstate th5 timer0 idx 
+13 354.403 thdstate th5 
+12 354.404 thdstate th5 timer0 idx 
+13 363.332 thdstate th5 
+12 363.333 thdstate th5 timer0 idx 
+13 372.367 thdstate th5 
+12 372.368 thdstate th5 timer0 idx 
+13 381.77 thdstate th5 
+12 381.771 thdstate th5 timer0 idx 
+13 391.162 thdstate th5 
+12 391.163 thdstate th5 timer0 idx 
+13 401.884 thdstate th5 
+12 401.884 thdstate th5 timer0 idx 
+13 412.533 thdstate th5 
+12 412.534 thdstate th5 timer0 idx 
+13 421.661 thdstate th5 
+12 421.661 thdstate th5 timer0 idx 
+13 433.478 thdstate th5 
+12 433.479 thdstate th5 timer0 idx 
+13 448.217 thdstate th5 
+12 448.218 thdstate th5 timer0 idx 
+13 458.748 thdstate th5 
+12 458.749 thdstate th5 timer0 idx 
+13 468.04 thdstate th5 
+12 468.04 thdstate th5 timer0 idx 
+13 480.844 thdstate th5 
+12 480.845 thdstate th5 timer0 idx 
+13 491.12 thdstate th5 
+12 491.121 thdstate th5 timer0 idx 
+13 502.4 thdstate th5 
+12 502.402 thdstate th5 timer0 idx 
+13 513.709 thdstate th5 
+12 513.71 thdstate th5 timer0 idx 
+13 521.994 thdstate th5 
+12 521.995 thdstate th5 timer0 idx 
+13 532.07 thdstate th5 
+12 532.071 thdstate th5 timer0 idx 
+13 537.068 thdstate th5 
+12 537.069 thdstate th5 timer0 idx 
+13 547.926 thdstate th5 
+12 547.927 thdstate th5 timer0 idx 
+13 552.728 thdstate th5 
+12 552.729 thdstate th5 timer0 idx 
+13 557.557 thdstate th5 
+12 557.558 thdstate th5 timer0 idx 
+13 569.896 thdstate th5 
+12 569.897 thdstate th5 timer0 idx 
+13 578.851 thdstate th5 
+12 578.851 thdstate th5 timer0 idx 
+13 584.632 thdstate th5 
+12 584.633 thdstate th5 timer0 idx 
+13 590.019 thdstate th5 
+12 590.019 thdstate th5 timer0 idx 
+13 601.22 thdstate th5 
+12 601.22 thdstate th5 timer0 idx 
+13 608.514 thdstate th5 
+12 608.514 thdstate th5 timer0 idx 
+13 619.791 thdstate th5 
+12 619.792 thdstate th5 timer0 idx 
+13 624.646 thdstate th5 
+12 624.647 thdstate th5 timer0 idx 
+13 630.647 thdstate th5 
+12 630.648 thdstate th5 timer0 idx 
+13 638.125 thdstate th5 
+12 638.126 thdstate th5 timer0 idx 
+13 645.687 thdstate th5 
+12 645.688 thdstate th5 timer0 idx 
+13 654.456 thdstate th5 
+12 654.456 thdstate th5 timer0 idx 
+13 660.026 thdstate th5 
+12 660.026 thdstate th5 timer0 idx 
+13 664.803 thdstate th5 
+12 664.804 thdstate th5 timer0 idx 
+13 673.858 thdstate th5 
+12 673.858 thdstate th5 timer0 idx 
+13 688.897 thdstate th5 
+12 17.9308 thdstate th6 timer0 idx 
+13 71.1878 thdstate th6 
+12 71.1889 thdstate th6 timer0 idx 
+13 84.9899 thdstate th6 
+12 84.9907 thdstate th6 timer0 idx 
+13 95.4108 thdstate th6 
+12 95.4115 thdstate th6 timer0 idx 
+13 105.281 thdstate th6 
+12 105.281 thdstate th6 timer0 idx 
+13 116.237 thdstate th6 
+12 116.238 thdstate th6 timer0 idx 
+13 126.361 thdstate th6 
+12 126.361 thdstate th6 timer0 idx 
+13 138.279 thdstate th6 
+12 138.28 thdstate th6 timer0 idx 
+13 150.461 thdstate th6 
+12 150.462 thdstate th6 timer0 idx 
+13 163.415 thdstate th6 
+12 163.416 thdstate th6 timer0 idx 
+13 171.639 thdstate th6 
+12 171.64 thdstate th6 timer0 idx 
+13 184.675 thdstate th6 
+12 184.675 thdstate th6 timer0 idx 
+13 197.04 thdstate th6 
+12 197.041 thdstate th6 timer0 idx 
+13 206.915 thdstate th6 
+12 206.916 thdstate th6 timer0 idx 
+13 223.143 thdstate th6 
+12 223.144 thdstate th6 timer0 idx 
+13 232.242 thdstate th6 
+12 232.243 thdstate th6 timer0 idx 
+13 243.695 thdstate th6 
+12 243.695 thdstate th6 timer0 idx 
+13 255.622 thdstate th6 
+12 255.623 thdstate th6 timer0 idx 
+13 265.634 thdstate th6 
+12 265.635 thdstate th6 timer0 idx 
+13 276.439 thdstate th6 
+12 276.439 thdstate th6 timer0 idx 
+13 285.501 thdstate th6 
+12 285.501 thdstate th6 timer0 idx 
+13 295.364 thdstate th6 
+12 295.365 thdstate th6 timer0 idx 
+13 304.21 thdstate th6 
+12 304.211 thdstate th6 timer0 idx 
+13 314.646 thdstate th6 
+12 314.647 thdstate th6 timer0 idx 
+13 325.163 thdstate th6 
+12 325.164 thdstate th6 timer0 idx 
+13 339.752 thdstate th6 
+12 339.752 thdstate th6 timer0 idx 
+13 355.41 thdstate th6 
+12 355.411 thdstate th6 timer0 idx 
+13 375.938 thdstate th6 
+12 375.939 thdstate th6 timer0 idx 
+13 388.77 thdstate th6 
+12 388.771 thdstate th6 timer0 idx 
+13 403.153 thdstate th6 
+12 403.154 thdstate th6 timer0 idx 
+13 418.161 thdstate th6 
+12 418.162 thdstate th6 timer0 idx 
+13 434.733 thdstate th6 
+12 434.734 thdstate th6 timer0 idx 
+13 456.417 thdstate th6 
+12 456.419 thdstate th6 timer0 idx 
+13 471.733 thdstate th6 
+12 471.734 thdstate th6 timer0 idx 
+13 482.767 thdstate th6 
+12 482.768 thdstate th6 timer0 idx 
+13 489.829 thdstate th6 
+12 489.83 thdstate th6 timer0 idx 
+13 498.644 thdstate th6 
+12 498.645 thdstate th6 timer0 idx 
+13 505.887 thdstate th6 
+12 505.888 thdstate th6 timer0 idx 
+13 516.912 thdstate th6 
+12 516.913 thdstate th6 timer0 idx 
+13 531.338 thdstate th6 
+12 531.339 thdstate th6 timer0 idx 
+13 545.44 thdstate th6 
+12 545.441 thdstate th6 timer0 idx 
+13 553.762 thdstate th6 
+12 553.763 thdstate th6 timer0 idx 
+13 565.207 thdstate th6 
+12 565.208 thdstate th6 timer0 idx 
+13 571.449 thdstate th6 
+12 571.449 thdstate th6 timer0 idx 
+13 578.113 thdstate th6 
+12 578.113 thdstate th6 timer0 idx 
+13 584.624 thdstate th6 
+12 584.624 thdstate th6 timer0 idx 
+13 591.194 thdstate th6 
+12 591.194 thdstate th6 timer0 idx 
+13 598.351 thdstate th6 
+12 598.352 thdstate th6 timer0 idx 
+13 609.983 thdstate th6 
+12 609.984 thdstate th6 timer0 idx 
+13 616.645 thdstate th6 
+12 616.646 thdstate th6 timer0 idx 
+13 627.842 thdstate th6 
+12 627.843 thdstate th6 timer0 idx 
+13 634.455 thdstate th6 
+12 634.456 thdstate th6 timer0 idx 
+13 641.639 thdstate th6 
+12 641.639 thdstate th6 timer0 idx 
+13 648.546 thdstate th6 
+12 648.547 thdstate th6 timer0 idx 
+13 660.149 thdstate th6 
+12 660.15 thdstate th6 timer0 idx 
+13 667.284 thdstate th6 
+12 667.284 thdstate th6 timer0 idx 
+13 679.606 thdstate th6 
+12 679.607 thdstate th6 timer0 idx 
+13 686.587 thdstate th6 
+12 686.588 thdstate th6 timer0 idx 
+13 699.903 thdstate th6 
+12 699.903 thdstate th6 timer0 idx 
+13 706.607 thdstate th6 
+12 706.608 thdstate th6 timer0 idx 
+13 714.496 thdstate th6 
+12 714.497 thdstate th6 timer0 idx 
+13 722.652 thdstate th6 
+12 722.653 thdstate th6 timer0 idx 
+13 728.266 thdstate th6 
+12 728.266 thdstate th6 timer0 idx 
+13 732.763 thdstate th6 
+12 10.5637 thdstate th7 timer0 idx 
+13 71.1682 thdstate th7 
+12 71.171 thdstate th7 timer0 idx 
+13 81.7951 thdstate th7 
+12 81.7958 thdstate th7 timer0 idx 
+13 91.7139 thdstate th7 
+12 91.7154 thdstate th7 timer0 idx 
+13 101.736 thdstate th7 
+12 101.737 thdstate th7 timer0 idx 
+13 112.791 thdstate th7 
+12 112.792 thdstate th7 timer0 idx 
+13 122.435 thdstate th7 
+12 122.436 thdstate th7 timer0 idx 
+13 135.775 thdstate th7 
+12 135.776 thdstate th7 timer0 idx 
+13 145.64 thdstate th7 
+12 145.641 thdstate th7 timer0 idx 
+13 157.9 thdstate th7 
+12 157.901 thdstate th7 timer0 idx 
+13 170.371 thdstate th7 
+12 170.372 thdstate th7 timer0 idx 
+13 184.357 thdstate th7 
+12 184.359 thdstate th7 timer0 idx 
+13 194.512 thdstate th7 
+12 194.513 thdstate th7 timer0 idx 
+13 210.386 thdstate th7 
+12 210.387 thdstate th7 timer0 idx 
+13 221.677 thdstate th7 
+12 221.678 thdstate th7 timer0 idx 
+13 232.185 thdstate th7 
+12 232.186 thdstate th7 timer0 idx 
+13 245.592 thdstate th7 
+12 245.593 thdstate th7 timer0 idx 
+13 255.221 thdstate th7 
+12 255.221 thdstate th7 timer0 idx 
+13 264.751 thdstate th7 
+12 264.752 thdstate th7 timer0 idx 
+13 283.101 thdstate th7 
+12 283.101 thdstate th7 timer0 idx 
+13 293.27 thdstate th7 
+12 293.271 thdstate th7 timer0 idx 
+13 302.3 thdstate th7 
+12 302.301 thdstate th7 timer0 idx 
+13 312.769 thdstate th7 
+12 312.77 thdstate th7 timer0 idx 
+13 324.086 thdstate th7 
+12 324.087 thdstate th7 timer0 idx 
+13 335.824 thdstate th7 
+12 335.825 thdstate th7 timer0 idx 
+13 346.001 thdstate th7 
+12 346.003 thdstate th7 timer0 idx 
+13 359.918 thdstate th7 
+12 359.919 thdstate th7 timer0 idx 
+13 374.075 thdstate th7 
+12 374.075 thdstate th7 timer0 idx 
+13 389.92 thdstate th7 
+12 389.921 thdstate th7 timer0 idx 
+13 399.741 thdstate th7 
+12 399.742 thdstate th7 timer0 idx 
+13 410.624 thdstate th7 
+12 410.625 thdstate th7 timer0 idx 
+13 422.113 thdstate th7 
+12 422.114 thdstate th7 timer0 idx 
+13 432.296 thdstate th7 
+12 432.298 thdstate th7 timer0 idx 
+13 449.233 thdstate th7 
+12 449.233 thdstate th7 timer0 idx 
+13 457.797 thdstate th7 
+12 457.798 thdstate th7 timer0 idx 
+13 469.341 thdstate th7 
+12 469.342 thdstate th7 timer0 idx 
+13 486.166 thdstate th7 
+12 486.167 thdstate th7 timer0 idx 
+13 501.741 thdstate th7 
+12 501.741 thdstate th7 timer0 idx 
+13 514.843 thdstate th7 
+12 514.844 thdstate th7 timer0 idx 
+13 526.315 thdstate th7 
+12 526.316 thdstate th7 timer0 idx 
+13 538.428 thdstate th7 
+12 538.429 thdstate th7 timer0 idx 
+13 561.083 thdstate th7 
+12 561.084 thdstate th7 timer0 idx 
+13 569.916 thdstate th7 
+12 569.917 thdstate th7 timer0 idx 
+13 577.064 thdstate th7 
+12 577.065 thdstate th7 timer0 idx 
+13 583.718 thdstate th7 
+12 583.719 thdstate th7 timer0 idx 
+13 590.287 thdstate th7 
+12 590.288 thdstate th7 timer0 idx 
+13 596.882 thdstate th7 
+12 596.883 thdstate th7 timer0 idx 
+13 602.93 thdstate th7 
+12 602.931 thdstate th7 timer0 idx 
+13 608.796 thdstate th7 
+12 608.796 thdstate th7 timer0 idx 
+13 615.272 thdstate th7 
+12 615.273 thdstate th7 timer0 idx 
+13 621.871 thdstate th7 
+12 621.872 thdstate th7 timer0 idx 
+13 628.197 thdstate th7 
+12 628.198 thdstate th7 timer0 idx 
+13 634.454 thdstate th7 
+12 634.455 thdstate th7 timer0 idx 
+13 640.77 thdstate th7 
+12 640.771 thdstate th7 timer0 idx 
+13 647.322 thdstate th7 
+12 647.322 thdstate th7 timer0 idx 
+13 655.079 thdstate th7 
+12 655.08 thdstate th7 timer0 idx 
+13 660.663 thdstate th7 
+12 660.665 thdstate th7 timer0 idx 
+13 667.151 thdstate th7 
+12 667.151 thdstate th7 timer0 idx 
+13 679.345 thdstate th7 
+12 679.346 thdstate th7 timer0 idx 
+13 684.535 thdstate th7 
+12 684.536 thdstate th7 timer0 idx 
+13 691.793 thdstate th7 
+12 691.794 thdstate th7 timer0 idx 
+13 700.156 thdstate th7 
+12 700.157 thdstate th7 timer0 idx 
+13 708.601 thdstate th7 
+12 708.603 thdstate th7 timer0 idx 
+13 717.07 thdstate th7 

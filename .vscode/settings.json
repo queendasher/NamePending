@@ -72,6 +72,8 @@
         "unordered_set": "cpp",
         "cinttypes": "cpp",
         "typeindex": "cpp",
-        "ranges": "cpp"
+        "ranges": "cpp",
+        "csignal": "cpp",
+        "cfenv": "cpp"
     }
 }

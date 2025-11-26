@@ -15,6 +15,12 @@ namespace Mathlib{
     template <typename T1, typename T2, ORDERING OA, ORDERING OB>
     class LapackMultExpr;
 
+    class T_Parallel { };
+    static constexpr T_Parallel Parallel;
+
+    template <typename T1, typename T2, ORDERING OA, ORDERING OB>
+    class ParallelMultExpr;
+
     template <typename T, ORDERING ORD = ColMajor>
     class MatrixView : public MatExpr<MatrixView<T, ORD>> {
     protected:
@@ -53,6 +59,13 @@ namespace Mathlib{
         template <typename T1, typename T2, ORDERING OA, ORDERING OB>
         MatrixView& operator=(const MatExprMul<MatrixView<T1, OA>, MatrixView<T2, OB>>& expr) {
             AddMatMat(expr.Left(), expr.Right(), *this);
+            return *this;
+        }
+
+        // Assignment from RunParallel multiplication
+        template <typename TA, typename TB, ORDERING OA, ORDERING OB>
+        MatrixView& operator=(const ParallelMultExpr<TA, TB, OA, OB>& other) {
+            AddMatMatParallel(other.a, other.b, *this);
             return *this;
         }
 
@@ -309,8 +322,23 @@ namespace Mathlib{
     };
 
     template <typename T1, typename T2, ORDERING OA, ORDERING OB>
+    class ParallelMultExpr {
+    public:
+        MatrixView<T1, OA> a;
+        MatrixView<T2, OB> b;
+
+        ParallelMultExpr(const MatrixView<T1, OA>& _a, const MatrixView<T2, OB>& _b)
+            : a(_a), b(_b) { }
+    };
+
+    template <typename T1, typename T2, ORDERING OA, ORDERING OB>
     auto operator|(const MatExprMul<MatrixView<T1, OA>, MatrixView<T2, OB>>& expr, T_Lapack) {
         return LapackMultExpr<T1, T2, OA, OB>(expr.Left(), expr.Right());
+    }
+
+    template <typename T1, typename T2, ORDERING OA, ORDERING OB>
+    auto operator|(const MatExprMul<MatrixView<T1, OA>, MatrixView<T2, OB>>& expr, T_Parallel) {
+        return ParallelMultExpr<T1, T2, OA, OB>(expr.Left(), expr.Right());
     }
 
     template <typename T, ORDERING ORD>

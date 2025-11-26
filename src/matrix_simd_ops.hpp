@@ -1,10 +1,10 @@
 #include "matrix.hpp"
 #include "../NamePending-HPC/src/simd.hpp"
+#include "../NamePending-HPC/src/taskmanager.hpp"
 
 namespace Mathlib {
 
-using ASC_HPC::SIMD;
-using ASC_HPC::fma;
+using namespace ASC_HPC;
 using std::size_t;
 
 // Compute C_block(HxW) += A_block(HxK) * B_block(KxW)
@@ -59,6 +59,7 @@ void AddMatMat2(MatrixView<double> A,
     for (; j + W <= n; j += W) {
         size_t i = 0;
         for (; i + H <= m; i += H) {
+            
             AddMatMatKernel<H, W>(
                 k,
                 &A(i, 0), A.Dist(),          // A block: HxK starting at row i, col 0
@@ -105,10 +106,49 @@ void AddMatMat (MatrixView<double> A, MatrixView<double> B, MatrixView<double> C
 
       MatrixView<double> Ablock(i2-i1, j2-j1, BW, memBA);
       Ablock = A.RowRange(i1,i2).ColRange(j1,j2);
+
+        static Timer t(" ", { 1, 0, 0});
+        RegionTimer reg(t);
+
+
       AddMatMat2 (Ablock, B.RowRange(j1,j2), C.RowRange(i1,i2));
     }
 }
 
 
+void AddMatMatParallel(MatrixView<double> A, MatrixView<double> B, MatrixView<double> C)
+    {
+        constexpr size_t NTASKS = 8;
 
-}
+        StartWorkers(NTASKS-1);
+
+        RunParallel(NTASKS,
+            // func: gets called with (nr, size), nr in [0,size)
+            [&](int nr, int size)
+            {
+                
+
+                const size_t m = C.Rows();
+                const size_t nTasks = static_cast<size_t>(size);
+
+                // ceil(m / nTasks)
+                const size_t chunk = (m + nTasks - 1) / nTasks;
+
+                const size_t i0 = static_cast<size_t>(nr) * chunk;
+                const size_t i1 = std::min(m, i0 + chunk);
+
+                if (i0 >= i1)
+                    return;   // this task has no rows to process
+
+                // Take the row ranges for this chunk
+                auto a_chunk = A.RowRange(i0, i1);
+                auto c_chunk = C.RowRange(i0, i1);
+
+                // Each task computes: C_chunk += A_chunk * B
+                AddMatMat(a_chunk, B, c_chunk);
+            });
+
+        StopWorkers();
+    }
+
+} // namespace Mathlib

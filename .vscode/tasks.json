@@ -33,8 +33,8 @@
         ".",
         "-B",
         "build",
-        "-DCMAKE_BUILD_TYPE=Debug"
-        //"-DCMAKE_BUILD_TYPE=Release"
+        //"-DCMAKE_BUILD_TYPE=Debug"
+        "-DCMAKE_BUILD_TYPE=Release"
       ],
       "options": {
         "cwd": "${workspaceFolder}"
@@ -48,7 +48,7 @@
         "--build",
         "build",
         "--config",
-        "Debug",
+        "Release",
         "-v",
         "--target",
         "demo"
