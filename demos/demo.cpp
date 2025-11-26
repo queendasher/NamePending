@@ -1,23 +1,27 @@
-#include "../NamePending-HPC/src/simd.hpp"
-#include "matrix.hpp"
+#include <iostream>
+#include <sstream>
 
-using namespace Mathlib;
+
+#include <../NamePending-HPC/src/taskmanager.hpp>
+#include <../NamePending-HPC/src/timer.hpp>
+
 using namespace ASC_HPC;
-using namespace std;
+using std::cout, std::endl;
 
-int main() {
-    size_t rows = 4;
-    size_t cols = 4;
-    Matrix<double, ColMajor> m1(rows, cols);
-    Matrix<double, ColMajor> m2(rows, cols);
-    Matrix<double, ColMajor> res(rows, cols);
 
-    for (size_t i = 0; i < rows; ++i)
-        for (size_t j = 0; j < cols; ++j) {
-            m1(i, j) = i + j + 1;
-        }
+int main()
+{
+  timeline = std::make_unique<TimeLine>("demo.trace");
 
-    res = m1 * m2;
-    cout << res << endl;
+  StartWorkers(3);
+  
+  RunParallel(10, [] (int i, int size)
+  {
+    static Timer t("timer one");
+    RegionTimer reg(t);
+    cout << "I am task " << i << " out of " << size << endl;
+  });
+  
+  StopWorkers();
 }
 

@@ -8,6 +8,7 @@
         "name": "Execute /build/demo",
         "type": "cppdbg",
         "request": "launch",
+        //"program": "${workspaceFolder}/build/demos/demo",
         "program": "${workspaceFolder}/build/demos/demo",
         "cwd": "${workspaceFolder}",
         "MIMode": "gdb",
