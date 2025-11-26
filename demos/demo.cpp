@@ -1,9 +1,9 @@
 #include <iostream>
 #include <sstream>
 
-
 #include <../NamePending-HPC/src/taskmanager.hpp>
 #include <../NamePending-HPC/src/timer.hpp>
+#include <../NamePending-HPC/src/lock_guard.hpp>
 
 #include "matrix.hpp"
 #include "lapack_interface.hpp"
